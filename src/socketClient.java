@@ -1,5 +1,7 @@
 
+//The java.net package contains the basics needed for network operations.
 import java.io.*;
+//The java.io package contains the basics needed for IO operations. 
 import java.net.*;
 public class socketClient {
 
@@ -9,7 +11,7 @@ public class socketClient {
 		//Host Server Definition
 		String host = "localhost";
 		//Port Definition
-		int port = 19999;
+		int port = 13000;
 		
 		StringBuffer instr = new StringBuffer();
 		String TimeStamp;
