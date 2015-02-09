@@ -2,6 +2,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
+
 public class multipleServerSocket implements Runnable {
 
   private Socket connection;
@@ -22,6 +23,12 @@ public class multipleServerSocket implements Runnable {
       }
     }
     catch (Exception e) {}
+    
+    //Test database connection
+    databaseConnection connection= new databaseConnection();
+    connection.connect();
+    
+    
   }
   multipleServerSocket(Socket s, int i) {
   this.connection = s;
