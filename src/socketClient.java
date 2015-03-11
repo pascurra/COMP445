@@ -4,7 +4,7 @@ import java.io.*;
 //The java.io package contains the basics needed for IO operations. 
 import java.net.*;
 public class socketClient {
-
+// Hello this is a comment for testing purposes
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 							
