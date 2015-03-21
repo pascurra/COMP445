@@ -5,12 +5,18 @@ public class TCPServer
 {
 	public static void main(String[] args) 
 	{
+		
+		
 		ServerSocket server = null;
 		Socket socket; // Client Socket
 		int serverPort = 6789;
 		
 		PrintWriter out;
 		BufferedReader in;
+		
+
+		
+		
 		
 		try {
 			// Create a Socket and bind it to a port
@@ -24,6 +30,10 @@ public class TCPServer
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String line;
 			
+			int i=1;
+			
+			while (i==1){
+			
 			// Read the request from the client
 			while((line = in.readLine()) != null)
 			{
@@ -33,6 +43,14 @@ public class TCPServer
 		         if (line.equals("exit")) 
 		             break;
 			}
+			
+			
+			
+			
+			}
+			
+			
+			
 			
 			// Close all the input and output streams, as well as the sockets
 			in.close();
@@ -45,6 +63,18 @@ public class TCPServer
 		} catch (IOException e) {
 			System.out.println("IOException:" + e.getMessage());
 		}
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
 	}
 
 }

@@ -54,6 +54,16 @@ public class Main {
 					System.out.println("Deleting Account...........");
 
 					// Create code to delete account : Paolo
+					
+					//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
+					String JSONCommand=
+							"{\n  \"ExecuteCommand\": {\n    \"DeregisterClient\": {\n      \"alias\": { \"String\": \"Alex\" }\n    }\n  }\n}";
+					//"jeh gioer ioeru";
+
+							
+					Message message= new Message( "localhost" , 6789, JSONCommand);
+					message.send();
+					
 
 					System.out.println("Account Deleted...........");
 				}
