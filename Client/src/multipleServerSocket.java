@@ -25,8 +25,8 @@ public class multipleServerSocket implements Runnable {
     catch (Exception e) {}
     
     //Test database connection
-    databaseConnection connection= new databaseConnection();
-    connection.connect();
+    //databaseConnection connection= new databaseConnection();
+    //connection.connect();
     
     
   }
