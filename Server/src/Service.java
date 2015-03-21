@@ -1,22 +1,36 @@
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
-public class TCPServer 
-{
-	public static void main(String[] args) 
-	{
-		
-		
-		ServerSocket server = null;
-		Socket socket; // Client Socket
-		int serverPort = 6789;
-		
-		PrintWriter out;
-		BufferedReader in;
-		
 
-		
-		
+public class Service {
+	
+	
+	
+	
+	
+	
+	public Service() {
+		super();
+	}
+
+	
+	Boolean terminate=false;
+
+	ServerSocket server = null;
+	Socket socket; // Client Socket
+	int serverPort = 6789;
+	
+	PrintWriter out;
+	BufferedReader in;
+	
+
+	
+	public void Execute(){
 		
 		try {
 			// Create a Socket and bind it to a port
@@ -36,7 +50,7 @@ public class TCPServer
 			// Read the request from the client
 			
 			
-			while((line = in.readLine()) != "null")
+			while((line = in.readLine()) != null)
 			{
 				System.out.println ("Server has received \"" + line + "\" from the client"); 
 				// Reverse the message and send it back to the client,
@@ -65,16 +79,35 @@ public class TCPServer
 		}
 		
 		
-		
-		
-		
-		
+		System.out.println("Service ended execution.");
 
 		
 		
-		
-		
-		
 	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
