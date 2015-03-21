@@ -32,14 +32,15 @@ public class TCPServer
 			
 			int i=1;
 			
-			while (i==1){
-			
+			String command="noexit";
 			// Read the request from the client
-			while((line = in.readLine()) != null)
+			
+			
+			while((line = in.readLine()) != "null")
 			{
 				System.out.println ("Server has received \"" + line + "\" from the client"); 
 				// Reverse the message and send it back to the client,
-				out.println(new StringBuilder(line).reverse().toString()); 
+				out.println(new StringBuilder(line).toString()); 
 		         if (line.equals("exit")) 
 		             break;
 			}
@@ -47,7 +48,6 @@ public class TCPServer
 			
 			
 			
-			}
 			
 			
 			

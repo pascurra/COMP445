@@ -57,9 +57,9 @@ public class Main {
 					
 					//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
 					String JSONCommand=
-							"{\n  \"ExecuteCommand\": {\n    \"DeregisterClient\": {\n      \"alias\": { \"String\": \"Alex\" }\n    }\n  }\n}";
+						//	"{\n  \"ExecuteCommand\": {\n    \"DeregisterClient\": {\n      \"alias\": { \"String\": \"Alex\" }\n    }\n  }\n}";
 					//"jeh gioer ioeru";
-
+					"<command>jhg</command>";
 							
 					Message message= new Message( "localhost" , 6789, JSONCommand);
 					message.send();
