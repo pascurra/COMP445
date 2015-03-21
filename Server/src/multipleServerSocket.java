@@ -14,7 +14,7 @@ public class multipleServerSocket implements Runnable {
   int count = 0;
     try{
       ServerSocket socket1 = new ServerSocket(port);
-      System.out.println("MultipleSocketServer Initialized");
+      System.out.println("Server: MultipleSocketServer Initialized");
       while(true){
         Socket connection = socket1.accept();
         Runnable runnable = new multipleServerSocket(connection, ++count);
@@ -44,14 +44,14 @@ public void run() {
       while((character = isr.read()) != 13) {
         process.append((char)character);
       }
-      System.out.println(process);
+      System.out.println("Proccess: "+process);
       //need to wait 10 seconds to pretend that we're processing something
       try {
         Thread.sleep(10000);
       }
       catch (Exception e){}
       TimeStamp = new java.util.Date().toString();
-      String returnCode = "MultipleSocketServer repsonded at "+ TimeStamp + (char) 13;
+      String returnCode = "Server: MultipleSocketServer responded at "+ TimeStamp + (char) 13;
       BufferedOutputStream os = new BufferedOutputStream(connection.getOutputStream());
       OutputStreamWriter osw = new OutputStreamWriter(os, "US-ASCII");
       osw.write(returnCode);

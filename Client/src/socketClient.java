@@ -15,7 +15,7 @@ public class socketClient {
 		
 		StringBuffer instr = new StringBuffer();
 		String TimeStamp;
-		System.out.println("SocketClient initialized");
+		System.out.println("Client: SocketClient initialized");
 				
 		try {
 		      /** Obtain an address object of the server */
@@ -31,7 +31,7 @@ public class socketClient {
 	          
 
 	          TimeStamp = new java.util.Date().toString();
-	          String process = "Calling the Socket Server on "+ host + " port " + port +
+	          String process = "Client: Calling the Socket Server on "+ host + " port " + port +
 	              " at " + TimeStamp +  (char) 13;
 
 	          /** Write across the socket connection and flush the buffer */
