@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.ResultSet;
 
 
 public class Service {
@@ -84,6 +85,10 @@ public class Service {
 				String time="";
 				
 				//Write to database
+				
+				databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
+				ResultSet result=registerQuery.Query();
+				
 				
 			}
 			

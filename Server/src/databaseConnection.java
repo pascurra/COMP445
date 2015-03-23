@@ -6,8 +6,21 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class databaseConnection {
+	
+	public databaseConnection(String query) {
+		super();
+		this.query = query;
 
-	public static void connect() {
+	}
+
+
+
+	String query;
+	ResultSet resultSet;
+	
+	
+
+	public ResultSet Query() {
 
 		Statement statement = null;
 
@@ -22,8 +35,8 @@ public class databaseConnection {
 
 			statement = conn.createStatement();
 
-			ResultSet resultSet = statement
-					.executeQuery("select * from ascurra_445.users");
+			resultSet = statement
+					.executeQuery(query);
 
 			while (resultSet.next()) {
 				String user = resultSet.getString("alias");
@@ -37,6 +50,7 @@ public class databaseConnection {
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
+		return resultSet;
 
 	}
 
