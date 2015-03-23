@@ -61,6 +61,41 @@ public class Service {
 			
 			
 			
+			//Demarshall
+			
+			
+			String Command="Deregister";
+			
+			
+			// Menu 3 , 3
+			if (Command.equals("Deregister")){
+				String email="paolo@";
+				
+				//query db to delete
+				
+				
+			}
+			
+			
+			// Menu 1.1
+			if (Command.equals("Register")){
+				String email="paolo@";
+				String Alias="paolo";
+				String time="";
+				
+				//Write to database
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			

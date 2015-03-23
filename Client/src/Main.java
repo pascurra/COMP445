@@ -59,7 +59,7 @@ public class Main {
 					String JSONCommand=
 						//	"{\n  \"ExecuteCommand\": {\n    \"DeregisterClient\": {\n      \"alias\": { \"String\": \"Alex\" }\n    }\n  }\n}";
 					//"jeh gioer ioeru";
-					"<command>jhg</command>";
+					"<command><Deregister><email>paolo.ascurra@gmail.com</email></Deregister></command>";
 							
 					Message message= new Message( "localhost" , 6789, JSONCommand);
 					message.send();
