@@ -5,6 +5,14 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.ResultSet;
+
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+
 
 
 public class Service {
@@ -58,6 +66,107 @@ public class Service {
 		         if (line.equals("exit")) 
 		             break;
 			}
+			
+			
+			
+			//Demarshall
+			
+			
+			
+
+			      try{
+			    	  
+			    	  
+			            JSONParser jsonParser = new JSONParser();
+			               JSONObject jsonObject = (JSONObject) jsonParser.parse(line);
+			            
+			            
+			         System.out.println("command");
+			         System.out.println(jsonObject.get("command"));
+			         System.out.println();
+
+			         System.out.println("alias");
+			         System.out.println(jsonObject.get("alias"));
+			         System.out.println();
+
+
+			      }catch(ParseException pe){
+			         System.out.println("position: " + pe.getPosition());
+			         System.out.println(pe);
+			      }
+			   
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			String Command="Deregister";
+			
+			
+			// Menu 3 , 3
+			if (Command.equals("Deregister")){
+				String email="paolo@";
+				
+				//query db to delete
+				
+				
+			}
+			
+			
+			// Menu 1.1
+			if (Command.equals("Register")){
+				String email="paolo@";
+				String Alias="paolo";
+				String time="";
+				
+				//Write to database
+				
+				databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
+				ResultSet result=registerQuery.Query();
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
