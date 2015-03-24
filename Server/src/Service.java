@@ -2,16 +2,38 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.ResultSet;
 
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.ParseException;
-import org.json.simple.parser.JSONParser;
+
+
+
+
+
+
+
+
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+
+
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.w3c.dom.Document;
+//import org.json.simple.JSONObject;
+//import org.json.simple.JSONArray;
+//import org.json.simple.parser.ParseException;
+//import org.json.simple.parser.JSONParser;
+import org.xml.sax.InputSource;
 
 
 
@@ -54,47 +76,38 @@ public class Service {
 			
 			int i=1;
 			
-			String command="noexit";
+			//String command="noexit";
 			// Read the request from the client
+			String xml="";
 			
 			
 			while((line = in.readLine()) != null)
 			{
 				System.out.println ("Server has received \"" + line + "\" from the client"); 
 				// Reverse the message and send it back to the client,
-				out.println(new StringBuilder(line).toString()); 
+				out.println(new StringBuilder(line).toString());
+				xml=line;
 		         if (line.equals("exit")) 
 		             break;
 			}
 			
-			
+			Document doc=null;
 			
 			//Demarshall
 			
-			
+			try {
+				doc=loadXML(xml);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
 			
 
-			      try{
-			    	  
-			    	  
-			            JSONParser jsonParser = new JSONParser();
-			               JSONObject jsonObject = (JSONObject) jsonParser.parse(line);
-			            
-			            
-			         System.out.println("command");
-			         System.out.println(jsonObject.get("command"));
-			         System.out.println();
-
-			         System.out.println("alias");
-			         System.out.println(jsonObject.get("alias"));
-			         System.out.println();
-
-
-			      }catch(ParseException pe){
-			         System.out.println("position: " + pe.getPosition());
-			         System.out.println(pe);
-			      }
-			   
+			String command = doc.getElementsByTagName("command").item(0).getTextContent();
+			
+			
+			System.out.println("The command to execute is: " + command);		
 			
 			
 			
@@ -103,44 +116,14 @@ public class Service {
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			String Command="Deregister";
+			//String Command="Deregister";
 			
 			
 			// Menu 3 , 3
-			if (Command.equals("Deregister")){
-				String email="paolo@";
-				
+			if (command.equals("Deregister")){
+				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+				System.out.println("The email to delete is: " + alias);		
+
 				//query db to delete
 				
 				
@@ -148,7 +131,7 @@ public class Service {
 			
 			
 			// Menu 1.1
-			if (Command.equals("Register")){
+			if (command.equals("Register")){
 				String email="paolo@";
 				String Alias="paolo";
 				String time="";
@@ -203,7 +186,13 @@ public class Service {
 	
 	
 	
-
+	public static Document loadXML(String xml) throws Exception
+	{
+	   DocumentBuilderFactory fctr = DocumentBuilderFactory.newInstance();
+	   DocumentBuilder bldr = fctr.newDocumentBuilder();
+	   InputSource insrc = new InputSource(new StringReader(xml));
+	   return bldr.parse(insrc);
+	}
 	
 	
 	
