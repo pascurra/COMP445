@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="Documentation/mysql-connector-java-5.1.34-bin.jar"/>
 	<classpathentry kind="lib" path="Documentation/commons-io-2.4.jar" sourcepath="Documentation/commons-io-2.4-sources.jar"/>
 	<classpathentry kind="lib" path="Documentation/commons-io-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="Documentation/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

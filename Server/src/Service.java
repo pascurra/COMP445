@@ -8,6 +8,13 @@ import java.net.UnknownHostException;
 import java.sql.ResultSet;
 
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+
+
+
 public class Service {
 	
 	
@@ -63,6 +70,68 @@ public class Service {
 			
 			
 			//Demarshall
+			
+			
+			
+
+			      try{
+			    	  
+			    	  
+			            JSONParser jsonParser = new JSONParser();
+			               JSONObject jsonObject = (JSONObject) jsonParser.parse(line);
+			            
+			            
+			         System.out.println("command");
+			         System.out.println(jsonObject.get("command"));
+			         System.out.println();
+
+			         System.out.println("alias");
+			         System.out.println(jsonObject.get("alias"));
+			         System.out.println();
+
+
+			      }catch(ParseException pe){
+			         System.out.println("position: " + pe.getPosition());
+			         System.out.println(pe);
+			      }
+			   
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			String Command="Deregister";
