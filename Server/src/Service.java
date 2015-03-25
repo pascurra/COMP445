@@ -18,9 +18,12 @@ import java.sql.ResultSet;
 
 
 
+import java.sql.SQLException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 
 
 
@@ -125,6 +128,30 @@ public class Service {
 				System.out.println("The email to delete is: " + alias);		
 
 				//query db to delete
+				
+				databaseConnection registerQuery=new databaseConnection("select * from ascurra_445.users");
+				ResultSet resultSet=registerQuery.Query();
+				
+	            try {
+					while (resultSet.next()) {
+					    String user = resultSet.getString("alias");
+					    System.out.println("User: " + user);
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				
 			}
