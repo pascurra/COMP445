@@ -125,7 +125,7 @@ public class Service {
 			// Menu 3 , 3
 			if (command.equals("Deregister")){
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				System.out.println("The email to delete is: " + alias);		
+				System.out.println("The alias to delete is: " + alias);		
 
 				//query db to delete
 				

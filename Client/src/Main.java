@@ -56,10 +56,11 @@ public class Main {
 					// Create code to delete account : Paolo
 					
 					//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
+					String alias="paolo";
+
 					String JSONCommand=
-						//	"{  \"command\": {    \"DeregisterClient\": {      \"alias\": { \"String\": \"Alex\" }    }  }}";
-					//"jeh gioer ioeru";
-					"<ExecuteCommand><command>Deregister</command><alias>paolo</alias></ExecuteCommand>";
+
+					"<ExecuteCommand><command>Deregister</command><alias>"+alias+"</alias></ExecuteCommand>";
 							
 					Message message= new Message( "localhost" , 6789, JSONCommand);
 					message.send();
