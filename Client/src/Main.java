@@ -100,16 +100,16 @@ public class Main {
 			System.out
 					.println("Please enter your new username and press ENTER..");
 
-			string = input.next();
+			String user = input.next();
 
-			System.out.println("You chose your new alias: " + string);
+			System.out.println("You chose your new alias: " + user);
 			
-			System.out.println("Registering user.........");
+			//System.out.println("Registering user.........");
 
 			// Create code to Register alias (user) : Ryan
 			
 			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-			String alias=string;
+			String alias=user;
 
 			String JSONCommand=
 
@@ -118,7 +118,21 @@ public class Main {
 			Message message= new Message( "localhost" , 6789, JSONCommand);
 			message.send();
 			
+			System.out.println("Please enter your email address and press ENTER: ");
+			
+			String email = input.next();
+			
+			String JSONCommand1=
 
+			"<ExecuteCommand><command>Register</command><email>"+email+"</email></ExecuteCommand>";
+			
+			Message messageEmail= new Message( "localhost" , 6789, JSONCommand1);
+			messageEmail.send();
+			
+			// Add in the registration time stamp here...
+			
+			
+			// Ending message
 			System.out.println("New user registered...........");
 
 		}
