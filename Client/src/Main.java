@@ -109,7 +109,7 @@ public class Main {
 			// Create code to Register alias (user) : Ryan
 			
 			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-			String alias="paolo";
+			String alias=string;
 
 			String JSONCommand=
 
