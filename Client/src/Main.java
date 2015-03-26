@@ -92,6 +92,8 @@ public class Main {
 			}
 
 		}
+		
+		// To Register new user
 
 		if (i == 2) {
 
