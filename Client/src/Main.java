@@ -101,6 +101,23 @@ public class Main {
 			string = input.next();
 
 			System.out.println("You chose your new alias: " + string);
+			
+			System.out.println("Registering user.........");
+
+			// Create code to Register alias (user) : Ryan
+			
+			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
+			String alias="paolo";
+
+			String JSONCommand=
+
+			"<ExecuteCommand><command>Register</command><alias>"+alias+"</alias></ExecuteCommand>";
+					
+			Message message= new Message( "localhost" , 6789, JSONCommand);
+			message.send();
+			
+
+			System.out.println("New user registered...........");
 
 		}
 
