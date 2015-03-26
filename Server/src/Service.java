@@ -160,12 +160,14 @@ public class Service {
 			// Menu 1.1
 			if (command.equals("Register")){
 				String email="paolo@";
-				String Alias="paolo";
+				String alias="paolo";
 				String time="";
+				
+				// How to grab the input from user stored in JSON?
 				
 				//Write to database
 				
-				databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
+				databaseConnection registerQuery=new databaseConnection("INSERT INTO clients (alias, email, registrationDate) VALUES (" + alias + ", " + email + ", " + time + ");");
 				ResultSet result=registerQuery.Query();
 				
 				
