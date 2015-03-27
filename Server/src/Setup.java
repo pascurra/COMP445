@@ -10,6 +10,7 @@ public class Setup {
 		//create one object for the conection
 		databaseConnection registerQuery=new databaseConnection("");
 
+
 		
 		//Example to delete alias paolo2015
 		registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
