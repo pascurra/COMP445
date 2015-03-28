@@ -14,14 +14,14 @@ public class Main {
 
 		int i = input.nextInt();
 		// String s = input.next();
-		String string;
+		String alias;
 
 		if (i == 1) {
 			System.out.println("Please enter your username and press ENTER..");
 
-			string = input.next();
+			alias = input.next();
 
-			System.out.println("You entered your login: " + string);
+			System.out.println("You entered your login: " + alias);
 
 			System.out.println("Please choose one option:");
 			System.out.println("1.- Create Twible");
@@ -56,7 +56,7 @@ public class Main {
 					// Create code to delete account : Paolo
 					
 					//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-					String alias="paolo";
+					//String alias="paolo";
 
 					String JSONCommand=
 
@@ -81,7 +81,7 @@ public class Main {
 				System.out
 						.println("Please enter the user you want to subscribe to and press ENTER...");
 
-				string = input.next();
+				alias = input.next();
 
 				System.out.println("Subscribing you to the user..........");
 
@@ -98,9 +98,9 @@ public class Main {
 			System.out
 					.println("Please enter your new username and press ENTER..");
 
-			string = input.next();
+			alias = input.next();
 
-			System.out.println("You chose your new alias: " + string);
+			System.out.println("You chose your new alias: " + alias);
 
 		}
 
