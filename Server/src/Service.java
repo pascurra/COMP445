@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -98,6 +99,9 @@ public class Service {
 			
 			//Demarshall
 			
+			
+			
+			
 			try {
 				doc=loadXML(xml);
 			} catch (Exception e) {
@@ -112,7 +116,9 @@ public class Service {
 			
 			System.out.println("The command to execute is: " + command);		
 			
-			
+			//create query object
+			databaseConnection registerQuery=new databaseConnection("");
+
 			
 			
 			
@@ -129,20 +135,12 @@ public class Service {
 
 				//query db to delete
 				
-				databaseConnection registerQuery=new databaseConnection("select * from ascurra_445.users");
-				ResultSet resultSet=registerQuery.Query();
+				//create one object for the conection
+
 				
-	            try {
-					while (resultSet.next()) {
-					    String user = resultSet.getString("alias");
-					    System.out.println("User: " + user);
-
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				//Example to delete alias paolo2015
+				registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
+				registerQuery.ExecuteUpdate();
 				
 				
 				
@@ -167,8 +165,14 @@ public class Service {
 				
 				//Write to database
 				
+<<<<<<< HEAD
 				databaseConnection registerQuery=new databaseConnection("INSERT INTO clients (alias, email, registrationDate) VALUES (" + alias + ", " + email + ", " + time + ");");
 				ResultSet result=registerQuery.Query();
+=======
+				//Paolo says: Needs to be updated like 3.3
+		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
+		//		ResultSet result=registerQuery.Query();
+>>>>>>> 1b2c5aef5675490262a721cea59038542054fbc6
 				
 				
 			}
