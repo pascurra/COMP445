@@ -165,14 +165,14 @@ public class Service {
 				
 				//Write to database
 				
-<<<<<<< HEAD
+
 				databaseConnection registerQuery=new databaseConnection("INSERT INTO clients (alias, email, registrationDate) VALUES (" + alias + ", " + email + ", " + time + ");");
 				ResultSet result=registerQuery.Query();
-=======
+
 				//Paolo says: Needs to be updated like 3.3
 		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
 		//		ResultSet result=registerQuery.Query();
->>>>>>> 1b2c5aef5675490262a721cea59038542054fbc6
+
 				
 				
 			}
