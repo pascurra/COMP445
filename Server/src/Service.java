@@ -175,7 +175,7 @@ public class Service {
 				//Write to database
 				
 
-				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (\"alias\", \"email\", \"registrationDate\");";		
+				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + "\"" + alias + "\"" + "\"" + email + "\"" + "\"" + registrationDate + "\";)";		
 				registerQuery.ExecuteUpdate();
 
 				//Paolo says: Needs to be updated like 3.3
