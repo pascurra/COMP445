@@ -7,9 +7,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,10 +23,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
+
+
+
+
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
-
 import org.xml.sax.InputSource;
 
 public class Service {
@@ -43,6 +47,7 @@ public class Service {
 
 	PrintWriter out;
 	BufferedReader in;
+	Scanner input = new Scanner(System.in);
 
 	public void Execute() {
 
@@ -114,23 +119,27 @@ public class Service {
 
 			if (command.equals("Register")){
 				
-				// Get user registration info
+				// Grab the alias entered previously
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				//String email = doc.getElementsByTagName("email").item(0).getTextContent();
-				//String registrationDate = doc.getElementsByTagName("registrationDate").item(0).getTextContent();
+				
+				// Prompt for email address
+				System.out.println("Please enter your email address and press ENTER: ");
 
-				// Print out for user
-				//System.out.println("The alias to register is: " + alias);
-				//System.out.println("The email associated to account is: " + email);
-				//System.out.println("The registration date is: " + registrationDate);
+				String email = input.next();
 				
-				
-				
+				// Create a timestamp
+				Calendar calendar = Calendar.getInstance();
+				java.sql.Timestamp registrationDate = new java.sql.Timestamp(calendar.getTime().getTime());
+
+
 				//Write to database
 				
 
-				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + alias + ", " + ");";		
+				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + "\'" + alias + "\'" + email + "\'" + registrationDate + "\'" + ")";
 				registerQuery.ExecuteUpdate();
+				
+				// Ending message
+				System.out.println("New user registered...........");
 
 				//Paolo says: Needs to be updated like 3.3
 		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");

@@ -106,12 +106,13 @@ public class Main {
 
 			System.out.println("You chose your new alias: " + user);
 			
+			
 			//System.out.println("Registering user.........");
 
 			// Create code to Register alias (user) : Ryan
 			
 			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-			//String alias=user;
+		
 
 			String JSONCommandAlias=
 
@@ -119,33 +120,6 @@ public class Main {
 					
 			Message messageAlias= new Message( "localhost" , 6789, JSONCommandAlias);
 			messageAlias.send();
-			
-			System.out.println("Please enter your email address and press ENTER: ");
-			
-			String email = input.next();
-			
-			String JSONCommandEmail=
-
-			"<ExecuteCommand><command>Register</command><email>"+email+"</email></ExecuteCommand>";
-			
-			Message messageEmail= new Message( "localhost" , 6789, JSONCommandEmail);
-			messageEmail.send();
-			
-			// Create a timestamp
-			Calendar calendar = Calendar.getInstance();
-			java.sql.Timestamp registrationDate = new java.sql.Timestamp(calendar.getTime().getTime());
-			
-			// Record timestamp in JSON
-			String JSONCommandTimestamp=
-				
-			"<ExecuteCommand><command>Register</command><email>"+registrationDate+"</email></ExecuteCommand>";
-			
-			Message messageTimestamp= new Message( "localhost" , 6789, JSONCommandTimestamp);
-			messageTimestamp.send();
-			
-			// Ending message
-			System.out.println("New user registered...........");
-
 
 
 		}
