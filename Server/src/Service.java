@@ -15,7 +15,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-<<<<<<< HEAD
 
 
 
@@ -23,8 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
-=======
->>>>>>> Dev
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -113,13 +111,13 @@ public class Service {
 			}
 
 			// Menu 1.1
-<<<<<<< HEAD
+
 			if (command.equals("Register")){
 				
 				// Get user registration info
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				String email = doc.getElementsByTagName("email").item(0).getTextContent();
-				String registrationDate = doc.getElementsByTagName("registrationDate").item(0).getTextContent();
+				//String email = doc.getElementsByTagName("email").item(0).getTextContent();
+				//String registrationDate = doc.getElementsByTagName("registrationDate").item(0).getTextContent();
 
 				// Print out for user
 				//System.out.println("The alias to register is: " + alias);
@@ -131,7 +129,7 @@ public class Service {
 				//Write to database
 				
 
-				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + alias + ", " +  email + ", " + registrationDate + ");";		
+				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + alias + ", " + ");";		
 				registerQuery.ExecuteUpdate();
 
 				//Paolo says: Needs to be updated like 3.3
@@ -140,33 +138,21 @@ public class Service {
 
 				
 				
-=======
-			if (command.equals("Register")) {
-				String email = "paolo@";
-				String Alias = "paolo";
-				String time = "";
 
-				// Write to database
-
-				// Paolo says: Needs to be updated like 3.3
-				// databaseConnection registerQuery=new
-				// databaseConnection("INSERT INTO...");
-				// ResultSet result=registerQuery.Query();
-
->>>>>>> Dev
-			}
 
 			// Close all the input and output streams, as well as the sockets
 			in.close();
 			out.close();
 			socket.close();
 			server.close();
-
+		 }
+			
 		} catch (UnknownHostException e) {
 			System.out.println("UnknownHostException:" + e.getMessage());
 		} catch (IOException e) {
 			System.out.println("IOException:" + e.getMessage());
 		}
+		
 
 		System.out.println("Service ended execution.");
 
