@@ -116,8 +116,8 @@ public class Main {
 
 			"<ExecuteCommand><command>Register</command><alias>"+alias+"</alias></ExecuteCommand>";
 					
-			Message message= new Message( "localhost" , 6789, JSONCommandAlias);
-			message.send();
+			Message messageAlias= new Message( "localhost" , 6789, JSONCommandAlias);
+			messageAlias.send();
 			
 			System.out.println("Please enter your email address and press ENTER: ");
 			
@@ -139,6 +139,8 @@ public class Main {
 				
 			"<ExecuteCommand><command>Register</command><email>"+registrationDate+"</email></ExecuteCommand>";
 			
+			Message messageTimestamp= new Message( "localhost" , 6789, JSONCommandTimestamp);
+			messageTimestamp.send();
 			
 			// Ending message
 			System.out.println("New user registered...........");
