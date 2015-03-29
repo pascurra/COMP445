@@ -166,16 +166,16 @@ public class Service {
 				String registrationDate = doc.getElementsByTagName("registrationDate").item(0).getTextContent();
 
 				// Print out for user
-				System.out.println("The alias to register is: " + alias);
-				System.out.println("The email associated to account is: " + email);
-				System.out.println("The registration date is: " + registrationDate);
+				//System.out.println("The alias to register is: " + alias);
+				//System.out.println("The email associated to account is: " + email);
+				//System.out.println("The registration date is: " + registrationDate);
 				
 				
 				
 				//Write to database
 				
 
-				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + "\"" + alias + "\"" + "\"" + email + "\"" + "\"" + registrationDate + "\";)";		
+				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (" + alias + ", " +  email + ", " + registrationDate + ");";		
 				registerQuery.ExecuteUpdate();
 
 				//Paolo says: Needs to be updated like 3.3
