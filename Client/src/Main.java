@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Main {
@@ -111,25 +112,32 @@ public class Main {
 			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
 			String alias=user;
 
-			String JSONCommand=
+			String JSONCommandAlias=
 
 			"<ExecuteCommand><command>Register</command><alias>"+alias+"</alias></ExecuteCommand>";
 					
-			Message message= new Message( "localhost" , 6789, JSONCommand);
+			Message message= new Message( "localhost" , 6789, JSONCommandAlias);
 			message.send();
 			
 			System.out.println("Please enter your email address and press ENTER: ");
 			
 			String email = input.next();
 			
-			String JSONCommand1=
+			String JSONCommandEmail=
 
 			"<ExecuteCommand><command>Register</command><email>"+email+"</email></ExecuteCommand>";
 			
-			Message messageEmail= new Message( "localhost" , 6789, JSONCommand1);
+			Message messageEmail= new Message( "localhost" , 6789, JSONCommandEmail);
 			messageEmail.send();
 			
-			// Add in the registration time stamp here...
+			// Create a timestamp
+			Calendar calendar = Calendar.getInstance();
+			java.sql.Timestamp registrationDate = new java.sql.Timestamp(calendar.getTime().getTime());
+			
+			// Record timestamp in JSON
+			String JSONCommandTimestamp=
+				
+			"<ExecuteCommand><command>Register</command><email>"+registrationDate+"</email></ExecuteCommand>";
 			
 			
 			// Ending message

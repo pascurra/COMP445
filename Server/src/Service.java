@@ -160,12 +160,15 @@ public class Service {
 			// Menu 1.1
 			if (command.equals("Register")){
 				
-				// ToDo: Add for loop to go through items and get the alias entered by user...
+				// Get user registration info
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				String email=doc.getElementsByTagName("email").item(0).getTextContent();
-				
-				Calendar calendar = Calendar.getInstance();
-				java.sql.Timestamp registrationDate = new java.sql.Timestamp(calendar.getTime().getTime());
+				String email = doc.getElementsByTagName("email").item(0).getTextContent();
+				String registrationDate = doc.getElementsByTagName("registrationDate").item(0).getTextContent();
+
+				// Print out for user
+				System.out.println("The alias to register is: " + alias);
+				System.out.println("The email associated to account is: " + email);
+				System.out.println("The registration date is: " + registrationDate);
 				
 				
 				
