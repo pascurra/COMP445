@@ -195,13 +195,14 @@ public class Service {
 				
 				
 			}
-			 if(command.equals("Create Twibble")){
+			if(command.equals("Create Twibble")){
 				 
 				 String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				 System.out.println("New Twibble Posted: "+twibbleContent);
 				
-				 createTwibble.query="INSERT INTO ascurra_445.twibbles(twibbleContent) VALUES ('" + contentTwibble + "')";
-				 createTwibble.ExecuteUpdate();
+				 databaseConnection createTwibbleQuery = new databaseConnection("");
+				 createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent) VALUES ('" + twibbleContent + "')";
+				 createTwibbleQuery.ExecuteUpdate();
 				
 			 }
 			

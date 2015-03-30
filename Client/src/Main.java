@@ -34,20 +34,23 @@ public class Main {
 
 			if (i == 1) {
 				System.out.println("1.- Create Twible");
-				System.out.println("Please enter a new Twibble Content: ");
-				String twibbleContent;
-				twibbleContent = input.nextLine();
 				
-				String JSONCommand=
-
-				"<ExecuteCommand><command>Create Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent></ExecuteCommand>";
-
-				Message message= new Message( "localhost" , 6789, JSONCommand);
-				message.send();
+				String twibbleContent="";
+							
 				
-				System.out.println("Twibble Posted :"+twibbleContent);				
-				
-
+				while(twibbleContent.equals("")){
+					
+					twibbleContent = input.nextLine();
+					System.out.println("Please enter a new Twibble Content: ");
+												
+					String JSONCommand=
+					"<ExecuteCommand><command>Create Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent></ExecuteCommand>";
+	
+					Message message= new Message( "localhost" , 6789, JSONCommand);
+					message.send();
+					
+					System.out.println("Twibble Posted :"+twibbleContent);				
+				}
 			}
 
 			if (i == 2) {
