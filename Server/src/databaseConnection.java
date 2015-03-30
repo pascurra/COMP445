@@ -21,7 +21,7 @@ public class databaseConnection {
 	
 	//for data select statements
 
-	public ResultSet ExecuteQuery() {
+	public ResultSet executeSelectStatement() {
 
 		Statement statement = null;
 
@@ -39,11 +39,7 @@ public class databaseConnection {
 			resultSet = statement
 					.executeQuery(query);
 
-			while (resultSet.next()) {
-				String user = resultSet.getString("alias");
-				System.out.println("User: " + user);
 
-			}
 
 		} catch (SQLException ex) {
 			// handle any errors

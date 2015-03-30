@@ -82,13 +82,25 @@ public class Main {
 				System.out
 						.println("Please enter the user you want to subscribe to and press ENTER...");
 
-				alias = input.next();
+				String subscribeTo = input.next();
 
 				System.out.println("Subscribing you to the user..........");
 
 				// Create code to subscribe account : Paolo
+				
+				
+				String JSONCommand=
 
-				System.out.println("You have been subscribed...........");
+						"<ExecuteCommand><command>Subscribe</command><alias>"+alias+"</alias><SubscribeTo>"+subscribeTo+"</SubscribeTo></ExecuteCommand>";
+								
+						Message message= new Message( "localhost" , 6789, JSONCommand);
+						message.send();
+						
+
+						System.out.println("You have been subscribed to: "+subscribeTo);
+				
+				
+				
 
 			}
 

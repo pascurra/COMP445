@@ -98,26 +98,17 @@ public class Service {
 			System.out.println("The command to execute is: " + command);
 
 			// create query object
-			databaseConnection registerQuery = new databaseConnection("");
 
 			// String Command="Deregister";
 
-			// Menu 3 , 3 by Paolo  - WORKING OK - use something similar in your tasks
-			if (command.equals("Deregister")) {
-				String alias = doc.getElementsByTagName("alias").item(0)
-						.getTextContent();
-				System.out.println("The alias to delete is: " + alias);
-
-				// query db to delete	
-				registerQuery.query = "DELETE FROM ascurra_445.clients WHERE alias="
-						+ "\"" + alias + "\"" + ";";
-				registerQuery.ExecuteUpdate();
-
-			}
+			
 
 			// Menu 1.1
 
 			if (command.equals("Register")){
+				
+				databaseConnection registerQuery = new databaseConnection("");
+
 				
 				// Grab the alias entered previously
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
@@ -149,12 +140,94 @@ public class Service {
 				
 
 
+		
+		 }
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			// Menu 3 , 3 by Paolo  - WORKING OK - use something similar in your tasks
+			if (command.equals("Deregister")) {
+				
+
+				String alias = doc.getElementsByTagName("alias").item(0)
+						.getTextContent();
+				System.out.println("The alias to delete is: " + alias);
+				databaseConnection deregisterQuery = new databaseConnection("DELETE FROM ascurra_445.clients WHERE alias="
+						+ "\"" + alias + "\"" + ";");
+
+				// query db to delete	
+				//deregisterQuery.query = "";
+				deregisterQuery.ExecuteUpdate();
+
+			}
+			
+			
+			//Menu 3.4 subscribe by Paolo
+			if (command.equals("Subscribe")) {
+				
+
+				
+				
+				String alias = doc.getElementsByTagName("alias").item(0)
+						.getTextContent();
+				String SubscribeTo = doc.getElementsByTagName("SubscribeTo").item(0)
+						.getTextContent();
+				//System.out.println("The alias to delete is: " + alias);
+
+				// query db to delete	
+		//		registerQuery.query = "DELETE FROM ascurra_445.clients WHERE alias="
+		//				+ "\"" + alias + "\"" + ";";
+		//		registerQuery.ExecuteUpdate();
+				databaseConnection subscribeQuery = new databaseConnection("select idusers FROM ascurra_445.clients where alias='"+ SubscribeTo+"';");
+
+				//registerQuery.query="";
+				ResultSet resultSetSubscribe=subscribeQuery.executeSelectStatement();
+				
+				int subscribeToId=0;
+				
+				try {
+					while (resultSetSubscribe.next()) {
+
+						subscribeToId=resultSetSubscribe.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				subscribeQuery.query="INSERT INTO ascurra_445.subscribers(client_alias,following_client_id) VALUES ('" + alias + "', '" + subscribeToId +"' )";
+				subscribeQuery.ExecuteUpdate();
+				
+				
+				
+
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 			// Close all the input and output streams, as well as the sockets
 			in.close();
 			out.close();
 			socket.close();
 			server.close();
-		 }
+			
+			
+
 			
 		} catch (UnknownHostException e) {
 			System.out.println("UnknownHostException:" + e.getMessage());

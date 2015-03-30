@@ -36,6 +36,13 @@ public class Setup {
 		registerQuery.ExecuteUpdate();
 		
 		
+		registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"sancho\";";
+		registerQuery.ExecuteUpdate();		
+		//Example to add alias paolo2016
+		registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (\"sancho\", \"sancho@sancho.com\",NOW());";		
+		registerQuery.ExecuteUpdate();
+		
+		
 		
 
 	}
