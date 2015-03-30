@@ -136,21 +136,8 @@ public class Service {
 		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
 		//		ResultSet result=registerQuery.Query();
 
-				
-				
-
-
-		
+								
 		 }
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			// Menu 3 , 3 by Paolo  - WORKING OK - use something similar in your tasks
@@ -172,9 +159,7 @@ public class Service {
 			
 			//Menu 3.4 subscribe by Paolo
 			if (command.equals("Subscribe")) {
-				
-
-				
+						
 				
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
@@ -209,15 +194,16 @@ public class Service {
 				subscribeQuery.ExecuteUpdate();
 				
 				
-				
-
 			}
-			
-			
-			
-			
-			
-			
+			 if(command.equals("Create Twibble")){
+				 
+				 String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
+				 System.out.println("New Twibble Posted: "+twibbleContent);
+				
+				 createTwibble.query="INSERT INTO ascurra_445.twibbles(twibbleContent) VALUES ('" + contentTwibble + "')";
+				 createTwibble.ExecuteUpdate();
+				
+			 }
 			
 			
 			// Close all the input and output streams, as well as the sockets
