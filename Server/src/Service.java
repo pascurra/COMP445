@@ -66,7 +66,7 @@ public class Service {
 					socket.getInputStream()));
 			String line;
 
-			int i = 1;
+			int  i = 1;
 
 			// Read the request from the client
 			String xml = "";
@@ -196,10 +196,16 @@ public class Service {
 				
 			}
 			if(command.equals("Create Twibble")){
+								
+				//Check if user has followers
+				//if(userId.hasFollewrs(){
+				//String followers =[]
+				//} 
+				
 				 
 				 String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				 System.out.println("New Twibble Posted: "+twibbleContent);
-				
+				 	
 				 databaseConnection createTwibbleQuery = new databaseConnection("");
 				 createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent) VALUES ('" + twibbleContent + "')";
 				 createTwibbleQuery.ExecuteUpdate();
