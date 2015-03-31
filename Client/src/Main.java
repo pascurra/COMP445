@@ -31,6 +31,7 @@ public class Main {
 			System.out.println("4.- Subscribe to other poster's Twibbles");
 
 			i = input.nextInt();
+			
 			//Post Twibble
 			if (i == 1) {
 				System.out.println("1.- Create Twible");
@@ -41,7 +42,7 @@ public class Main {
 					
 				System.out.println("Please enter a new Twibble Content: ");
 				
-				twibbleContent = input.nextLine();	
+				twibbleContent = input.next();	
 								
 				System.out.println("Twibble Posted :"+twibbleContent);
 					

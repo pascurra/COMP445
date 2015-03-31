@@ -206,7 +206,9 @@ public class Service {
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
 								
-				databaseConnection getAliasId = new databaseConnection("SELECT FROM ascura_445,clients)(idusers)WHERE(alias= "+alias +")"); 
+				databaseConnection getAliasId = new databaseConnection(""); 
+				
+				getAliasId.query = "SELECT FROM ascura_445,clients)(idusers)WHERE(alias= "+alias +")";
 				
 				ResultSet theForeignKey = getAliasId.executeSelectStatement();
 				
