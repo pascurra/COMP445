@@ -206,15 +206,31 @@ public class Service {
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
 								
+				System.out.println("Current Alias: "+alias);
+				
 				databaseConnection getAliasId = new databaseConnection(""); 
 				
-				getAliasId.query = "SELECT FROM ascura_445,clients)(idusers)WHERE(alias= "+alias +")";
+				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
 				
 				ResultSet theForeignKey = getAliasId.executeSelectStatement();
 				
+				int userId = 0; 
+				try {
+					while (theForeignKey.next()) {
+
+						 userId=theForeignKey.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				System.out.println("The Foreign Key is: "+userId);
+				
 				databaseConnection createTwibbleQuery = new databaseConnection("");
 				
-                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,users_idusers-ForeignKey) VALUES ('" + twibbleContent + "','" + theForeignKey + "')";
+                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,users_idusers-ForeinKey) VALUES ('" + twibbleContent + "','" + userId + "')";
 				 	
                 createTwibbleQuery.ExecuteUpdate();
                 

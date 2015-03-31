@@ -35,8 +35,6 @@ public class Main {
 			//Post Twibble
 			if (i == 1) {
 				System.out.println("1.- Create Twible");
-				
-				//
 								
 				String twibbleContent;
 					
@@ -53,7 +51,8 @@ public class Main {
 				message.send();
 				
 			}
-
+			
+			//Delete Twibble	
 			if (i == 2) {
 				System.out.println("2.- Delete Twible");
 
