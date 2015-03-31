@@ -201,18 +201,25 @@ public class Service {
 				//if(userId.hasFollewrs(){
 				//String followers =[]
 				//} 
+								
 				
-				 
-				 String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
-				 System.out.println("New Twibble Posted: "+twibbleContent);
+				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
+				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+								
+				databaseConnection getAliasId = new databaseConnection("SELECT FROM ascura_445,clients)(idusers)WHERE(alias= "+alias +")"); 
+				
+				ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				
+				databaseConnection createTwibbleQuery = new databaseConnection("");
+				
+                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,users_idusers-ForeignKey) VALUES ('" + twibbleContent + "','" + theForeignKey + "')";
 				 	
-				 databaseConnection createTwibbleQuery = new databaseConnection("");
-				 createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent) VALUES ('" + twibbleContent + "')";
-				 createTwibbleQuery.ExecuteUpdate();
+                createTwibbleQuery.ExecuteUpdate();
+                
+                System.out.println("New Twibble Posted: "+twibbleContent);
 				
 			 }
-			
-			
+						
 			// Close all the input and output streams, as well as the sockets
 			in.close();
 			out.close();

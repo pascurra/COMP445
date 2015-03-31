@@ -7,13 +7,16 @@ public class Setup {
 		// TODO Auto-generated method stub
 		
 		
-		//create one object for the conection
+		//create one object for the connection
 		databaseConnection registerQuery=new databaseConnection("");
 		databaseConnection createTwibbleQuery = new databaseConnection("");
-
+		databaseConnection getAliasId = new databaseConnection("");
 		//Example to create twibble
 		createTwibbleQuery.query="INSERT INTO ascurra_455.twibbles(twiblrcontent) VALUES( \"newContent\";)";
 		createTwibbleQuery.ExecuteUpdate();
+		
+		//Example get id of specific alias
+		getAliasId.query ="SELECT FROM ascura_445,clients)(idusers)WHERE(\"alias\";)";
 		
 		//Example to delete alias paolo2015
 		registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
