@@ -10,7 +10,7 @@ public class Setup {
 		//create one object for the conection
 		databaseConnection registerQuery=new databaseConnection("");
 
-
+/**
 		
 		//Example to delete alias paolo2015
 		registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
@@ -40,6 +40,10 @@ public class Setup {
 		registerQuery.ExecuteUpdate();		
 		//Example to add alias paolo2016
 		registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES (\"sancho\", \"sancho@sancho.com\",NOW());";		
+		registerQuery.ExecuteUpdate();
+		*/
+		
+		registerQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,users_idusers-ForeinKey) VALUES (\"Hello Robin!\", \"28\");";		
 		registerQuery.ExecuteUpdate();
 		
 		
