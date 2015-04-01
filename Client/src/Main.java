@@ -56,7 +56,7 @@ public class Main {
 			
 			//Delete Twibble ToDo: Ryan	
 			if (i == 2) {
-				System.out.println("2.- Delete Twible");
+				
 				System.out.println("Are you sure you want to delete the Twible?");
 				System.out.println("1.- Yes");
 				System.out.println("2.- No");
