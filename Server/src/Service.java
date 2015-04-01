@@ -66,7 +66,7 @@ public class Service {
 					socket.getInputStream()));
 			String line;
 
-			int i = 1;
+			int  i = 1;
 
 			// Read the request from the client
 			String xml = "";
@@ -136,21 +136,8 @@ public class Service {
 		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
 		//		ResultSet result=registerQuery.Query();
 
-				
-				
-
-
-		
+								
 		 }
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			// Menu 3 , 3 by Paolo  - WORKING OK - use something similar in your tasks
@@ -172,9 +159,7 @@ public class Service {
 			
 			//Menu 3.4 subscribe by Paolo
 			if (command.equals("Subscribe")) {
-				
-
-				
+						
 				
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
@@ -209,17 +194,50 @@ public class Service {
 				subscribeQuery.ExecuteUpdate();
 				
 				
-				
-
 			}
-			
-			
-			
-			
-			
-			
-			
-			
+			if(command.equals("Create Twibble")){
+								
+				//Check if user has followers
+				//if(userId.hasFollewrs(){
+				//String followers =[]
+				//} 
+								
+				
+				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
+				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+								
+				System.out.println("Current Alias: "+alias);
+				
+				databaseConnection getAliasId = new databaseConnection(""); 
+				
+				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
+				
+				ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				
+				int userId = 0; 
+				try {
+					while (theForeignKey.next()) {
+
+						 userId=theForeignKey.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				System.out.println("The Foreign Key is: "+userId);
+				
+				databaseConnection createTwibbleQuery = new databaseConnection("");
+				
+                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
+				 	
+                createTwibbleQuery.ExecuteUpdate();
+                
+                System.out.println("New Twibble Posted: "+twibbleContent);
+				
+			 }
+						
 			// Close all the input and output streams, as well as the sockets
 			in.close();
 			out.close();
