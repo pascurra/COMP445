@@ -237,6 +237,12 @@ public class Service {
                 System.out.println("New Twibble Posted: "+twibbleContent);
 				
 			 }
+			
+			// Delete a Twible
+			if(command.equals("Delete Twibble")){
+				//ToDo: Ryan
+				System.out.println("In progress to implement Delete Twibble command....");
+			}
 						
 			// Close all the input and output streams, as well as the sockets
 			in.close();

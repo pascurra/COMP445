@@ -16,7 +16,8 @@ public class Main {
 		int i = input.nextInt();
 		// String s = input.next();
 		String alias;
-
+		String twibbleContent = "";
+		
 		if (i == 1) {
 			System.out.println("Please enter your username and press ENTER..");
 
@@ -37,7 +38,7 @@ public class Main {
 			if (i == 1) {
 				System.out.println("1.- Create Twible");
 								
-				String twibbleContent;
+				//String twibbleContent;
 					
 				System.out.println("Please enter a new Twibble Content: ");
 				
@@ -53,11 +54,31 @@ public class Main {
 				
 			}
 			
-			//Delete Twibble	
+			//Delete Twibble ToDo: Ryan	
 			if (i == 2) {
 				System.out.println("2.- Delete Twible");
+				System.out.println("Are you sure you want to delete the Twible?");
+				System.out.println("1.- Yes");
+				System.out.println("2.- No");
+				
+				i = input.nextInt();
+				
+				if (i == 1) {
+					System.out.println("Deleting Twible...........");
+					
+					String JSONCommand=
 
+					"<ExecuteCommand><command>Delete Twible</command><twibbleContent>"+twibbleContent+"</twibbleContent></ExecuteCommand>";
+							
+					Message message= new Message( "localhost" , 6789, JSONCommand);
+					message.send();
+				
 			}
+				if (i == 2) {
+					System.out.println("Nothing to do.");
+
+				}
+		}
 
 			if (i == 3) {
 				System.out.println("3.- Deregister account");
