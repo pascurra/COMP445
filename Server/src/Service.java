@@ -245,7 +245,7 @@ public class Service {
 				System.out.println("The Foreign Key is: "+userId);
 				
 								
-				//Posting twibble 
+				//Posting Twibble 
 				databaseConnection createTwibbleQuery = new databaseConnection("");
 				createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
 		        createTwibbleQuery.ExecuteUpdate();                
