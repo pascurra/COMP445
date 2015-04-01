@@ -7,8 +7,14 @@ public class StartWebServer {
 		// TODO Auto-generated method stub
 
 		
-		WebServer webServer= new WebServer("<p>Hello frame!</p>");
 		
+ListOfClients listOfClients=new ListOfClients();
+
+String htmlcontent=listOfClients.getListOfClients();
+
+WebServer webServer= new WebServer("<p>"+htmlcontent+"</p>");
+
+
 
 		while (webServer.terminate!=true){
 			
