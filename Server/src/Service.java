@@ -16,22 +16,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+
+import java.util.Properties;  
+import javax.mail.*;  
+import javax.mail.internet.*;
+import javax.activation.*;
 
 public class Service {
 
@@ -100,9 +93,7 @@ public class Service {
 			// create query object
 
 			// String Command="Deregister";
-
-			
-
+		
 			// Menu 1.1
 
 			if (command.equals("Register")){
@@ -196,18 +187,18 @@ public class Service {
 				
 			}
 			if(command.equals("Create Twibble")){
-								
-				//Check if user has followers
-				//if(userId.hasFollewrs(){
-				//String followers =[]
-				//} 
-								
-				
+							
+				//Analyze data received from client				
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-								
+				//String email = doc.getElementsByTagName("email").item(0).getTextContent();
+				//String subscribers = doc.getElementsByTagName("subscribers").item(0).getTextContent();
+				
+				//Get Subscribers Emails
+				//
 				System.out.println("Current Alias: "+alias);
 				
+				// Getting the appropriate id 
 				databaseConnection getAliasId = new databaseConnection(""); 
 				
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
@@ -228,6 +219,16 @@ public class Service {
 				
 				System.out.println("The Foreign Key is: "+userId);
 				
+				//Getting the current user's email
+				databaseConnection getEmail = new databaseConnection(""); 
+				
+				getEmail.query = "select email FROM ascurra_445.clients where alias='"+ alias+"' ";
+				
+				ResultSet userEmail = getEmail.executeSelectStatement();
+				
+				System.out.println("Current User Email: "+userEmail);
+				
+				//Posting twibble 
 				databaseConnection createTwibbleQuery = new databaseConnection("");
 				
                 createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
@@ -235,6 +236,51 @@ public class Service {
                 createTwibbleQuery.ExecuteUpdate();
                 
                 System.out.println("New Twibble Posted: "+twibbleContent);
+                
+                //////Check if subscriber and email notification//////
+                
+                // Recipient's email ID needs to be mentioned.
+                String to = "mehdi.m.jamai@gmail.com";
+
+                // Sender's email ID needs to be mentioned
+                String from = "mehdi.mj@hotmail.fr";
+
+                // Assuming you are sending email from localhost
+                String host = "localhost";
+
+                // Get system properties
+                Properties properties = System.getProperties();
+
+                // Setup mail server
+                properties.setProperty("mail.smtp.host", host);
+
+                // Get the default Session object.
+                Session session = Session.getDefaultInstance(properties);
+
+                try{
+                   // Create a default MimeMessage object.
+                   MimeMessage message = new MimeMessage(session);
+
+                   // Set From: header field of the header.
+                   message.setFrom(new InternetAddress(from));
+
+                   // Set To: header field of the header.
+                   message.addRecipient(Message.RecipientType.TO,
+                           new InternetAddress(to));
+                  
+                   // Set Subject: header field
+                   message.setSubject("Notification");
+
+                   // Now set the actual message
+                   message.setText("This is actual message");
+
+                   // Send message
+                   Transport.send(message);
+                   System.out.println("Sent message successfully....");
+                }catch (MessagingException mex) {
+                   mex.printStackTrace();
+                }
+                ///////End of Email Stuff//////
 				
 			 }
 						
