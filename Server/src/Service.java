@@ -179,32 +179,58 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
+							
 				subscribeQuery.query="INSERT INTO ascurra_445.subscribers(client_alias,following_client_id) VALUES ('" + alias + "', '" + subscribeToId +"' )";
 				subscribeQuery.ExecuteUpdate();
-				
-				
+								
 			}
+			
 			if(command.equals("Create Twibble")){
 							
 				//Analyze data received from client				
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				//String email = doc.getElementsByTagName("email").item(0).getTextContent();
-				//String subscribers = doc.getElementsByTagName("subscribers").item(0).getTextContent();
+												
+				//Getting appropriate email
+				databaseConnection getEmail = new databaseConnection("");
+				getEmail.query =  "select email FROM ascurra_445.clients where alias='"+ alias+"' ";
+				ResultSet theEmail = getEmail.executeSelectStatement();
+				String currentEmail="";
+				try {
+					while (theEmail.next()) {
+
+						 currentEmail=theEmail.getString("email");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("CurrentEmail: "+currentEmail);
 				
-				//Get Subscribers Emails
-				//
-				System.out.println("Current Alias: "+alias);
+				//Getting subscribers list
+				databaseConnection getId = new databaseConnection("");
+				getId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
+				ResultSet ids = getId.executeSelectStatement();
+				int a =0;
+				try {
+					while (ids.next()) {
+
+						 a=ids.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Current ID: "+a);
+				
+				//Get Subscribers Alias
 				
 				// Getting the appropriate id 
 				databaseConnection getAliasId = new databaseConnection(""); 
-				
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
-				
 				ResultSet theForeignKey = getAliasId.executeSelectStatement();
-				
 				int userId = 0; 
 				try {
 					while (theForeignKey.next()) {
@@ -216,34 +242,21 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 				System.out.println("The Foreign Key is: "+userId);
 				
-				//Getting the current user's email
-				databaseConnection getEmail = new databaseConnection(""); 
-				
-				getEmail.query = "select email FROM ascurra_445.clients where alias='"+ alias+"' ";
-				
-				ResultSet userEmail = getEmail.executeSelectStatement();
-				
-				System.out.println("Current User Email: "+userEmail);
-				
+								
 				//Posting twibble 
 				databaseConnection createTwibbleQuery = new databaseConnection("");
-				
-                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
-				 	
-                createTwibbleQuery.ExecuteUpdate();
-                
+				createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
+		        createTwibbleQuery.ExecuteUpdate();                
                 System.out.println("New Twibble Posted: "+twibbleContent);
                 
                 //////Check if subscriber and email notification//////
-                
                 // Recipient's email ID needs to be mentioned.
                 String to = "mehdi.m.jamai@gmail.com";
 
                 // Sender's email ID needs to be mentioned
-                String from = "mehdi.mj@hotmail.fr";
+                String from = currentEmail;
 
                 // Assuming you are sending email from localhost
                 String host = "localhost";
@@ -282,6 +295,11 @@ public class Service {
                 }
                 ///////End of Email Stuff//////
 				
+			 }
+			 //Update Profile
+			 if(command.equals("Update Profile")){
+				
+			 	
 			 }
 						
 			// Close all the input and output streams, as well as the sockets
