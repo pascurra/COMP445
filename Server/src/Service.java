@@ -230,7 +230,7 @@ public class Service {
 				
 				databaseConnection createTwibbleQuery = new databaseConnection("");
 				
-                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,users_idusers-ForeinKey) VALUES ('" + twibbleContent + "','" + userId + "')";
+                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
 				 	
                 createTwibbleQuery.ExecuteUpdate();
                 

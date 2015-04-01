@@ -29,6 +29,7 @@ public class Main {
 			System.out.println("2.- Delete Twible");
 			System.out.println("3.- Deregister account");
 			System.out.println("4.- Subscribe to other poster's Twibbles");
+			System.out.println("5.- Update Profile");
 
 			i = input.nextInt();
 			
@@ -111,9 +112,7 @@ public class Main {
 						Message message= new Message( "localhost" , 6789, JSONCommand);
 						message.send();
 
-						System.out.println("You have been subscribed to: "+subscribeTo);
-							
-				
+						System.out.println("You have been subscribed to: "+subscribeTo);		
 
 			}
 
