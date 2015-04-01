@@ -65,18 +65,6 @@ public class Main {
 				
 				if (i == 1) {
 					System.out.println("Deleting Twible...........");
-					
-					String JSONCommand=
-
-					"<ExecuteCommand><command>Delete Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent></ExecuteCommand>";
-							
-					Message message= new Message( "localhost" , 6789, JSONCommand);
-					message.send();
-				
-			}
-				if (i == 2) {
-					System.out.println("Nothing to do.");
-
 				}
 		}
 
