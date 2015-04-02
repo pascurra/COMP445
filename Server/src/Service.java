@@ -301,6 +301,19 @@ public class Service {
 				
 			 	
 			 }
+			
+			// Delete a Twibble
+			if(command.equals("Delete Twibble")){
+				//ToDo: Ryan
+				System.out.println("In progress to implement Delete Twibble command....");
+				
+				// Grab the twibbleContent entered previously
+				//String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
+				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+				
+				System.out.println("Current Alias: "+ alias);
+				//System.out.println("Twibble to delete is: " + twibbleContent);
+			}
 						
 			// Close all the input and output streams, as well as the sockets
 			in.close();
