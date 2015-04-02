@@ -238,17 +238,55 @@ public class Service {
 				
 			 }
 			
-			// Delete a Twibble
+			// Delete a Twibble: Still working on this!!
 			if(command.equals("Delete Twibble")){
 				//ToDo: Ryan
-				System.out.println("In progress to implement Delete Twibble command....");
-				
-				// Grab the twibbleContent entered previously
-				//String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
+		
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+				//String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				
-				System.out.println("Current Alias: "+ alias);
-				//System.out.println("Twibble to delete is: " + twibbleContent);
+				System.out.println("Current Alias: "+alias);
+				
+				databaseConnection getAliasId = new databaseConnection("");
+				
+				getAliasId.query = "SELECT usersIdForeign FROM ascurra_445.twibbles";
+				
+				ResultSet rs = getAliasId.executeSelectStatement();
+				
+				//String getAliasId = "select idusers FROM ascurra_445.clients where alias='"+ alias +"' ";
+				
+				//ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				int usersForeign = 0;
+				try {
+					while(rs.next()) {
+					usersForeign=rs.getInt("usersIdForeign");
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				System.out.println("The Foreign Key is: "+ usersForeign);
+				
+				
+				//databaseConnection getTwibbleQuery = new databaseConnection("");
+				
+				//getTwibbleQuery.query = "select twiblrcontent FROM ascurra_445.twibbles where usersIdForeign='"+ theForeignKey +"' ";
+				
+				//databaseConnection deleteTwibbleQuery = new databaseConnection("");
+				
+				//registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
+				//registerQuery.ExecuteUpdate();
+				//"DELETE FROM ascurra_445.clients WHERE alias=" + "\"" + alias + "\"" + ";"
+				//('" + alias + "', '" + subscribeToId +"' )";
+                //deleteTwibbleQuery.query="DELETE FROM ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + getTwibbleQuery.query + "','" + "')";
+			 	
+               // deleteTwibbleQuery.ExecuteUpdate();
+                
+                //System.out.println("The Twibble deleted was: " + getTwibbleQuery.query);
+					
+
 			}
 						
 			// Close all the input and output streams, as well as the sockets

@@ -68,7 +68,7 @@ public class Main {
 					
 					String JSONCommand=
 
-							"<ExecuteCommand><command>Delete Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent></ExecuteCommand>";
+							"<ExecuteCommand><command>Delete Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent><alias>"+alias+"</alias></ExecuteCommand>";
 									
 							Message message= new Message( "localhost" , 6789, JSONCommand);
 							message.send();
