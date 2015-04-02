@@ -243,23 +243,31 @@ public class Service {
 				//ToDo: Ryan
 		
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				//String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
+			
 				
 				System.out.println("Current Alias: "+alias);
+
 				
-				databaseConnection getAliasId = new databaseConnection("");
+				databaseConnection getTwibbleQuery = new databaseConnection("");
 				
-				getAliasId.query = "SELECT usersIdForeign FROM ascurra_445.twibbles";
-				
-				ResultSet rs = getAliasId.executeSelectStatement();
-				
-				//String getAliasId = "select idusers FROM ascurra_445.clients where alias='"+ alias +"' ";
-				
-				//ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles";
+				//where usersIdForeign='"+ usersForeign +"' ";
+				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
+				String content = "";
+				int idtwiblr = 0;
 				int usersForeign = 0;
+				//int usersForeign = 0;
 				try {
-					while(rs.next()) {
-					usersForeign=rs.getInt("usersIdForeign");
+					
+				      while(rs1.next()){
+				          //Retrieve by column name
+				          idtwiblr  = rs1.getInt("idtwiblr");
+				  
+				          content = rs1.getString("twiblrcontent");
+				          usersForeign  = rs1.getInt("usersIdForeign");
+				         
+					//while(rs1.next()) {
+					//content=rs1.getString("twiblrcontent");
 					}
 					
 				} catch (SQLException e) {
@@ -267,24 +275,14 @@ public class Service {
 					e.printStackTrace();
 				}
 				
-				System.out.println("The Foreign Key is: "+ usersForeign);
 				
+				databaseConnection deleteTwibbleQuery = new databaseConnection("");
 				
-				//databaseConnection getTwibbleQuery = new databaseConnection("");
-				
-				//getTwibbleQuery.query = "select twiblrcontent FROM ascurra_445.twibbles where usersIdForeign='"+ theForeignKey +"' ";
-				
-				//databaseConnection deleteTwibbleQuery = new databaseConnection("");
-				
-				//registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
-				//registerQuery.ExecuteUpdate();
-				//"DELETE FROM ascurra_445.clients WHERE alias=" + "\"" + alias + "\"" + ";"
-				//('" + alias + "', '" + subscribeToId +"' )";
-                //deleteTwibbleQuery.query="DELETE FROM ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + getTwibbleQuery.query + "','" + "')";
-			 	
-               // deleteTwibbleQuery.ExecuteUpdate();
+				deleteTwibbleQuery.query="DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"+ content +"' ";
+				deleteTwibbleQuery.ExecuteUpdate();
+
                 
-                //System.out.println("The Twibble deleted was: " + getTwibbleQuery.query);
+                System.out.println("The Twibble deleted was: " + content);
 					
 
 			}
