@@ -260,7 +260,7 @@ public class Service {
 				ArrayList<String> contentList = new ArrayList<String>();
 				
 				try {
-					System.out.println("Which twibble would you like to delete?");
+				
 				      while(rs1.next()){
 				          //Retrieve by column name
 				          content = rs1.getString("twiblrcontent");
