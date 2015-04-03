@@ -34,24 +34,17 @@ public class Main {
 
 			i = input.nextInt();
 			
-			//Post Twibble
+			//Create Twibble option Twibble
 			if (i == 1) {
 				System.out.println("1.- Create Twible");
-								
 				//String twibbleContent;
-					
 				System.out.println("Please enter a new Twibble Content: ");
-				
 				twibbleContent = input.next();	
-								
 				System.out.println("Twibble Posted :"+twibbleContent);
-					
 				String JSONCommand=
 				"<ExecuteCommand><command>Create Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent><alias>"+alias+"</alias></ExecuteCommand>";
-
 				Message message= new Message( "localhost" , 6789, JSONCommand);
 				message.send();
-				
 			}
 			
 			//Delete Twibble ToDo: Ryan	

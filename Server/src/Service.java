@@ -51,7 +51,7 @@ public class Service {
 	BufferedReader in;
 	Scanner input = new Scanner(System.in);
 
-	public void Execute() {
+	public void Execute() throws SQLException {
 
 		try {
 			// Create a Socket and bind it to a port
@@ -198,46 +198,52 @@ public class Service {
 				
 			}
 			if(command.equals("Create Twibble")){
-								
-				//Check if user has followers
-				//if(userId.hasFollewrs(){
-				//String followers =[]
-				//} 
-								
 				
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
-				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-								
+				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();		
 				System.out.println("Current Alias: "+alias);
-				
+				//Getting current ID
 				databaseConnection getAliasId = new databaseConnection(""); 
-				
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
-				
-				ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				ResultSet id = getAliasId.executeSelectStatement();
 				
 				int userId = 0; 
 				try {
-					while (theForeignKey.next()) {
-
-						 userId=theForeignKey.getInt("idusers");
-
+					while (id.next()) {
+						 userId=id.getInt("idusers");
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				System.out.println("The current id is: "+userId);
+				//Get Subscribers List
+				//Get aliases of followers 
+				databaseConnection getSubscribers = new databaseConnection(""); 
+				getSubscribers.query = "select client_alias FROM ascurra_445.subscribers where following_client_id='"+ userId+"' ";
+				ResultSet subscribersSet = getSubscribers.executeSelectStatement();
+				String [] followers = new String[subscribersSet.getMetaData().getColumnCount()];	
+				int subCount = 0;
+				try {
+					while (subscribersSet.next()) {
+											
+						  followers[subCount] = subscribersSet.getString(subCount);
+						  subCount++;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("The number of follower is: "+subCount);
+				System.out.println("Array of aliases: "+followers);
+
 				
-				System.out.println("The Foreign Key is: "+userId);
-				
+				//Create Twibble
 				databaseConnection createTwibbleQuery = new databaseConnection("");
-				
                 createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
-				 	
                 createTwibbleQuery.ExecuteUpdate();
-                
                 System.out.println("New Twibble Posted: "+twibbleContent);
-				
+				//Send Notification
 			 }
 			
 			// Delete a Twibble: 
