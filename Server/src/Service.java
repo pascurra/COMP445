@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -16,15 +17,23 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
-import java.util.Properties;  
-import javax.mail.*;  
-import javax.mail.internet.*;
-import javax.activation.*;
 
 public class Service {
 
@@ -93,7 +102,9 @@ public class Service {
 			// create query object
 
 			// String Command="Deregister";
-		
+
+			
+
 			// Menu 1.1
 
 			if (command.equals("Register")){
@@ -126,6 +137,7 @@ public class Service {
 				//Paolo says: Needs to be updated like 3.3
 		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
 		//		ResultSet result=registerQuery.Query();
+
 								
 		 }
 			
@@ -178,58 +190,32 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-							
+				
+				
 				subscribeQuery.query="INSERT INTO ascurra_445.subscribers(client_alias,following_client_id) VALUES ('" + alias + "', '" + subscribeToId +"' )";
 				subscribeQuery.ExecuteUpdate();
-								
+				
+				
 			}
-			
 			if(command.equals("Create Twibble")){
-							
-				//Analyze data received from client				
+								
+				//Check if user has followers
+				//if(userId.hasFollewrs(){
+				//String followers =[]
+				//} 
+								
+				
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-												
-				//Getting appropriate email
-				databaseConnection getEmail = new databaseConnection("");
-				getEmail.query =  "select email FROM ascurra_445.clients where alias='"+ alias+"' ";
-				ResultSet theEmail = getEmail.executeSelectStatement();
-				String currentEmail="";
-				try {
-					while (theEmail.next()) {
-
-						 currentEmail=theEmail.getString("email");
-
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("CurrentEmail: "+currentEmail);
+								
+				System.out.println("Current Alias: "+alias);
 				
-				//Getting subscribers list
-				databaseConnection getId = new databaseConnection("");
-				getId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
-				ResultSet ids = getId.executeSelectStatement();
-				int a =0;
-				try {
-					while (ids.next()) {
-
-						 a=ids.getInt("idusers");
-
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Current ID: "+a);
-				
-				//Get Subscribers Alias
-				
-				// Getting the appropriate id 
 				databaseConnection getAliasId = new databaseConnection(""); 
+				
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
+				
 				ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				
 				int userId = 0; 
 				try {
 					while (theForeignKey.next()) {
@@ -241,77 +227,95 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 				System.out.println("The Foreign Key is: "+userId);
 				
-								
-				//Posting Twibble 
 				databaseConnection createTwibbleQuery = new databaseConnection("");
-				createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
-		        createTwibbleQuery.ExecuteUpdate();                
-                System.out.println("New Twibble Posted: "+twibbleContent);
+				
+                createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
+				 	
+                createTwibbleQuery.ExecuteUpdate();
                 
-                //////Check if subscriber and email notification//////
-                // Recipient's email ID needs to be mentioned.
-                String to = "mehdi.m.jamai@gmail.com";
-
-                // Sender's email ID needs to be mentioned
-                String from = currentEmail;
-
-                // Assuming you are sending email from localhost
-                String host = "smtp.gmail.com";
-
-                // Get system properties
-                Properties properties = System.getProperties();
-
-                // Setup mail server
-                properties.setProperty("mail.smtp.host", host);
-
-                // Get the default Session object.
-                Session session = Session.getDefaultInstance(properties);
-
-                try{
-                   // Create a default MimeMessage object.
-                   MimeMessage message = new MimeMessage(session);
-
-                   // Set From: header field of the header.
-                   message.setFrom(new InternetAddress(from));
-
-                   // Set To: header field of the header.
-                   message.addRecipient(Message.RecipientType.TO,
-                           new InternetAddress(to));
-                  
-                   // Set Subject: header field
-                   message.setSubject("Notification");
-
-                   // Now set the actual message
-                   message.setText("This is actual message");
-
-                   // Send message
-                   Transport.send(message);
-                   System.out.println("Sent message successfully....");
-                }catch (MessagingException mex) {
-                   mex.printStackTrace();
-                }
-                ///////End of Email Stuff//////
+                System.out.println("New Twibble Posted: "+twibbleContent);
 				
-			 }
-			 //Update Profile
-			 if(command.equals("Update Profile")){
-				
-			 	
 			 }
 			
-			// Delete a Twibble
+			// Delete a Twibble: 
 			if(command.equals("Delete Twibble")){
-				//ToDo: Ryan
-				System.out.println("In progress to implement Delete Twibble command....");
 				
-				// Grab the twibbleContent entered previously
-				//String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+			
+				System.out.println("Current Alias: "+alias);
+
+				databaseConnection getTwibbleQuery = new databaseConnection("");
 				
-				System.out.println("Current Alias: "+ alias);
-				//System.out.println("Twibble to delete is: " + twibbleContent);
+				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles";
+				
+				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
+				
+				String content = "";
+				int j = 1;
+				
+				// Need a way to store the twibble contents so we can choose which to delete
+				ArrayList<String> contentList = new ArrayList<String>();
+				
+				try {
+				
+				      while(rs1.next()){
+				          //Retrieve by column name
+				          content = rs1.getString("twiblrcontent");
+				          contentList.add(content);
+
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				// Go through twibbles to find which one to delete from page
+				boolean flag = true;
+				int choice = 0;
+				String outContent = "";
+				System.out.println("Which twibble would you like to delete?");
+				
+				//Loop through to display twibbles and choose which to delete
+				do {
+
+					for(int k = 0; k < contentList.size(); k++) {
+						System.out.println(j + ": " + contentList.get(k));
+						j++;
+					}
+					
+					System.out.println("Please select the number to delete or '0' for exit: ");
+				
+					choice = input.nextInt();
+					
+					if(choice == 0) {
+						flag = false;
+					}
+					
+					for(int p = 0; p < contentList.size(); ++p) {
+					
+						outContent = contentList.get(p);
+						int indexCounter = contentList.indexOf(outContent);
+						indexCounter++;
+					
+						// If the choice meets the index in our arraylist then delete that twibble
+						if(choice == indexCounter) {
+						
+							databaseConnection deleteTwibbleQuery = new databaseConnection("");
+							deleteTwibbleQuery.query="DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"+ outContent +"' ";
+							deleteTwibbleQuery.ExecuteUpdate();
+							System.out.println("The Twibble deleted was: " + outContent);
+
+						}
+					
+					}
+					flag = false;
+					}while(flag);
+				 
+					
 			}
 						
 			// Close all the input and output streams, as well as the sockets
