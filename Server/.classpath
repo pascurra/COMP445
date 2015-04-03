@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="Documentation/json-20140107.jar"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
