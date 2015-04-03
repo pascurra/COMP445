@@ -8,12 +8,14 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 
 
 
@@ -238,36 +240,32 @@ public class Service {
 				
 			 }
 			
-			// Delete a Twibble: Still working on this!!
+			// Delete a Twibble: 
 			if(command.equals("Delete Twibble")){
-				//ToDo: Ryan
-		
+				
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
 			
-				
 				System.out.println("Current Alias: "+alias);
 
-				
 				databaseConnection getTwibbleQuery = new databaseConnection("");
 				
 				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles";
-				//where usersIdForeign='"+ usersForeign +"' ";
+				
 				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
+				
 				String content = "";
-				int idtwiblr = 0;
-				int usersForeign = 0;
-				//int usersForeign = 0;
+				int j = 1;
+				
+				// Need a way to store the twibble contents so we can choose which to delete
+				ArrayList<String> contentList = new ArrayList<String>();
+				
 				try {
-					
+					System.out.println("Which twibble would you like to delete?");
 				      while(rs1.next()){
 				          //Retrieve by column name
-				          idtwiblr  = rs1.getInt("idtwiblr");
-				  
 				          content = rs1.getString("twiblrcontent");
-				          usersForeign  = rs1.getInt("usersIdForeign");
-				         
-					//while(rs1.next()) {
-					//content=rs1.getString("twiblrcontent");
+				          contentList.add(content);
+
 					}
 					
 				} catch (SQLException e) {
@@ -275,16 +273,49 @@ public class Service {
 					e.printStackTrace();
 				}
 				
+				// Go through twibbles to find which one to delete from page
+				boolean flag = true;
+				int choice = 0;
+				String outContent = "";
+				System.out.println("Which twibble would you like to delete?");
 				
-				databaseConnection deleteTwibbleQuery = new databaseConnection("");
-				
-				deleteTwibbleQuery.query="DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"+ content +"' ";
-				deleteTwibbleQuery.ExecuteUpdate();
+				//Loop through to display twibbles and choose which to delete
+				do {
 
-                
-                System.out.println("The Twibble deleted was: " + content);
+					for(int k = 0; k < contentList.size(); k++) {
+						System.out.println(j + ": " + contentList.get(k));
+						j++;
+					}
 					
+					System.out.println("Please select the number to delete or '0' for exit: ");
+				
+					choice = input.nextInt();
+					
+					if(choice == 0) {
+						flag = false;
+					}
+					
+					for(int p = 0; p < contentList.size(); ++p) {
+					
+						outContent = contentList.get(p);
+						int indexCounter = contentList.indexOf(outContent);
+						indexCounter++;
+					
+						// If the choice meets the index in our arraylist then delete that twibble
+						if(choice == indexCounter) {
+						
+							databaseConnection deleteTwibbleQuery = new databaseConnection("");
+							deleteTwibbleQuery.query="DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"+ outContent +"' ";
+							deleteTwibbleQuery.ExecuteUpdate();
+							System.out.println("The Twibble deleted was: " + outContent);
 
+						}
+					
+					}
+					flag = false;
+					}while(flag);
+				 
+					
 			}
 						
 			// Close all the input and output streams, as well as the sockets
