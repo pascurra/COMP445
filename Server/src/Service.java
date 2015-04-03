@@ -212,6 +212,7 @@ public class Service {
 					e.printStackTrace();
 				}
 				System.out.println("The current id is: "+userId);
+				
 				//Get Current User Email
 				databaseConnection getUserEmail = new databaseConnection(""); 
 				getUserEmail.query = "select email FROM ascurra_445.clients where alias='"+ alias+"' ";
@@ -227,28 +228,45 @@ public class Service {
 					e.printStackTrace();
 				}
 				System.out.println("The current email is: "+currentEmail);
+				
 				//Get Subscribers List
 				//Get aliases of followers 
 				databaseConnection getSubscribers = new databaseConnection(""); 
 				getSubscribers.query = "select client_alias FROM ascurra_445.subscribers where following_client_id='"+ userId+"' ";
 				ResultSet subscribersSet = getSubscribers.executeSelectStatement();
 				
-				ArrayList al = new ArrayList();
+				ArrayList<String> subscriberAliases = new ArrayList();
 				try {
 					
 					while (subscribersSet.next()) {
-						al.add(subscribersSet.getString("client_alias"));
+						subscriberAliases.add(subscribersSet.getString("client_alias"));
 						
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("The number of followers is: "+al.size());
-				System.out.println("Array of aliases: "+al);
-				//Get Email of Followers  
-//				databaseConnection getFollowersEmail = new databaseConnection(""); 
-//				getFollowersEmail.query = "select email FROM ascurra_445.clients where following_client_id='"+ userId+"' ";
+				System.out.println("The number of followers is: "+subscriberAliases.size());
+				System.out.println("Array of aliases: "+subscriberAliases);
+				
+				//Get Email of Followers
+				ArrayList<String> subscriberEmails = new ArrayList();
+				databaseConnection getSubscriberEmail = new databaseConnection("");
+				for(String a : subscriberAliases ){
+					getSubscriberEmail.query = "select email FROM ascurra_445.clients where alias='"+ a+"' ";
+					ResultSet emailOfSubscriber = getSubscriberEmail.executeSelectStatement();
+					try {						
+						while (emailOfSubscriber.next()) {
+							subscriberEmails.add(emailOfSubscriber.getString("email"));
+							
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				};
+				//End Of Subscriber Email
+		
 				//Create Twibble
 				databaseConnection createTwibbleQuery = new databaseConnection("");
                 createTwibbleQuery.query="INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('" + twibbleContent + "','" + userId + "')";
@@ -257,46 +275,45 @@ public class Service {
 				
                 //Send Notification
              // Recipient's email ID needs to be mentioned.
-//                String to = Array of Subscribers Emails;
-//
-//                // Sender's email ID needs to be mentioned
-//                String from = currentEmail;
-//
-//                // Assuming you are sending email from localhost
-//                String host = "smtp.gmail.com";
-//
-//                // Get system properties
-//                Properties properties = System.getProperties();
-//
-//                // Setup mail server
-//                properties.setProperty("mail.smtp.host", host);
-//
-//                // Get the default Session object.
-//                Session session = Session.getDefaultInstance(properties);
-//
-//                try{
-//                   // Create a default MimeMessage object.
-//                   MimeMessage message = new MimeMessage(session);
-//
-//                   // Set From: header field of the header.
-//                   message.setFrom(new InternetAddress(from));
-//
-//                   // Set To: header field of the header.
-//                   message.addRecipient(Message.RecipientType.TO,
-//                                            new InternetAddress(to));
-//
-//                   // Set Subject: header field
-//                   message.setSubject("This is the Subject Line!");
-//
-//                   // Now set the actual message
-//                   message.setText("This is actual message");
-//
-//                   // Send message
-//                   Transport.send(message);
-//                   System.out.println("Sent message successfully....");
-//                }catch (MessagingException mex) {
-//                   mex.printStackTrace();
-//                }
+               
+                // Sender's email ID needs to be mentioned
+                String from = currentEmail;
+
+                // Assuming you are sending email from localhost
+                String host = "smtp.gmail.com";
+
+                // Get system properties
+                Properties properties = System.getProperties();
+
+                // Setup mail server
+                properties.setProperty("mail.smtp.host", host);
+
+                // Get the default Session object.
+                Session session = Session.getDefaultInstance(properties);
+
+                try{
+                   // Create a default MimeMessage object.
+                   MimeMessage message = new MimeMessage(session);
+
+                   // Set From: header field of the header.
+                   message.setFrom(new InternetAddress(from));
+
+                   // Set To: header field of the header.
+                   message.addRecipient(Message.RecipientType.CC,subscriberEmails);
+                                            
+
+                   // Set Subject: header field
+                   message.setSubject(alias+" posted a new Twibble !");
+
+                   // Now set the actual message
+                   message.setText(twibbleContent);
+
+                   // Send message
+                   Transport.send(message);
+                   System.out.println("Sent message successfully....");
+                }catch (MessagingException mex) {
+                   mex.printStackTrace();
+                }
                 //
 			 }
 			
