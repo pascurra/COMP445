@@ -18,6 +18,8 @@ public class Setup {
 		//Example get id of specific alias
 		getAliasId.query ="SELECT FROM ascura_445,clients)(idusers)WHERE(\"alias\";)";
 		
+		
+		
 		//Example to delete alias paolo2015
 		registerQuery.query="DELETE FROM ascurra_445.clients WHERE alias=\"paolo2015\";";
 		registerQuery.ExecuteUpdate();		
