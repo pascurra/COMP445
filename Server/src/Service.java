@@ -126,7 +126,6 @@ public class Service {
 				//Paolo says: Needs to be updated like 3.3
 		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
 		//		ResultSet result=registerQuery.Query();
-
 								
 		 }
 			
@@ -259,7 +258,7 @@ public class Service {
                 String from = currentEmail;
 
                 // Assuming you are sending email from localhost
-                String host = "localhost";
+                String host = "smtp.gmail.com";
 
                 // Get system properties
                 Properties properties = System.getProperties();
