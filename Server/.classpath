@@ -11,5 +11,7 @@
 	<classpathentry kind="lib" path="Documentation/commons-io-2.4-sources.jar"/>
 	<classpathentry kind="lib" path="Documentation/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="Documentation/json-20140107.jar"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib/mailapi.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
