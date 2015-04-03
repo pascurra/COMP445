@@ -18,11 +18,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
+
 import java.util.*;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -265,6 +266,14 @@ public class Service {
 						e.printStackTrace();
 					}
 				};
+				
+				InternetAddress[] cc = new InternetAddress [subscriberEmails.size()] ;
+				 for(int b=0;b<subscriberEmails.size();b++){
+				 cc[b] = new InternetAddress(subscriberEmails.get(b));
+				}								        
+				 System.out.println(cc);
+//				String [] emails = new String[subscriberEmails.size()];
+//				subscriberEmails.toArray(emails);
 				//End Of Subscriber Email
 		
 				//Create Twibble
@@ -275,39 +284,41 @@ public class Service {
 				
                 //Send Notification
              // Recipient's email ID needs to be mentioned.
-               
                 // Sender's email ID needs to be mentioned
                 String from = currentEmail;
-
+                //Auth
+                final String username = "myTwibble@gmail.com";//change accordingly
+                final String password = "##twibbleGmail##";//change accordingly
                 // Assuming you are sending email from localhost
                 String host = "smtp.gmail.com";
-
                 // Get system properties
-                Properties properties = System.getProperties();
-
+                Properties props = System.getProperties();
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", host);
+                props.put("mail.smtp.port", "587");
                 // Setup mail server
-                properties.setProperty("mail.smtp.host", host);
-
-                // Get the default Session object.
-                Session session = Session.getDefaultInstance(properties);
-
+                props.setProperty("mail.smtp.host", host);
+                //
+                // Get the Session object.
+                Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                   protected PasswordAuthentication getPasswordAuthentication() {
+                      return new PasswordAuthentication(username, password);
+                   }
+                });
+                
                 try{
                    // Create a default MimeMessage object.
                    MimeMessage message = new MimeMessage(session);
-
                    // Set From: header field of the header.
                    message.setFrom(new InternetAddress(from));
-
                    // Set To: header field of the header.
-                   message.addRecipient(Message.RecipientType.CC,subscriberEmails);
-                                            
-
+                   message.addRecipients(Message.RecipientType.BCC, cc);             
                    // Set Subject: header field
                    message.setSubject(alias+" posted a new Twibble !");
-
                    // Now set the actual message
                    message.setText(twibbleContent);
-
                    // Send message
                    Transport.send(message);
                    System.out.println("Sent message successfully....");
@@ -423,13 +434,14 @@ public class Service {
 			socket.close();
 			server.close();
 			
-			
-
-			
+						
 		} catch (UnknownHostException e) {
 			System.out.println("UnknownHostException:" + e.getMessage());
 		} catch (IOException e) {
 			System.out.println("IOException:" + e.getMessage());
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 

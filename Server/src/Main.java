@@ -6,18 +6,12 @@ public class Main
 {
 	public static void main(String[] args) throws SQLException 
 	{
-		
-		
-		Service service= new Service();
-		
-
-		while (service.terminate!=true){
 			
-			service.Execute();
-
-					
-		}
+		Service service= new Service();
+		while (service.terminate!=true){
+				service.Execute();
 				
+		}
 		
 	}
 
