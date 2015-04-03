@@ -246,10 +246,32 @@ public class Service {
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
 			
 				System.out.println("Current Alias: "+alias);
+				
+				// Same as create twibble, we need to get the foreign id for displaying the right set of twibbles to delete
+				// relative to the alias requesting to delete
+				databaseConnection getAliasId = new databaseConnection(""); 
+				
+				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"+ alias+"' ";
+				
+				ResultSet theForeignKey = getAliasId.executeSelectStatement();
+				
+				int userId = 0; 
+				try {
+					while (theForeignKey.next()) {
 
+						 userId=theForeignKey.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				System.out.println("The Foreign Key is: "+userId);
+				
 				databaseConnection getTwibbleQuery = new databaseConnection("");
 				
-				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles";
+				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles where usersIdForeign='"+ userId+"' ";
 				
 				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
 				
