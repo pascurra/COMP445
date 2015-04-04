@@ -192,7 +192,8 @@ public class Service {
 				
 				
 			}
-			//CreateTwibble
+			
+			//Create Twibble
 			if(command.equals("Create Twibble")){
 				
 				String twibbleContent = doc.getElementsByTagName("twibbleContent").item(0).getTextContent();
@@ -272,9 +273,6 @@ public class Service {
 				 cc[b] = new InternetAddress(subscriberEmails.get(b));
 				}								        
 				 System.out.println(cc);
-//				String [] emails = new String[subscriberEmails.size()];
-//				subscriberEmails.toArray(emails);
-				//End Of Subscriber Email
 		
 				//Create Twibble
 				databaseConnection createTwibbleQuery = new databaseConnection("");
@@ -283,7 +281,7 @@ public class Service {
                 System.out.println("New Twibble Posted: "+twibbleContent);
 				
                 //Send Notification
-             // Recipient's email ID needs to be mentioned.
+                // Recipient's email ID needs to be mentioned.
                 // Sender's email ID needs to be mentioned
                 String from = currentEmail;
                 //Auth
@@ -307,7 +305,6 @@ public class Service {
                       return new PasswordAuthentication(username, password);
                    }
                 });
-                
                 try{
                    // Create a default MimeMessage object.
                    MimeMessage message = new MimeMessage(session);
@@ -325,8 +322,15 @@ public class Service {
                 }catch (MessagingException mex) {
                    mex.printStackTrace();
                 }
-                //
 			 }
+			
+			//End of Creating Twibble
+			
+			//Updating Profile
+			if(command.equals("Update Profile")){
+				
+			}
+			//End Of Updating Profile
 			
 			// Delete a Twibble: 
 			if(command.equals("Delete Twibble")){

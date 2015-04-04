@@ -46,6 +46,21 @@ public class Main {
 				Message message= new Message( "localhost" , 6789, JSONCommand);
 				message.send();
 			}
+			if(i == 5){
+				System.out.println("5.- Update Profile");
+				System.out.println("Are you sure you want to update you profile ? (y/n)");
+				char ans;
+				ans = input.next().charAt(0);
+				if(ans =='y'){
+				System.out.println("Updating profile...");
+				String JSONCommand=
+						"<ExecuteCommand><command>Update Profile</command><alias>"+alias+"</alias></ExecuteCommand>";
+						Message message= new Message( "localhost" , 6789, JSONCommand);
+						message.send();
+				
+				}
+				System.out.println("Bye "+alias);
+			}
 			
 			//Delete Twibble ToDo: Ryan	
 			if (i == 2) {
