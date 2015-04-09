@@ -159,6 +159,7 @@ public class Main {
 
 			System.out.println("You chose your new alias: " + user);
 			
+			// Add email entry here....
 			
 			//System.out.println("Registering user.........");
 
