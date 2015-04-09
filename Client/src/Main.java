@@ -17,7 +17,7 @@ public class Main {
 		// String s = input.next();
 		String alias;
 		String twibbleContent = "";
-		
+
 		if (i == 1) {
 			System.out.println("Please enter your username and press ENTER..");
 
@@ -31,62 +31,56 @@ public class Main {
 			System.out.println("3.- Deregister account");
 			System.out.println("4.- Subscribe to other poster's Twibbles");
 			System.out.println("5.- Update Profile");
+			System.out.println("6.- Post a Profile");
 
 			i = input.nextInt();
-			
-			//Create Twibble option Twibble
+
+			// Create Twibble option Twibble
 			if (i == 1) {
 				System.out.println("1.- Create Twible");
-				//String twibbleContent;
+				// String twibbleContent;
 				System.out.println("Please enter a new Twibble Content: ");
-				twibbleContent = input.next();	
-				System.out.println("Twibble Posted :"+twibbleContent);
-				String JSONCommand=
-				"<ExecuteCommand><command>Create Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent><alias>"+alias+"</alias></ExecuteCommand>";
-				Message message= new Message( "localhost" , 6789, JSONCommand);
+				twibbleContent = input.next();
+				System.out.println("Twibble Posted :" + twibbleContent);
+				String JSONCommand = "<ExecuteCommand><command>Create Twibble</command><twibbleContent>"
+						+ twibbleContent
+						+ "</twibbleContent><alias>"
+						+ alias
+						+ "</alias></ExecuteCommand>";
+				Message message = new Message("localhost", 6789, JSONCommand);
 				message.send();
 			}
-			if(i == 5){
-				System.out.println("5.- Update Profile");
-				System.out.println("Are you sure you want to update you profile ? (y/n)");
-				char ans;
-				ans = input.next().charAt(0);
-				if(ans =='y'){
-				System.out.println("Updating profile...");
-				String JSONCommand=
-						"<ExecuteCommand><command>Update Profile</command><alias>"+alias+"</alias></ExecuteCommand>";
-						Message message= new Message( "localhost" , 6789, JSONCommand);
-						message.send();
-				
-				}
-				System.out.println("Bye "+alias);
-			}
-			
-			//Delete Twibble ToDo: Ryan	
+
+
+			// Delete Twibble ToDo: Ryan
 			if (i == 2) {
-				
-				System.out.println("Are you sure you want to delete the Twible?");
+
+				System.out
+						.println("Are you sure you want to delete the Twible?");
 				System.out.println("1.- Yes");
 				System.out.println("2.- No");
-				
+
 				i = input.nextInt();
-				
+
 				if (i == 1) {
 					System.out.println("Deleting Twible...........");
-					
-					String JSONCommand=
 
-							"<ExecuteCommand><command>Delete Twibble</command><twibbleContent>"+twibbleContent+"</twibbleContent><alias>"+alias+"</alias></ExecuteCommand>";
-									
-							Message message= new Message( "localhost" , 6789, JSONCommand);
-							message.send();
+					String JSONCommand =
+
+					"<ExecuteCommand><command>Delete Twibble</command><twibbleContent>"
+							+ twibbleContent + "</twibbleContent><alias>"
+							+ alias + "</alias></ExecuteCommand>";
+
+					Message message = new Message("localhost", 6789,
+							JSONCommand);
+					message.send();
 				}
-				
+
 				if (i == 2) {
 					System.out.println("Nothing to do.");
 
 				}
-		}
+			}
 
 			if (i == 3) {
 				System.out.println("3.- Deregister account");
@@ -101,17 +95,19 @@ public class Main {
 					System.out.println("Deleting Account...........");
 
 					// Create code to delete account : Paolo
-					
-					//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-					//String alias="paolo";
 
-					String JSONCommand=
+					// Use this tool:
+					// http://bernhardhaeussner.de/odd/json-escape/
+					// String alias="paolo";
 
-					"<ExecuteCommand><command>Deregister</command><alias>"+alias+"</alias></ExecuteCommand>";
-							
-					Message message= new Message( "localhost" , 6789, JSONCommand);
+					String JSONCommand =
+
+					"<ExecuteCommand><command>Deregister</command><alias>"
+							+ alias + "</alias></ExecuteCommand>";
+
+					Message message = new Message("localhost", 6789,
+							JSONCommand);
 					message.send();
-					
 
 					System.out.println("Account Deleted...........");
 				}
@@ -133,20 +129,80 @@ public class Main {
 				System.out.println("Subscribing you to the user..........");
 
 				// Create code to subscribe account : Paolo
-								
-				String JSONCommand=
 
-						"<ExecuteCommand><command>Subscribe</command><alias>"+alias+"</alias><SubscribeTo>"+subscribeTo+"</SubscribeTo></ExecuteCommand>";
-								
-						Message message= new Message( "localhost" , 6789, JSONCommand);
-						message.send();
+				String JSONCommand =
 
-						System.out.println("You have been subscribed to: "+subscribeTo);		
+				"<ExecuteCommand><command>Subscribe</command><alias>" + alias
+						+ "</alias><SubscribeTo>" + subscribeTo
+						+ "</SubscribeTo></ExecuteCommand>";
+
+				Message message = new Message("localhost", 6789, JSONCommand);
+				message.send();
+
+				System.out.println("You have been subscribed to: "
+						+ subscribeTo);
 
 			}
+			
+			
+			if (i == 5) {
+				System.out.println("5.- Update Profile");
+				System.out
+						.println("Are you sure you want to update you profile ? (y/n)");
+				char ans;
+				ans = input.next().charAt(0);
+				if (ans == 'y') {
+					System.out.println("Updating profile...");
+					String JSONCommand = "<ExecuteCommand><command>Update Profile</command><alias>"
+							+ alias + "</alias></ExecuteCommand>";
+					Message message = new Message("localhost", 6789,
+							JSONCommand);
+					message.send();
+
+				}
+				System.out.println("Bye " + alias);
+			}
+			
+			
+			
+			if (i == 6) {
+				
+				
+				System.out.println("6.- Post a Profile");
+				System.out.println("Please enter your location: ");
+				String profileLocation = input.next();
+				
+				System.out.println("Please enter your interests separated by a comma: ");
+				String interests = input.next();
+				
+				
+				System.out.println("Processing...");
+				String JSONCommand = "<ExecuteCommand><command>PostProfile</command><alias>"
+						+ alias
+						+ "</alias><profileLocation>"
+						+ profileLocation
+						+ "</profileLocation><interests>"
+						+ interests
+						+ "</interests></ExecuteCommand>";
+				Message message = new Message("localhost", 6789, JSONCommand);
+				message.send();
+				
+				
+				
+				System.out.println("Bye " + alias);
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 		}
-		
+
 		// To Register new user
 
 		if (i == 2) {
@@ -154,26 +210,24 @@ public class Main {
 			System.out
 					.println("Please enter your new username and press ENTER..");
 
-
 			String user = input.next();
 
 			System.out.println("You chose your new alias: " + user);
-			
-			
-			//System.out.println("Registering user.........");
+
+			// System.out.println("Registering user.........");
 
 			// Create code to Register alias (user) : Ryan
-			
-			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-		
 
-			String JSONCommandAlias=
+			// Use this tool: http://bernhardhaeussner.de/odd/json-escape/
 
-			"<ExecuteCommand><command>Register</command><alias>"+user+"</alias></ExecuteCommand>";
-					
-			Message messageAlias= new Message( "localhost" , 6789, JSONCommandAlias);
+			String JSONCommandAlias =
+
+			"<ExecuteCommand><command>Register</command><alias>" + user
+					+ "</alias></ExecuteCommand>";
+
+			Message messageAlias = new Message("localhost", 6789,
+					JSONCommandAlias);
 			messageAlias.send();
-
 
 		}
 
