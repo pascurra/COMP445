@@ -5,13 +5,21 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
 
+		String ServerIP="localhost";
+		
 		System.out.println("Welcome to the Twiblr Client System!");
+		System.out.println("Please enter the IP of the server X.X.X.X");
+
+		ServerIP = input.next();
+
+		
+		
 		System.out.println("Please choose one option:");
 		System.out.println("1.- Login");
 		System.out.println("2.- Register");
 
-		Scanner input = new Scanner(System.in);
 
 		int i = input.nextInt();
 		// String s = input.next();
@@ -47,7 +55,7 @@ public class Main {
 						+ "</twibbleContent><alias>"
 						+ alias
 						+ "</alias></ExecuteCommand>";
-				Message message = new Message("localhost", 6789, JSONCommand);
+				Message message = new Message(ServerIP, 6789, JSONCommand);
 				message.send();
 			}
 
@@ -71,7 +79,7 @@ public class Main {
 							+ twibbleContent + "</twibbleContent><alias>"
 							+ alias + "</alias></ExecuteCommand>";
 
-					Message message = new Message("localhost", 6789,
+					Message message = new Message(ServerIP, 6789,
 							JSONCommand);
 					message.send();
 				}
@@ -105,7 +113,7 @@ public class Main {
 					"<ExecuteCommand><command>Deregister</command><alias>"
 							+ alias + "</alias></ExecuteCommand>";
 
-					Message message = new Message("localhost", 6789,
+					Message message = new Message(ServerIP, 6789,
 							JSONCommand);
 					message.send();
 
@@ -136,7 +144,7 @@ public class Main {
 						+ "</alias><SubscribeTo>" + subscribeTo
 						+ "</SubscribeTo></ExecuteCommand>";
 
-				Message message = new Message("localhost", 6789, JSONCommand);
+				Message message = new Message(ServerIP, 6789, JSONCommand);
 				message.send();
 
 				System.out.println("You have been subscribed to: "
@@ -155,7 +163,7 @@ public class Main {
 					System.out.println("Updating profile...");
 					String JSONCommand = "<ExecuteCommand><command>Update Profile</command><alias>"
 							+ alias + "</alias></ExecuteCommand>";
-					Message message = new Message("localhost", 6789,
+					Message message = new Message(ServerIP, 6789,
 							JSONCommand);
 					message.send();
 
@@ -184,7 +192,7 @@ public class Main {
 						+ "</profileLocation><interests>"
 						+ interests
 						+ "</interests></ExecuteCommand>";
-				Message message = new Message("localhost", 6789, JSONCommand);
+				Message message = new Message(ServerIP, 6789, JSONCommand);
 				message.send();
 				
 				
@@ -225,7 +233,7 @@ public class Main {
 			"<ExecuteCommand><command>Register</command><alias>" + user
 					+ "</alias></ExecuteCommand>";
 
-			Message messageAlias = new Message("localhost", 6789,
+			Message messageAlias = new Message(ServerIP, 6789,
 					JSONCommandAlias);
 			messageAlias.send();
 
