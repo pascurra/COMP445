@@ -221,11 +221,23 @@ public class Main {
 			String user = input.next();
 
 			System.out.println("You chose your new alias: " + user);
+<<<<<<< HEAD
 
 			// System.out.println("Registering user.........");
+=======
+			
+			System.out
+			.println("Please enter your email address and press ENTER..");
+			
+			String email = input.next();
+			
+			System.out.println("Email address associated with your Twiblr account will be: " + email);
+			
+>>>>>>> Ryan
 
 			// Create code to Register alias (user) : Ryan
 
+<<<<<<< HEAD
 			// Use this tool: http://bernhardhaeussner.de/odd/json-escape/
 
 			String JSONCommandAlias =
@@ -237,6 +249,14 @@ public class Main {
 					JSONCommandAlias);
 			messageAlias.send();
 
+=======
+			String JSONCommandRegister=
+					"<ExecuteCommand><command>Register</command><alias>"+user+"</alias><email>"+email+"</email></ExecuteCommand>";
+	
+			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
+			messageRegister.send();
+			
+>>>>>>> Ryan
 		}
 
 	}
