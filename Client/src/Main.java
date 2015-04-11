@@ -159,23 +159,25 @@ public class Main {
 
 			System.out.println("You chose your new alias: " + user);
 			
-			// Add email entry here....
+			System.out
+			.println("Please enter your email address and press ENTER..");
 			
-			//System.out.println("Registering user.........");
+			String email = input.next();
+			
+			System.out.println("Email address associated with your Twiblr account will be: " + email);
+			
 
 			// Create code to Register alias (user) : Ryan
 			
 			//Use this tool: http://bernhardhaeussner.de/odd/json-escape/
 		
 
-			String JSONCommandAlias=
-
-			"<ExecuteCommand><command>Register</command><alias>"+user+"</alias></ExecuteCommand>";
-					
-			Message messageAlias= new Message( "localhost" , 6789, JSONCommandAlias);
-			messageAlias.send();
-
-
+			String JSONCommandRegister=
+					"<ExecuteCommand><command>Register</command><alias>"+user+"</alias><email>"+email+"</email></ExecuteCommand>";
+	
+			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
+			messageRegister.send();
+			
 		}
 
 	}

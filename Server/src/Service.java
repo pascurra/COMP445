@@ -106,34 +106,21 @@ public class Service {
 				
 				databaseConnection registerQuery = new databaseConnection("");
 
-				
-				// Grab the alias entered previously
+				// Grab the alias and email entered previously
 				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
-				
-				// Prompt for email address
-				System.out.println("Please enter your email address and press ENTER: ");
-
-				String email = input.next();
+				String email = doc.getElementsByTagName("email").item(0).getTextContent();
 				
 				// Create a timestamp
 				Calendar calendar = Calendar.getInstance();
 				java.sql.Timestamp registrationDate = new java.sql.Timestamp(calendar.getTime().getTime());
 
-
 				//Write to database
-				
-
 				registerQuery.query="INSERT INTO ascurra_445.clients(alias,email,registrationDate) VALUES ('" + alias + "', '" + email + "', ' " + registrationDate + "')";
 				registerQuery.ExecuteUpdate();
 				
 				// Ending message
 				System.out.println("New user registered...........");
-
-				//Paolo says: Needs to be updated like 3.3
-		//		databaseConnection registerQuery=new databaseConnection("INSERT INTO...");
-		//		ResultSet result=registerQuery.Query();
-
-								
+					
 		 }
 			
 			
