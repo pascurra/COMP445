@@ -83,12 +83,13 @@ public class Main {
 				int deleteTwibbleOption = input.nextInt();
 
 				if (deleteTwibbleOption == 1) {
-					System.out.println("Deleting Twible...........");
-
+					System.out.println("Please enter Twibble ID to delete: ");
+					String twibbleID = input.next();
+					
 					String JSONCommand =
 
-					"<ExecuteCommand><command>Delete Twibble</command><twibbleContent>"
-							+ twibbleContent + "</twibbleContent><alias>"
+					"<ExecuteCommand><command>Delete Twibble</command><twibbleID>"
+							+ twibbleID + "</twibbleID><alias>"
 							+ alias + "</alias></ExecuteCommand>";
 
 					Message message = new Message(ServerIP, 6789, JSONCommand);

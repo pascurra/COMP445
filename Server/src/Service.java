@@ -432,19 +432,38 @@ public class Service {
 
 			}
 
-			// Delete a Twibble:
+			// Delete a Twibble: Ryan
 			if (command.equals("Delete Twibble")) {
 
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
+				String twibbleID = doc.getElementsByTagName("twibbleID").item(0).getTextContent();
 
 				System.out.println("Current Alias: " + alias);
+				System.out.println("Twibble ID to delete: " + twibbleID);
 
 				// Same as create twibble, we need to get the foreign id for
 				// displaying the right set of twibbles to delete
 				// relative to the alias requesting to delete
-				databaseConnection getAliasId = new databaseConnection("");
-
+				//databaseConnection getAliasId = new databaseConnection("");
+				
+				//databaseConnection getTwibbleId = new databaseConnection("");
+				
+				databaseConnection deleteTwibbleQuery = new databaseConnection("");
+				
+				//getTwibbleId.query = "select idtwiblr FROM ascurra_445.twibbles where alias='"
+				//		+ alias + "' ";
+				
+				//ResultSet idtwiblr = getTwibbleId.executeSelectStatement();
+				
+				deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
+						+ twibbleID + "' ";
+				deleteTwibbleQuery.ExecuteUpdate();
+				
+				System.out.println("Twibble deleted!");
+				
+				
+/**
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
 						+ alias + "' ";
 
@@ -538,7 +557,7 @@ public class Service {
 					}
 					flag = false;
 				} while (flag);
-
+*/
 			}
 
 			// Close all the input and output streams, as well as the sockets
