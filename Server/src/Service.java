@@ -67,7 +67,7 @@ public class Service {
 			String xml = "";
 
 			while ((line = in.readLine()) != null) {
-				System.out.println("Server has received \"" + line
+				System.out.println("SERVER: Server has received \"" + line
 						+ "\" from the client");
 				// Reverse the message and send it back to the client,
 				out.println(new StringBuilder(line).toString());
@@ -90,7 +90,7 @@ public class Service {
 			String command = doc.getElementsByTagName("command").item(0)
 					.getTextContent();
 
-			System.out.println("The command to execute is: " + command);
+			System.out.println("SERVER: The command to execute is: " + command);
 
 			// create query object
 
@@ -141,7 +141,7 @@ public class Service {
 
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
-				System.out.println("The alias to delete is: " + alias);
+				System.out.println("SERVER: The alias to delete is: " + alias);
 				databaseConnection deregisterQuery = new databaseConnection(
 						"DELETE FROM ascurra_445.clients WHERE alias=" + "\""
 								+ alias + "\"" + ";");
@@ -428,7 +428,7 @@ public class Service {
 				postProfile.ExecuteUpdate();
 
 				// Ending message
-				System.out.println("New user registered...........");
+				System.out.println("SERVER: New user registered...........");
 
 			}
 
@@ -462,7 +462,7 @@ public class Service {
 					e.printStackTrace();
 				}
 
-				System.out.println("The Foreign Key is: " + userId);
+				System.out.println("SERVER: The Foreign Key is: " + userId);
 
 				databaseConnection getTwibbleQuery = new databaseConnection("");
 
@@ -556,7 +556,7 @@ public class Service {
 			e.printStackTrace();
 		}
 
-		System.out.println("Service ended execution.");
+		System.out.println("SERVER: Service ended execution.");
 
 	}
 
