@@ -216,7 +216,7 @@ public class Main {
 		}
 
 		// To Register new user
-		// To Register new user
+
 
 		if (mainMemuOption == 2) {
 
