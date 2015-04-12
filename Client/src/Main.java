@@ -222,9 +222,18 @@ public class Main {
 					.println("Please enter your new username and press ENTER..");
 
 			String user = input.next();
+			
+			
 
 			System.out.println("You chose your new alias: " + user);
 
+			// Prompt for email address
+			System.out
+					.println("Please enter your email address and press ENTER: ");
+
+			String email = input.next();
+			
+			
 			// System.out.println("Registering user.........");
 
 			// Create code to Register alias (user) : Ryan
@@ -234,7 +243,8 @@ public class Main {
 			String JSONCommandAlias =
 
 			"<ExecuteCommand><command>Register</command><alias>" + user
-					+ "</alias></ExecuteCommand>";
+					+ "</alias><email>" + email
+					+ "</email></ExecuteCommand>";
 
 			Message messageAlias = new Message(ServerIP, 6789, JSONCommandAlias);
 			messageAlias.send();
@@ -242,6 +252,10 @@ public class Main {
 			
 			//show menu for registered users
 			mainMemuOption=1;
+			
+			System.out.println("You can login now...");
+
+			
 
 		}
 

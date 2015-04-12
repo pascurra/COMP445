@@ -106,11 +106,8 @@ public class Service {
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
 
-				// Prompt for email address
-				System.out
-						.println("Please enter your email address and press ENTER: ");
-
-				String email = input.next();
+				String email = doc.getElementsByTagName("email").item(0)
+						.getTextContent();
 
 				// Create a timestamp
 				Calendar calendar = Calendar.getInstance();
