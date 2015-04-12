@@ -462,6 +462,7 @@ public class Service {
 				
 				System.out.println("Twibble deleted!");
 				
+				
 				// Commented out as we are now doing a delete by twibble id.
 /**
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
