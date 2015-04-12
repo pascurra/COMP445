@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Main {
 
-	
 	static boolean keepRunning = true;
 	static Scanner input = new Scanner(System.in);
 	static String ServerIP = "localhost";
