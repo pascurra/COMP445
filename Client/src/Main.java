@@ -216,39 +216,31 @@ public class Main {
 		}
 
 		// To Register new user
+		// To Register new user
 
 		if (mainMemuOption == 2) {
 
 			System.out
 					.println("Please enter your new username and press ENTER..");
 
+
 			String user = input.next();
-			
-			
 
 			System.out.println("You chose your new alias: " + user);
-
-			// Prompt for email address
+			
 			System.out
-					.println("Please enter your email address and press ENTER: ");
-
+			.println("Please enter your email address and press ENTER..");
+			
 			String email = input.next();
 			
+			System.out.println("Email address associated with your Twiblr account will be: " + email);
 			
-			// System.out.println("Registering user.........");
-
-			// Create code to Register alias (user) : Ryan
-
-			// Use this tool: http://bernhardhaeussner.de/odd/json-escape/
-
-			String JSONCommandAlias =
-
-			"<ExecuteCommand><command>Register</command><alias>" + user
-					+ "</alias><email>" + email
-					+ "</email></ExecuteCommand>";
-
-			Message messageAlias = new Message(ServerIP, 6789, JSONCommandAlias);
-			messageAlias.send();
+			
+			String JSONCommandRegister=
+					"<ExecuteCommand><command>Register</command><alias>"+user+"</alias><email>"+email+"</email></ExecuteCommand>";
+	
+			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
+			messageRegister.send();
 			
 			
 			//show menu for registered users
@@ -256,9 +248,9 @@ public class Main {
 			
 			System.out.println("You can login now...");
 
-			
-
 		}
+
+
 
 		if (mainMemuOption == 3) {
 
