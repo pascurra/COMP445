@@ -49,7 +49,7 @@ public class Service {
 		try {
 			// Create a Socket and bind it to a port
 			server = new ServerSocket(serverPort);
-			System.out.println("Server is up and running...");
+			System.out.println("SERVER: Server is up and running...");
 
 			// Accept a connection from the client and associate a Socket to
 			// this connection
@@ -67,7 +67,7 @@ public class Service {
 			String xml = "";
 
 			while ((line = in.readLine()) != null) {
-				System.out.println("Server has received \"" + line
+				System.out.println("SERVER: Server has received \"" + line
 						+ "\" from the client");
 				// Reverse the message and send it back to the client,
 				out.println(new StringBuilder(line).toString());
@@ -90,7 +90,7 @@ public class Service {
 			String command = doc.getElementsByTagName("command").item(0)
 					.getTextContent();
 
-			System.out.println("The command to execute is: " + command);
+			System.out.println("SERVER: The command to execute is: " + command);
 
 			// create query object
 
@@ -126,7 +126,7 @@ public class Service {
 				registerQuery.ExecuteUpdate();
 
 				// Ending message
-				System.out.println("New user registered...........");
+				System.out.println("SERVER: New user registered...........");
 
 				// Paolo says: Needs to be updated like 3.3
 				// databaseConnection registerQuery=new
@@ -141,7 +141,7 @@ public class Service {
 
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
-				System.out.println("The alias to delete is: " + alias);
+				System.out.println("SERVER: The alias to delete is: " + alias);
 				databaseConnection deregisterQuery = new databaseConnection(
 						"DELETE FROM ascurra_445.clients WHERE alias=" + "\""
 								+ alias + "\"" + ";");
@@ -159,7 +159,7 @@ public class Service {
 						.getTextContent();
 				String SubscribeTo = doc.getElementsByTagName("SubscribeTo")
 						.item(0).getTextContent();
-				// System.out.println("The alias to delete is: " + alias);
+				// System.out.println("SERVER: The alias to delete is: " + alias);
 
 				// query db to delete
 				// registerQuery.query =
@@ -201,7 +201,7 @@ public class Service {
 						.getTextContent();
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
-				System.out.println("Current Alias: " + alias);
+				System.out.println("SERVER: Current Alias: " + alias);
 				// Getting current ID
 				databaseConnection getAliasId = new databaseConnection("");
 				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
@@ -217,7 +217,7 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("The current id is: " + userId);
+				System.out.println("SERVER: The current id is: " + userId);
 
 				// Get Current User Email
 				databaseConnection getUserEmail = new databaseConnection("");
@@ -234,7 +234,7 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("The current email is: " + currentEmail);
+				System.out.println("SERVER: The current email is: " + currentEmail);
 
 				// Get Subscribers List
 				// Get aliases of followers
@@ -256,9 +256,9 @@ public class Service {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("The number of followers is: "
+				System.out.println("SERVER: The number of followers is: "
 						+ subscriberAliases.size());
-				System.out.println("Array of aliases: " + subscriberAliases);
+				System.out.println("SERVER: Array of aliases: " + subscriberAliases);
 
 				// Get Email of Followers
 				ArrayList<String> subscriberEmails = new ArrayList();
@@ -295,7 +295,7 @@ public class Service {
 				createTwibbleQuery.query = "INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('"
 						+ twibbleContent + "','" + userId + "')";
 				createTwibbleQuery.ExecuteUpdate();
-				System.out.println("New Twibble Posted: " + twibbleContent);
+				System.out.println("SERVER: New Twibble Posted: " + twibbleContent);
 
 				// Send Notification
 				// Recipient's email ID needs to be mentioned.
@@ -337,7 +337,7 @@ public class Service {
 					message.setText(twibbleContent);
 					// Send message
 					Transport.send(message);
-					System.out.println("Sent message successfully....");
+					System.out.println("SERVER: Sent message successfully....");
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
@@ -428,7 +428,7 @@ public class Service {
 				postProfile.ExecuteUpdate();
 
 				// Ending message
-				System.out.println("New user registered...........");
+				System.out.println("SERVER: New user registered...........");
 
 			}
 
@@ -438,7 +438,7 @@ public class Service {
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
 
-				System.out.println("Current Alias: " + alias);
+				System.out.println("SERVER: Current Alias: " + alias);
 
 				// Same as create twibble, we need to get the foreign id for
 				// displaying the right set of twibbles to delete
@@ -462,7 +462,7 @@ public class Service {
 					e.printStackTrace();
 				}
 
-				System.out.println("The Foreign Key is: " + userId);
+				System.out.println("SERVER: The Foreign Key is: " + userId);
 
 				databaseConnection getTwibbleQuery = new databaseConnection("");
 
@@ -496,7 +496,7 @@ public class Service {
 				boolean flag = true;
 				int choice = 0;
 				String outContent = "";
-				System.out.println("Which twibble would you like to delete?");
+				System.out.println("SERVER: Which twibble would you like to delete?");
 
 				// Loop through to display twibbles and choose which to delete
 				do {
@@ -530,7 +530,7 @@ public class Service {
 							deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"
 									+ outContent + "' ";
 							deleteTwibbleQuery.ExecuteUpdate();
-							System.out.println("The Twibble deleted was: "
+							System.out.println("SERVER: The Twibble deleted was: "
 									+ outContent);
 
 						}
@@ -548,15 +548,15 @@ public class Service {
 			server.close();
 
 		} catch (UnknownHostException e) {
-			System.out.println("UnknownHostException:" + e.getMessage());
+			System.out.println("SERVER: UnknownHostException:" + e.getMessage());
 		} catch (IOException e) {
-			System.out.println("IOException:" + e.getMessage());
+			System.out.println("SERVER: IOException:" + e.getMessage());
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		System.out.println("Service ended execution.");
+		System.out.println("SERVER: Service ended execution.");
 
 	}
 

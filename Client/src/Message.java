@@ -45,9 +45,9 @@ public class Message
 		//	{
 				// Send the line to the server: Put the input line on the output stream
 				out.println(line);
-				System.out.println("Sent \"" + line + "\" to the server");
+				System.out.println("CLIENT: Sent \"" + line + "\" to the server");
 				// Receive response from the server: Read the response from input stream
-				System.out.println("Received \"" + in.readLine() + "\" from the server");
+				System.out.println("CLIENT: Received \"" + in.readLine() + "\" from the server");
 				System.out.print("> " );
 			//	if(line.equals("exit"))
 		//			break;
@@ -64,9 +64,9 @@ public class Message
 			socket.close();
 			
 		} catch (UnknownHostException e) {
-			System.out.println("UnknownHostException:" + e.getMessage());
+			System.out.println("CLIENT: UnknownHostException:" + e.getMessage());
 		} catch (IOException e) {
-			System.out.println("IOException:" + e.getMessage());
+			System.out.println("CLIENT: IOException:" + e.getMessage());
 		}
 	}
 }
