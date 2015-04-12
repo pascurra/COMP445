@@ -34,7 +34,7 @@ public class Message
 			// Create the stream of data to be communicated between this client and the server
 			out = new PrintWriter(socket.getOutputStream(), true); 
 		    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		    userInput = new BufferedReader(new InputStreamReader(System.in));
+		   // userInput = new BufferedReader(new InputStreamReader(System.in));
 			String line=JSONCommand;
 			
 			System.out.print("> " );
@@ -60,7 +60,7 @@ public class Message
 			// Close all the input and output streams, as well as the socket
 			out.close();
 			in.close();
-			userInput.close();
+		//	userInput.close();
 			socket.close();
 			
 		} catch (UnknownHostException e) {

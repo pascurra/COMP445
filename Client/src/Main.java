@@ -3,36 +3,46 @@ import java.util.Scanner;
 
 public class Main {
 
-	
+	static boolean keepRunning = true;
+	static Scanner input = new Scanner(System.in);
+	static String ServerIP = "localhost";
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner input = new Scanner(System.in);
 
-		String ServerIP="localhost";
-		
 		System.out.println("Welcome to the Twiblr Client System!");
 		System.out.println("Please enter the IP of the server X.X.X.X");
 
 		ServerIP = input.next();
 
-		
-		
+		while (keepRunning == true) {
+			showMenu();
+		}
+
+	}
+
+	public static void showMenu() {
+
 		System.out.println("Please choose one option:");
 		System.out.println("1.- Login");
 		System.out.println("2.- Register");
+		System.out.println("3.- Terminate");
 
-
-		int i = input.nextInt();
+		int mainMemuOption = input.nextInt();
+		int subMemuOption;
 		// String s = input.next();
 		String alias;
 		String twibbleContent = "";
 
-		if (i == 1) {
+		if (mainMemuOption == 1) {
+			
 			System.out.println("Please enter your username and press ENTER..");
 
 			alias = input.next();
 
 			System.out.println("You entered your login: " + alias);
+			while (mainMemuOption==1){
+			
 
 			System.out.println("Please choose one option:");
 			System.out.println("1.- Create Twible");
@@ -41,11 +51,12 @@ public class Main {
 			System.out.println("4.- Subscribe to other poster's Twibbles");
 			System.out.println("5.- Update Profile");
 			System.out.println("6.- Post a Profile");
+			System.out.println("9.- Exit");
 
-			i = input.nextInt();
+			subMemuOption = input.nextInt();
 
 			// Create Twibble option Twibble
-			if (i == 1) {
+			if (subMemuOption == 1) {
 				System.out.println("1.- Create Twible");
 				// String twibbleContent;
 				System.out.println("Please enter a new Twibble Content: ");
@@ -60,18 +71,17 @@ public class Main {
 				message.send();
 			}
 
-
 			// Delete Twibble ToDo: Ryan
-			if (i == 2) {
+			if (subMemuOption == 2) {
 
 				System.out
 						.println("Are you sure you want to delete the Twible?");
 				System.out.println("1.- Yes");
 				System.out.println("2.- No");
 
-				i = input.nextInt();
+				int deleteTwibbleOption = input.nextInt();
 
-				if (i == 1) {
+				if (deleteTwibbleOption == 1) {
 					System.out.println("Deleting Twible...........");
 
 					String JSONCommand =
@@ -80,27 +90,26 @@ public class Main {
 							+ twibbleContent + "</twibbleContent><alias>"
 							+ alias + "</alias></ExecuteCommand>";
 
-					Message message = new Message(ServerIP, 6789,
-							JSONCommand);
+					Message message = new Message(ServerIP, 6789, JSONCommand);
 					message.send();
 				}
 
-				if (i == 2) {
+				if (deleteTwibbleOption == 2) {
 					System.out.println("Nothing to do.");
 
 				}
 			}
 
-			if (i == 3) {
+			if (subMemuOption == 3) {
 				System.out.println("3.- Deregister account");
 				System.out
 						.println("Are you sure you want to deregister your account?");
 				System.out.println("1.- Yes");
 				System.out.println("2.- No");
 
-				i = input.nextInt();
+				int deregisterAccountOption = input.nextInt();
 
-				if (i == 1) {
+				if (deregisterAccountOption == 1) {
 					System.out.println("Deleting Account...........");
 
 					// Create code to delete account : Paolo
@@ -114,21 +123,20 @@ public class Main {
 					"<ExecuteCommand><command>Deregister</command><alias>"
 							+ alias + "</alias></ExecuteCommand>";
 
-					Message message = new Message(ServerIP, 6789,
-							JSONCommand);
+					Message message = new Message(ServerIP, 6789, JSONCommand);
 					message.send();
 
 					System.out.println("Account Deleted...........");
 				}
 
-				if (i == 2) {
+				if (deregisterAccountOption == 2) {
 					System.out.println("Nothing to do.");
 
 				}
 
 			}
 
-			if (i == 4) {
+			if (subMemuOption == 4) {
 				System.out.println("4.- Subscribe to other poster's Twibbles");
 				System.out
 						.println("Please enter the user you want to subscribe to and press ENTER...");
@@ -152,9 +160,8 @@ public class Main {
 						+ subscribeTo);
 
 			}
-			
-			
-			if (i == 5) {
+
+			if (subMemuOption == 5) {
 				System.out.println("5.- Update Profile");
 				System.out
 						.println("Are you sure you want to update you profile ? (y/n)");
@@ -164,27 +171,23 @@ public class Main {
 					System.out.println("Updating profile...");
 					String JSONCommand = "<ExecuteCommand><command>Update Profile</command><alias>"
 							+ alias + "</alias></ExecuteCommand>";
-					Message message = new Message(ServerIP, 6789,
-							JSONCommand);
+					Message message = new Message(ServerIP, 6789, JSONCommand);
 					message.send();
 
 				}
 				System.out.println("Bye " + alias);
 			}
-			
-			
-			
-			if (i == 6) {
-				
-				
+
+			if (subMemuOption == 6) {
+
 				System.out.println("6.- Post a Profile");
 				System.out.println("Please enter your location: ");
 				String profileLocation = input.next();
-				
-				System.out.println("Please enter your interests separated by a comma: ");
+
+				System.out
+						.println("Please enter your interests separated by a comma: ");
 				String interests = input.next();
-				
-				
+
 				System.out.println("Processing...");
 				String JSONCommand = "<ExecuteCommand><command>PostProfile</command><alias>"
 						+ alias
@@ -195,26 +198,25 @@ public class Main {
 						+ "</interests></ExecuteCommand>";
 				Message message = new Message(ServerIP, 6789, JSONCommand);
 				message.send();
-				
-				
-				
+
 				System.out.println("Bye " + alias);
 			}
+
+			if (subMemuOption == 9) {
+
+				
+				mainMemuOption=0;
+				keepRunning = false;
+
+			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
+			}
 
 		}
 
 		// To Register new user
 
-		if (i == 2) {
+		if (mainMemuOption == 2) {
 
 			System.out
 					.println("Please enter your new username and press ENTER..");
@@ -234,9 +236,18 @@ public class Main {
 			"<ExecuteCommand><command>Register</command><alias>" + user
 					+ "</alias></ExecuteCommand>";
 
-			Message messageAlias = new Message(ServerIP, 6789,
-					JSONCommandAlias);
+			Message messageAlias = new Message(ServerIP, 6789, JSONCommandAlias);
 			messageAlias.send();
+			
+			
+			//show menu for registered users
+			mainMemuOption=1;
+
+		}
+
+		if (mainMemuOption == 3) {
+
+			keepRunning = false;
 
 		}
 
