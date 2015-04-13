@@ -70,25 +70,11 @@ public class Service {
 				System.out.println("Server has received \"" + line
 						+ "\" from the client");
 				// Reverse the message and send it back to the client,
-				
-				
-				if (line.contains("<"))
-				{
+				out.println(new StringBuilder(line).toString());
 				xml = line;
-				break;
-				}
-				
-				
-				
 				if (line.equals("exit"))
 					break;
-				
-
-				
 			}
-			
-			//process sth
-
 
 			Document doc = null;
 
@@ -146,11 +132,6 @@ public class Service {
 				// databaseConnection registerQuery=new
 				// databaseConnection("INSERT INTO...");
 				// ResultSet result=registerQuery.Query();
-				
-				//reply to waiting client
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -168,13 +149,6 @@ public class Service {
 				// query db to delete
 				// deregisterQuery.query = "";
 				deregisterQuery.ExecuteUpdate();
-				
-
-
-				
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
-				
 
 			}
 
@@ -216,10 +190,6 @@ public class Service {
 				subscribeQuery.query = "INSERT INTO ascurra_445.subscribers(client_alias,following_client_id) VALUES ('"
 						+ alias + "', '" + subscribeToId + "' )";
 				subscribeQuery.ExecuteUpdate();
-				
-				
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -371,24 +341,12 @@ public class Service {
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
-				
-				
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
-				
 			}
 
 			// End of Creating Twibble
 
 			// Updating Profile
 			if (command.equals("Update Profile")) {
-				
-				
-				
-				
-				
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 			// End Of Updating Profile
@@ -471,10 +429,6 @@ public class Service {
 
 				// Ending message
 				System.out.println("New user registered...........");
-				
-				
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -497,10 +451,6 @@ public class Service {
 				deleteTwibbleQuery.ExecuteUpdate();
 				
 				System.out.println("Twibble deleted!");
-				
-				
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 			
@@ -540,10 +490,6 @@ public class Service {
 				databaseConnection deleteProfileQuery = new databaseConnection("");
 				deleteProfileQuery.query = "DELETE FROM ascurra_445.profiles WHERE idForeignKey= '" + fKeyId + "' ";
 				deleteProfileQuery.ExecuteUpdate();
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 				
 				
 			}
