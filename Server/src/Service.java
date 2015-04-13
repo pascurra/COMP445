@@ -452,7 +452,46 @@ public class Service {
 				
 				System.out.println("Twibble deleted!");
 
-	
+			}
+			
+			// Delete Profile: Ryan
+			if (command.equals("Delete Profile")) {
+				
+				String alias = doc.getElementsByTagName("alias").item(0).getTextContent();
+				System.out.println("Current Alias: " + alias);
+				
+				// Go get the idForeignKey to delete profile....
+				databaseConnection getAliasId = new databaseConnection("");
+				
+				// Get the idusers from Client table
+				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
+						+ alias + "' ";
+				
+				// Store result set to search for alias id
+				ResultSet theForeignKey = getAliasId.executeSelectStatement();
+
+				// Find the foreign key to know which profile to delete
+				int fKeyId = 0;
+				try {
+					while (theForeignKey.next()) {
+
+						fKeyId = theForeignKey.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				// Display which profile will be deleted based on the alias id
+				System.out.println("The Foreign Key in Profiles table is: " + fKeyId);
+				
+				// Connect and delete profile in profiles table
+				databaseConnection deleteProfileQuery = new databaseConnection("");
+				deleteProfileQuery.query = "DELETE FROM ascurra_445.profiles WHERE idForeignKey= '" + fKeyId + "' ";
+				deleteProfileQuery.ExecuteUpdate();
+				
+				
 			}
 
 			// Close all the input and output streams, as well as the sockets

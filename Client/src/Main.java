@@ -51,7 +51,7 @@ public class Main {
 			System.out.println("4.- Subscribe to other poster's Twibbles");
 			System.out.println("5.- Update Profile");
 			System.out.println("6.- Post a Profile");
-			System.out.println("7.- Delete a Profile");
+			System.out.println("7.- Delete Profile");
 			System.out.println("9.- Exit");
 
 			subMemuOption = input.nextInt();
@@ -205,7 +205,35 @@ public class Main {
 			}
 			
 			if (subMemuOption == 7) {
+				System.out.println("7.- Delete Profile");
 				System.out.println("Are you sure you want to delete the profile?");
+				
+				System.out.println("1.- Yes");
+				System.out.println("2.- No");
+				
+				int deleteProfileOption = input.nextInt();
+
+				if (deleteProfileOption == 1) {
+					System.out.println("Deleting Profile...........");
+
+
+					String JSONCommand =
+
+					"<ExecuteCommand><command>Delete Profile</command><alias>"
+							+ alias + "</alias></ExecuteCommand>";
+
+					Message message = new Message(ServerIP, 6789, JSONCommand);
+					message.send();
+
+					System.out.println("Profile Deleted...........");
+				}
+				
+				if (deleteProfileOption == 2) {
+					System.out.println("Nothing to do.");
+
+				}
+				
+				
 			}
 
 			if (subMemuOption == 9) {
