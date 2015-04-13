@@ -442,123 +442,17 @@ public class Service {
 				System.out.println("Current Alias: " + alias);
 				System.out.println("Twibble ID to delete: " + twibbleID);
 
-				// Same as create twibble, we need to get the foreign id for
-				// displaying the right set of twibbles to delete
-				// relative to the alias requesting to delete
-				//databaseConnection getAliasId = new databaseConnection("");
-				
-				//databaseConnection getTwibbleId = new databaseConnection("");
 				
 				databaseConnection deleteTwibbleQuery = new databaseConnection("");
-				
-				//getTwibbleId.query = "select idtwiblr FROM ascurra_445.twibbles where alias='"
-				//		+ alias + "' ";
-				
-				//ResultSet idtwiblr = getTwibbleId.executeSelectStatement();
+
 				
 				deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
 						+ twibbleID + "' ";
 				deleteTwibbleQuery.ExecuteUpdate();
 				
 				System.out.println("Twibble deleted!");
-				// Added comment
-				
-				// Commented out as we are now doing a delete by twibble id.
-/**
-				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
-						+ alias + "' ";
 
-				ResultSet theForeignKey = getAliasId.executeSelectStatement();
-
-				int userId = 0;
-				try {
-					while (theForeignKey.next()) {
-
-						userId = theForeignKey.getInt("idusers");
-
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				System.out.println("The Foreign Key is: " + userId);
-
-				databaseConnection getTwibbleQuery = new databaseConnection("");
-
-				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles where usersIdForeign='"
-						+ userId + "' ";
-
-				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
-
-				String content = "";
-				int j = 1;
-
-				// Need a way to store the twibble contents so we can choose
-				// which to delete
-				ArrayList<String> contentList = new ArrayList<String>();
-
-				try {
-
-					while (rs1.next()) {
-						// Retrieve by column name
-						content = rs1.getString("twiblrcontent");
-						contentList.add(content);
-
-					}
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				// Go through twibbles to find which one to delete from page
-				boolean flag = true;
-				int choice = 0;
-				String outContent = "";
-				System.out.println("Which twibble would you like to delete?");
-
-				// Loop through to display twibbles and choose which to delete
-				do {
-
-					for (int k = 0; k < contentList.size(); k++) {
-						System.out.println(j + ": " + contentList.get(k));
-						j++;
-					}
-
-					System.out
-							.println("Please select the number to delete or '0' for exit: ");
-
-					choice = input.nextInt();
-
-					if (choice == 0) {
-						flag = false;
-					}
-
-					for (int p = 0; p < contentList.size(); ++p) {
-
-						outContent = contentList.get(p);
-						int indexCounter = contentList.indexOf(outContent);
-						indexCounter++;
-
-						// If the choice meets the index in our arraylist then
-						// delete that twibble
-						if (choice == indexCounter) {
-
-							databaseConnection deleteTwibbleQuery = new databaseConnection(
-									"");
-							deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"
-									+ outContent + "' ";
-							deleteTwibbleQuery.ExecuteUpdate();
-							System.out.println("The Twibble deleted was: "
-									+ outContent);
-
-						}
-
-					}
-					flag = false;
-				} while (flag);
-*/
+	
 			}
 
 			// Close all the input and output streams, as well as the sockets
