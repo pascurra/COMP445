@@ -11,15 +11,15 @@ public class WebServer {
 	Socket clientSocket = null;
 	ServerSocket serverSocket = null;
 
-
 	public WebServer(String htmlContent) {
 
 		this.htmlContent = htmlContent;
-		
 
 	}
 
 	public void listenToRequest() throws IOException {
+		System.out.println("Listening. Please visit http://localhost:8080/");
+
 		try {
 			serverSocket = new ServerSocket(8080);
 		} catch (IOException e) {
@@ -31,12 +31,12 @@ public class WebServer {
 			clientSocket = serverSocket.accept();
 
 			if (clientSocket != null)
-				System.out.println("Connected");
+				System.out.println("Connected.");
 
 		} catch (IOException e) {
 			System.err.println("Accept failed.");
 			System.exit(1);
-		}		
+		}
 		DataInputStream din = new DataInputStream(clientSocket.getInputStream());
 		request = din.readLine().trim();
 		request = request.substring(4);
@@ -46,15 +46,13 @@ public class WebServer {
 			System.out.println(request);
 
 		}
-		
-		
+
 	}
-		
-		
+
 	public void renderHTML() throws IOException {
 
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
-	
+
 		out.println("HTTP/1.1 200 OK");
 		out.println("Content-Type: text/html");
 		out.println("\r\n");
@@ -65,9 +63,6 @@ public class WebServer {
 
 		clientSocket.close();
 		serverSocket.close();
-		
-		
-	}
-	}
 
-
+	}
+}

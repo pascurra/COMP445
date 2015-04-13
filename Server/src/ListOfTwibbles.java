@@ -2,74 +2,83 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-
-
-
 public class ListOfTwibbles {
-	
-	public String getListOfProfiles(){
-		
-		
-		databaseConnection ListOfProfiles=new databaseConnection("");
-		
-		
-		ListOfProfiles.query="SELECT * FROM ascurra_445.profiles";
-		ResultSet resultSet=ListOfProfiles.executeSelectStatement();
-		
-	      ArrayList idProfiles = new ArrayList();		
-	      ArrayList alias = new ArrayList();		
-	      ArrayList location = new ArrayList();		
-	      ArrayList interests = new ArrayList();		
-	      ArrayList dateOfJoining = new ArrayList();		
-	      ArrayList dateOfPostingProfile = new ArrayList();		
 
-	      
-	      
+	String client;
+
+	public String getListOfTwibbles() {
+
+		databaseConnection ListOfTwibbles = new databaseConnection("");
+
+		// getting client id
+		ListOfTwibbles.query = "SELECT * FROM ascurra_445.clients where alias='"
+				+ client + "'";
+
+		ResultSet resultSet = ListOfTwibbles.executeSelectStatement();
+		ArrayList idClient = new ArrayList();
 		try {
 			while (resultSet.next()) {
 
-				idProfiles.add(resultSet.getInt("idprofiles"));
-				alias.add(resultSet.getString("alias"));
-				location.add(resultSet.getString("location"));
-				interests.add(resultSet.getString("interests"));
-				dateOfJoining.add(resultSet.getString("dateOfJoining"));
-				dateOfPostingProfile.add(resultSet.getString("dateOfPostingProfile"));
-
+				idClient.add(resultSet.getInt("idusers"));
 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		String listOfProfiles="";
-		
-		for (int i=0;i< alias.size();i++){
-			
-			listOfProfiles=listOfProfiles.concat("<div><div>"+"Profile:"+"</div>");
+		int idClientInt = (int) idClient.get(0);
 
-			listOfProfiles=listOfProfiles.concat("<div><div>"+idProfiles.get(i).toString()+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+ (String) alias.get(i)+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) location.get(i)+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) interests.get(i)+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) dateOfJoining.get(i)+"</div></div>");
+		// getting twiblr list for that client
+		ListOfTwibbles.query = "SELECT * FROM ascurra_445.twibbles where usersIdForeign='"
+				+ idClientInt + "'";
+		resultSet = ListOfTwibbles.executeSelectStatement();
 
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) dateOfPostingProfile.get(i)+"</div></div>");
-			listOfProfiles=listOfProfiles.concat("<div><div>"+"------------------"+"</div>");
+		ArrayList idtwiblr = new ArrayList();
+		ArrayList twiblrcontent = new ArrayList();
+		ArrayList usersIdForeign = new ArrayList();
+		ArrayList date = new ArrayList();
 
-			
+		try {
+			while (resultSet.next()) {
+
+				idtwiblr.add(resultSet.getInt("idtwiblr"));
+				twiblrcontent.add(resultSet.getString("twiblrcontent"));
+				usersIdForeign.add(resultSet.getString("usersIdForeign"));
+				date.add(resultSet.getString("date"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
 
-		
-		return listOfProfiles;
-		
-		
-		
-		
+		String listOfTwibbles = "";
+
+		for (int i = 0; i < idtwiblr.size(); i++) {
+
+			listOfTwibbles = listOfTwibbles.concat("<div><div>" + "Twibble:"
+					+ "</div>");
+
+			listOfTwibbles = listOfTwibbles.concat("<div><div>Id: "
+					+ idtwiblr.get(i).toString() + "</div>");
+			listOfTwibbles = listOfTwibbles.concat("<div>Content: "
+					+ (String) twiblrcontent.get(i) + "</div>");
+			listOfTwibbles = listOfTwibbles.concat("<div>UserId: "
+					+ usersIdForeign.get(i).toString() + "</div>");
+			listOfTwibbles = listOfTwibbles.concat("<div>Date Of Creation"
+					+ (String) date.get(i) + "</div>");
+			listOfTwibbles = listOfTwibbles.concat("<div><div>"
+					+ "------------------" + "</div>");
+
+		}
+
+		return listOfTwibbles;
+
+	}
+
+	public ListOfTwibbles(String client) {
+		super();
+		this.client = client;
 	}
 
 }

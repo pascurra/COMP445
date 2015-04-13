@@ -50,13 +50,13 @@ public class ListOfProfiles {
 			
 			listOfProfiles=listOfProfiles.concat("<div><div>"+"Profile:"+"</div>");
 
-			listOfProfiles=listOfProfiles.concat("<div><div>"+idProfiles.get(i).toString()+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+ (String) alias.get(i)+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) location.get(i)+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) interests.get(i)+"</div>");
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) dateOfJoining.get(i)+"</div></div>");
+			listOfProfiles=listOfProfiles.concat("<div><div>Id: "+idProfiles.get(i).toString()+"</div>");
+			listOfProfiles=listOfProfiles.concat("<div>Alias: <a href=\"http://localhost:8080/"+ (String) alias.get(i)+"-Twibbles/\">"+ (String) alias.get(i)+"</a> </div>");
+			listOfProfiles=listOfProfiles.concat("<div>Location: "+(String) location.get(i)+"</div>");
+			listOfProfiles=listOfProfiles.concat("<div>Interest: "+(String) interests.get(i)+"</div>");
+			listOfProfiles=listOfProfiles.concat("<div>Date Of Joining Twibbler: "+(String) dateOfJoining.get(i)+"</div></div>");
 
-			listOfProfiles=listOfProfiles.concat("<div>"+(String) dateOfPostingProfile.get(i)+"</div></div>");
+			listOfProfiles=listOfProfiles.concat("<div>Date Of Profile Creation: "+(String) dateOfPostingProfile.get(i)+"</div></div>");
 			listOfProfiles=listOfProfiles.concat("<div><div>"+"------------------"+"</div>");
 
 			
