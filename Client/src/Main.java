@@ -257,8 +257,7 @@ public class Main {
 
 			
 			String user = userInput.nextLine();
-			userInput.nextLine();
-
+			
 			System.out.println("You chose your new alias: " + user);
 			
 			System.out
@@ -275,7 +274,7 @@ public class Main {
 	
 			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
 			messageRegister.send();
-			
+			userInput.close();
 			
 			//show menu for registered users
 			mainMemuOption=1;
