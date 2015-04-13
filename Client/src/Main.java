@@ -6,7 +6,7 @@ public class Main {
 	static boolean keepRunning = true;
 	static Scanner input = new Scanner(System.in);
 	static String ServerIP = "localhost";
-	static Scanner userInput = new Scanner(System.in);
+	static Scanner userInput = new Scanner(System.in); // Added to test having spaces in register. It works so far.
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -274,6 +274,8 @@ public class Main {
 	
 			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
 			messageRegister.send();
+			
+			// Close the scanner object
 			userInput.close();
 			
 			//show menu for registered users
