@@ -51,6 +51,7 @@ public class Main {
 			System.out.println("4.- Subscribe to other poster's Twibbles");
 			System.out.println("5.- Update Profile");
 			System.out.println("6.- Post a Profile");
+			System.out.println("7.- Delete a Profile");
 			System.out.println("9.- Exit");
 
 			subMemuOption = input.nextInt();
@@ -201,6 +202,10 @@ public class Main {
 				message.send();
 
 				System.out.println("Bye " + alias);
+			}
+			
+			if (subMemuOption == 7) {
+				System.out.println("Are you sure you want to delete the profile?");
 			}
 
 			if (subMemuOption == 9) {
