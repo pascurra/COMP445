@@ -288,8 +288,7 @@ public class Service {
 					cc[b] = new InternetAddress(subscriberEmails.get(b));
 				}
 				System.out.println(cc);
-
-				// Create Twibble
+					
 				databaseConnection createTwibbleQuery = new databaseConnection(
 						"");
 				createTwibbleQuery.query = "INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('"
@@ -347,7 +346,13 @@ public class Service {
 
 			// Updating Profile
 			if (command.equals("Update Profile")) {
-
+				databaseConnection updateProfile = new databaseConnection("");
+				String profile_location = doc.getElementsByTagName("profile_location").item(0).getTextContent();
+				String profile_interests = doc.getElementsByTagName("profile_interests").item(0).getTextContent();
+				String currentAlias = doc.getElementsByTagName("currentAlias").item(0).getTextContent();
+				updateProfile.query = "UPDATE profiles SET location='"+profile_location+"',interests='"+profile_interests+"' WHERE alias='"+currentAlias+"'";
+				updateProfile.ExecuteUpdate();
+				System.out.println("Profile Updated :  New Location :"+profile_location+" New Interests : "+profile_interests);
 			}
 			// End Of Updating Profile
 
