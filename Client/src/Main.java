@@ -166,14 +166,28 @@ public class Main {
 
 			if (subMemuOption == 5) {
 				System.out.println("5.- Update Profile");
-				System.out
-						.println("Are you sure you want to update you profile ? (y/n)");
+				System.out.println("Are you sure you want to update you profile ? (y/n)");
 				char ans;
 				ans = input.next().charAt(0);
+				
+				String newAlias="";
+				String newLocation="";
+				String newInterests="";
+				
+			
 				if (ans == 'y') {
-					System.out.println("Updating profile...");
-					String JSONCommand = "<ExecuteCommand><command>Update Profile</command><alias>"
-							+ alias + "</alias></ExecuteCommand>";
+					System.out.println("Please enter a new Alias :");
+					newAlias = input.next();
+					System.out.println("Please enter a new Location :");
+					newLocation = input.next();
+					System.out.println("Please enter a new Interests seperated by a comma :");
+					newInterests= input.next();
+					System.out.println("Profile Updated");
+					String JSONCommand = "<ExecuteCommand><command>Update Profile</command><profile_alias>"
+							+ newAlias + "</profile_alias>"
+							+"<profile_location>"+newLocation+"</profile_location>"
+							+"<profile_interests>"+newInterests+"</profile_interests>"
+							+"<currentAlias>"+alias+"</currentAlias></ExecuteCommand>";
 					Message message = new Message(ServerIP, 6789, JSONCommand);
 					message.send();
 
