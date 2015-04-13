@@ -6,6 +6,7 @@ public class Main {
 	static boolean keepRunning = true;
 	static Scanner input = new Scanner(System.in);
 	static String ServerIP = "localhost";
+	static Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -249,22 +250,22 @@ public class Main {
 		}
 
 		// To Register new user
-
-
 		if (mainMemuOption == 2) {
 
 			System.out
 					.println("Please enter your new username and press ENTER..");
 
-
-			String user = input.next();
+			
+			String user = userInput.nextLine();
+			userInput.nextLine();
 
 			System.out.println("You chose your new alias: " + user);
 			
 			System.out
 			.println("Please enter your email address and press ENTER..");
 			
-			String email = input.next();
+			String email = userInput.nextLine();
+			
 			
 			System.out.println("Email address associated with your Twiblr account will be: " + email);
 			
