@@ -533,24 +533,27 @@ public class Service {
 
 				databaseConnection getTwibbleQuery = new databaseConnection("");
 
-				getTwibbleQuery.query = "select idtwiblr,twiblrcontent,usersIdForeign FROM ascurra_445.twibbles where usersIdForeign='"
-						+ userId + "' ";
+				getTwibbleQuery.query = "select idtwiblr FROM ascurra_445.twibbles where usersIdForeign='"
+						+ userId + "' "; //twiblrcontent,usersIdForeign
 
 				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
 
-				String content = "";
-				int j = 1;
+				int content;
+				int j = 0;
 
 				// Need a way to store the twibble contents so we can choose
 				// which to delete
-				ArrayList<String> contentList = new ArrayList<String>();
+				ArrayList<Integer> twiblrIds = new ArrayList<Integer>();
 
+
+				
 				try {
 
 					while (rs1.next()) {
 						// Retrieve by column name
-						content = rs1.getString("twiblrcontent");
-						contentList.add(content);
+						content = rs1.getInt("idtwiblr");
+						twiblrIds.add(content);
+						
 
 					}
 
@@ -559,10 +562,11 @@ public class Service {
 					e.printStackTrace();
 				}
 
+				//out.println(new StringBuilder(twiblrIds.get(0)).toString());
 				// Go through twibbles to find which one to delete from page
-				boolean flag = true;
-				int choice = 0;
-				String outContent = "";
+				//boolean flag = true;
+				//int choice = 0;
+				//String outContent = "";
 				//System.out.println("Which twibble would you like to delete?");
 
 				// Loop through to display twibbles and choose which to delete
@@ -570,13 +574,13 @@ public class Service {
 				
 
 				
-				for (String s : contentList) {
-					out.println(new StringBuilder(s).toString());
-				}
+				//for (String s : contentList) {
+					//out.println(new StringBuilder(s).toString());
+				//}
 				
-				for (int k = 0; k < contentList.size(); k++) {
+				for (int k = 0; k < twiblrIds.size(); k++) {
 						//System.out.println(j + ": " + contentList.get(k));
-					out.println(new StringBuilder(contentList.get(k)).toString());
+					out.println(new StringBuilder(twiblrIds.get(k)).toString());
 					//j++;
 				}
 					
@@ -629,6 +633,7 @@ public class Service {
 			}
 			
 			// Confirm twibble delete but not working
+			/**
 			if(command.equals("Twibble Delete")) {
 				
 				String twibbleID = doc.getElementsByTagName("twibbleID").item(0).getTextContent();
@@ -642,7 +647,7 @@ public class Service {
 				System.out.println("Twibble deleted!");
 					
 			}
-			
+			*/
 			// Delete Profile: Ryan
 			if (command.equals("Delete Profile")) {
 				

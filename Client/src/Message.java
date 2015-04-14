@@ -54,12 +54,12 @@ public class Message
 					System.out.println("Which twibble would you like to delete?");
 					while((line = in.readLine()) !=null) {
 
-					System.out.println("CLIENT: Received \"" + j + ": " + in.readLine() + "\" from the server");
-					arl.add(j);
-					j++;
+					System.out.println("CLIENT: Received \"" + in.read() + "\" from the server");
+					//arl.add(j);
+					//j++;
 					System.out.print("> " );
 					}
-					
+					/**
 					System.out.println("Please enter Twibble ID to delete: ");
 					int twibbleID = input.nextInt();
 					for (int i: arl) {
@@ -76,7 +76,7 @@ public class Message
 						System.out.println("Do we make it here?");
 						}
 					}
-	
+	*/
 			// Close all the input and output streams, as well as the socket
 			out.close();
 			in.close();
