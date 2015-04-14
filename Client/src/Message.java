@@ -1,10 +1,17 @@
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.*;
+
+import org.w3c.dom.Document;
 
 public class Message 
 {
 	String hostname;	
 	int serverPort;
+	Scanner input = new Scanner(System.in);
+	//static String ServerIP = "localhost";
+	ArrayList<Integer> arl = new ArrayList<Integer>();
 
 	String JSONCommand;
 
@@ -16,13 +23,13 @@ public class Message
 		this.JSONCommand= JSONCommand;
 	}
 
-	// Needs developed still...
-	public void SendAndRecieve() {
+	// Needs developed still so don't use this one for now, use send() for multithreading purposes!
+	public void SendAndReceive() {
 		Socket socket = null; // Also known as ClientSocket
-		
 		PrintWriter out;
 		BufferedReader in;
 		BufferedReader userInput;
+		
 	
 		try {
 			// Create a Socket and bind it to a port
@@ -36,22 +43,39 @@ public class Message
 			String line=JSONCommand;
 			
 			System.out.print("> " );
-		
-		
-		
+			int j = 1;
+			
 			//	while(line != null)
-		//	{
-				// Send the line to the server: Put the input line on the output stream
-				out.println(line);
-				System.out.println("Sent \"" + line + "\" to the server");
-				// Receive response from the server: Read the response from input stream
-				System.out.println("Received \"" + in.readLine() + "\" from the server");
-				System.out.print("> " );
-			//	if(line.equals("exit"))
-		//			break;
-	//		}
-			
-			
+			//	{
+					// Send the line to the server: Put the input line on the output stream
+					out.println(line);
+					System.out.println("CLIENT: Sent \"" + line + "\" to the server");
+					// Receive response from the server: Read the response from input stream
+					System.out.println("Which twibble would you like to delete?");
+					while((line = in.readLine()) !=null) {
+
+					System.out.println("CLIENT: Received \"" + j + ": " + in.readLine() + "\" from the server");
+					arl.add(j);
+					j++;
+					System.out.print("> " );
+					}
+					
+					System.out.println("Please enter Twibble ID to delete: ");
+					int twibbleID = input.nextInt();
+					for (int i: arl) {
+						System.out.println(i);
+						if(twibbleID == i) {
+						String JSONCommand =
+	
+						"<ExecuteCommand><command>Twibble Delete</command><twibbleID>"
+								+ twibbleID + "</twibbleID></ExecuteCommand>";
+						
+						Message message = new Message(hostname, 6789, JSONCommand);
+						message.send();
+						System.out.println("Do we make it here?");
+						}
+					}
+	
 			// Close all the input and output streams, as well as the socket
 			out.close();
 			in.close();
@@ -87,7 +111,7 @@ public class Message
 			
 			System.out.print("> " );
 			
-			
+
 			
 		//	while(line != null)
 		//	{
@@ -95,8 +119,14 @@ public class Message
 				out.println(line);
 				System.out.println("CLIENT: Sent \"" + line + "\" to the server");
 				// Receive response from the server: Read the response from input stream
+				
 				System.out.println("CLIENT: Received \"" + in.readLine() + "\" from the server");
+				//System.out.println("CLIENT: Received \"" + in.readLine() + "\" from the server");
 				System.out.print("> " );
+				
+				
+
+				
 			//	if(line.equals("exit"))
 		//			break;
 	//		}
