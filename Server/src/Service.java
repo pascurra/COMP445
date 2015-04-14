@@ -480,158 +480,77 @@ public class Service {
 
 			}
 
-			// Delete a Twibble: Ryan
 			if (command.equals("Delete Twibble")) {
-
+				databaseConnection ListOfTwibbles = new databaseConnection("");
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
-				//String twibbleID = doc.getElementsByTagName("twibbleID").item(0).getTextContent();
-
-				System.out.println("Current Alias: " + alias);
-				//System.out.println("Twibble ID to delete: " + twibbleID);
-
-
-				// Same as create twibble, we need to get the foreign id for
-				// displaying the right set of twibbles to delete
-				// relative to the alias requesting to delete
-				databaseConnection getAliasId = new databaseConnection("");
 				
-				//databaseConnection getTwibbleId = new databaseConnection("");
+				ListOfTwibbles.query = "SELECT * FROM ascurra_445.clients where alias='"
+						+ alias + "'";
 				
-				//databaseConnection deleteTwibbleQuery = new databaseConnection("");
-				
-				//getTwibbleId.query = "select idtwiblr FROM ascurra_445.twibbles where alias='"
-				//		+ alias + "' ";
-				
-				//ResultSet idtwiblr = getTwibbleId.executeSelectStatement();
-				
-
-				
-				
-				// Added comment
-				
-				// Commented out as we are now doing a delete by twibble id.
-
-				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
-						+ alias + "' ";
-
-				ResultSet theForeignKey = getAliasId.executeSelectStatement();
-
-				int userId = 0;
+				ResultSet resultSet = ListOfTwibbles.executeSelectStatement();
+				ArrayList idClient = new ArrayList();
 				try {
-					while (theForeignKey.next()) {
+					while (resultSet.next()) {
 
-						userId = theForeignKey.getInt("idusers");
+						idClient.add(resultSet.getInt("idusers"));
 
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				int idClientInt = (int) idClient.get(0);
+				
+				// getting twiblr list for that client
+				ListOfTwibbles.query = "SELECT * FROM ascurra_445.twibbles where usersIdForeign='"
+						+ idClientInt + "'";
+				resultSet = ListOfTwibbles.executeSelectStatement();
 
-				System.out.println("The Foreign Key is: " + userId);
-
-				databaseConnection getTwibbleQuery = new databaseConnection("");
-
-				getTwibbleQuery.query = "select idtwiblr FROM ascurra_445.twibbles where usersIdForeign='"
-						+ userId + "' "; //twiblrcontent,usersIdForeign
-
-				ResultSet rs1 = getTwibbleQuery.executeSelectStatement();
-
-				int content;
-				int j = 0;
-
-				// Need a way to store the twibble contents so we can choose
-				// which to delete
-				ArrayList<Integer> twiblrIds = new ArrayList<Integer>();
-
-
+				ArrayList idtwiblr = new ArrayList();
+				ArrayList twiblrcontent = new ArrayList();
+				ArrayList usersIdForeign = new ArrayList();
+				ArrayList date = new ArrayList();
 				
 				try {
+					while (resultSet.next()) {
 
-					while (rs1.next()) {
-						// Retrieve by column name
-						content = rs1.getInt("idtwiblr");
-						twiblrIds.add(content);
-						
+						idtwiblr.add(resultSet.getInt("idtwiblr"));
+						twiblrcontent.add(resultSet.getString("twiblrcontent"));
+						usersIdForeign.add(resultSet.getString("usersIdForeign"));
+						date.add(resultSet.getString("date"));
 
 					}
-
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-				//out.println(new StringBuilder(twiblrIds.get(0)).toString());
-				// Go through twibbles to find which one to delete from page
-				//boolean flag = true;
-				//int choice = 0;
-				//String outContent = "";
-				//System.out.println("Which twibble would you like to delete?");
-
-				// Loop through to display twibbles and choose which to delete
-				//do {
 				
+				String listOfTwibbles = "";
 
-				
-				//for (String s : contentList) {
-					//out.println(new StringBuilder(s).toString());
-				//}
-				
-				for (int k = 0; k < twiblrIds.size(); k++) {
-						//System.out.println(j + ": " + contentList.get(k));
-					out.println(new StringBuilder(twiblrIds.get(k)).toString());
-					//j++;
+				for (int j = 0; j < idtwiblr.size(); j++) {
+
+					listOfTwibbles = listOfTwibbles.concat("<div><div>" + "Twibble:"
+							+ "</div>");
+
+					listOfTwibbles = listOfTwibbles.concat("<div><div>Id: "
+							+ idtwiblr.get(j).toString() + "</div>");
+					listOfTwibbles = listOfTwibbles.concat("<div>Content: "
+							+ (String) twiblrcontent.get(j) + "</div>");
+					listOfTwibbles = listOfTwibbles.concat("<div>UserId: "
+							+ usersIdForeign.get(j).toString() + "</div>");
+					listOfTwibbles = listOfTwibbles.concat("<div>Date Of Creation"
+							+ (String) date.get(j) + "</div>");
+					listOfTwibbles = listOfTwibbles.concat("<div><div>"
+							+ "------------------" + "</div>");
+
 				}
-					
-
-					//System.out
-					//		.println("Please select the number to delete or '0' for exit: ");
-
-					//choice = input.nextInt();
-
-					//if (choice == 0) {
-					//	flag = false;
-					//}
-
-					//for (int p = 0; p < contentList.size(); ++p) {
-
-						//outContent = contentList.get(p);
-						//int indexCounter = contentList.indexOf(outContent);
-						//indexCounter++;
-
-						// If the choice meets the index in our arraylist then
-						// delete that twibble
-						//if (choice == indexCounter) {
-
-							//databaseConnection deleteTwibbleQuery = new databaseConnection(
-							//		"");
-							//deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE twiblrcontent= '"
-							//		+ outContent + "' ";
-							//deleteTwibbleQuery.ExecuteUpdate();
-							//System.out.println("The Twibble deleted was: "
-							//		+ outContent);
-
-						//}
-
-					//}
-					//flag = false;
-				//} while (flag);
-
 				
-				//deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
-				//		+ twibbleID + "' ";
-				//deleteTwibbleQuery.ExecuteUpdate();
+				// Now how do I return that listOfTwibbles to Message.java?????
+				out.println(new StringBuilder(listOfTwibbles).toString());
 				
-				//System.out.println("Twibble deleted!");
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				//out.println(new StringBuilder("sucess").toString());
-
 			}
-			
+
 			// Confirm twibble delete but not working
 			/**
 			if(command.equals("Twibble Delete")) {

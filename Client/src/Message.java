@@ -54,11 +54,15 @@ public class Message
 					System.out.println("Which twibble would you like to delete?");
 					while((line = in.readLine()) !=null) {
 
-					System.out.println("CLIENT: Received \"" + in.read() + "\" from the server");
+					System.out.println("CLIENT: Received \"" + in.readLine() + "\" from the server");
+					
+					// From earlier attempt
 					//arl.add(j);
 					//j++;
 					System.out.print("> " );
 					}
+					
+					// From earlier attempt
 					/**
 					System.out.println("Please enter Twibble ID to delete: ");
 					int twibbleID = input.nextInt();
