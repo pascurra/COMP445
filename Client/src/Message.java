@@ -63,12 +63,13 @@ public class Message
 					System.out.println("Please enter Twibble ID to delete: ");
 					int twibbleID = input.nextInt();
 					for (int i: arl) {
-						System.out.println(i);
+						System.out.println(i); // Just to see output
 						if(twibbleID == i) {
 						String JSONCommand =
 	
 						"<ExecuteCommand><command>Twibble Delete</command><twibbleID>"
 								+ twibbleID + "</twibbleID></ExecuteCommand>";
+						
 						
 						Message message = new Message(hostname, 6789, JSONCommand);
 						message.send();

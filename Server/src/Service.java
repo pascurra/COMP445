@@ -628,7 +628,7 @@ public class Service {
 
 			}
 			
-			// Confirm twibble delete
+			// Confirm twibble delete but not working
 			if(command.equals("Twibble Delete")) {
 				
 				String twibbleID = doc.getElementsByTagName("twibbleID").item(0).getTextContent();
