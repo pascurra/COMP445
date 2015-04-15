@@ -525,7 +525,7 @@ public class Service implements Runnable{
 					e.printStackTrace();
 				}
 				
-				String listOfTwibbles = "";
+				//String listOfTwibbles = "";
 				String result="";
 
 				result=result.concat("ExecuteCommand><command>sendTwibbles</command>");
