@@ -86,10 +86,6 @@ public class Service implements Runnable{
 				if (line.equals("exit"))
 					break;
 				
-
-				
-				
-				
 			}
 
 			Document doc = null;
@@ -113,7 +109,7 @@ public class Service implements Runnable{
 			// String Command="Deregister";
 
 			// Menu 1.1
-
+			// Register client: Ryan
 			if (command.equals("Register")) {
 
 				databaseConnection registerQuery = new databaseConnection("");
@@ -490,33 +486,139 @@ public class Service implements Runnable{
 
 			}
 
-			// Delete a Twibble: Ryan
+			// Delete Twibble: Ryan
 			if (command.equals("Delete Twibble")) {
-
+				databaseConnection ListOfTwibbles = new databaseConnection("");
 				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
-				String twibbleID = doc.getElementsByTagName("twibbleID").item(0).getTextContent();
-
-				System.out.println("Current Alias: " + alias);
-				System.out.println("Twibble ID to delete: " + twibbleID);
-
 				
-				databaseConnection deleteTwibbleQuery = new databaseConnection("");
+				ListOfTwibbles.query = "SELECT * FROM ascurra_445.clients where alias='"
+						+ alias + "'";
+				
+				ResultSet resultSet = ListOfTwibbles.executeSelectStatement();
+				ArrayList idClient = new ArrayList();
+				try {
+					while (resultSet.next()) {
 
-				
-				deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
-						+ twibbleID + "' ";
-				deleteTwibbleQuery.ExecuteUpdate();
-				
-				System.out.println("Twibble deleted!");
-				
-				
+						idClient.add(resultSet.getInt("idusers"));
 
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				int idClientInt = (int) idClient.get(0);
+				
+				// getting twiblr list for that client
+				ListOfTwibbles.query = "SELECT * FROM ascurra_445.twibbles where usersIdForeign='"
+						+ idClientInt + "'";
+				resultSet = ListOfTwibbles.executeSelectStatement();
 
+				ArrayList idtwiblr = new ArrayList();
+				ArrayList twiblrcontent = new ArrayList();
+				ArrayList usersIdForeign = new ArrayList();
+				ArrayList date = new ArrayList();
+				
+				try {
+					while (resultSet.next()) {
+
+						idtwiblr.add(resultSet.getInt("idtwiblr"));
+						twiblrcontent.add(resultSet.getString("twiblrcontent"));
+						usersIdForeign.add(resultSet.getString("usersIdForeign"));
+						date.add(resultSet.getString("date"));
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				String listOfTwibbles = "";
+				String result="";
+
+				result=result.concat("ExecuteCommand><command>sendTwibbles</command>");
+				for (int j = 0; j < idtwiblr.size(); j++) {
+
+					result=result.concat("<tiwbble>"+
+					"<id>"+ idtwiblr.get(j) +"</id>" +
+					"<CONTENT>"+ twiblrcontent.get(j) +"</CONTENT>"+
+					"<DATE>" + usersIdForeign.get(j) +"</DATE>"+
+					"</twibble>"
+					);
+
+				}
+
+				result=result.concat("</ExecuteCommand>");
+				// Now send xml list of twibbles to client
+				out.println(result);
+				
+				/**
+				// We are looking to come back to here from Client main to continue deletion of twibble
+				// May need to use this to add special command within Delete Twibble
+				String xml1 = "";
+
+				while ((line = in.readLine()) != null) {
+
+					System.out.println("Server has received \"" + line
+							+ "\" from the client");
+					
+					if (line.contains("<"))
+					{
+					xml1 = line;
+					break;
+					}
+					
+					
+					
+					if (line.equals("exit"))
+						break;
+					
+				}
+
+				Document docu = null;
+
+				// Demarshall
+
+				try {
+					docu = loadXML(xml1);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				String command1 = docu.getElementsByTagName("command").item(0)
+						.getTextContent();
+
+				System.out.println("The command to execute is: " + command1);
+				
+				if (command1.equals("Twibble Delete")) {
+					databaseConnection twibbleToDeleteQuery = new databaseConnection("");
+					String iDTwiblr = doc.getElementsByTagName("alias").item(0)
+							.getTextContent();
+					
+					twibbleToDeleteQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
+							+ iDTwiblr + "' ";
+					twibbleToDeleteQuery.ExecuteUpdate();
+					
+				}
+
+				*/
 			}
 			
+			if (command.equals("Confirm Twibble Delete")) {
+				databaseConnection twibbleToDeleteQuery = new databaseConnection("");
+				String iDTwiblr = doc.getElementsByTagName("idtwiblr").item(0)
+						.getTextContent();
+				
+				twibbleToDeleteQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
+						+ iDTwiblr + "' ";
+				twibbleToDeleteQuery.ExecuteUpdate();
+				
+				System.out.println("Twibble Deleted..............");
+				
+			}
+			
+		
 			// Delete Profile: Ryan
 			if (command.equals("Delete Profile")) {
 				
@@ -549,6 +651,7 @@ public class Service implements Runnable{
 				// Display which profile will be deleted based on the alias id
 				System.out.println("The Foreign Key in Profiles table is: " + fKeyId);
 				
+				
 				// Connect and delete profile in profiles table
 				databaseConnection deleteProfileQuery = new databaseConnection("");
 				deleteProfileQuery.query = "DELETE FROM ascurra_445.profiles WHERE idForeignKey= '" + fKeyId + "' ";
@@ -566,7 +669,7 @@ public class Service implements Runnable{
 			out.close();
 			socket.close();
 			server.close();
-
+			
 		} catch (UnknownHostException e) {
 			System.out.println("UnknownHostException:" + e.getMessage());
 		} catch (IOException e) {

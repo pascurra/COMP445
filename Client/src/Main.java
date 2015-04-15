@@ -84,17 +84,35 @@ public class Main {
 				int deleteTwibbleOption = input.nextInt();
 
 				if (deleteTwibbleOption == 1) {
-					System.out.println("Please enter Twibble ID to delete: ");
-					String twibbleID = input.next();
+					//System.out.println("Please enter Twibble ID to delete: ");
+					//String twibbleID = input.next();
 					
 					String JSONCommand =
 
-					"<ExecuteCommand><command>Delete Twibble</command><twibbleID>"
-							+ twibbleID + "</twibbleID><alias>"
-							+ alias + "</alias></ExecuteCommand>";
+					//"<ExecuteCommand><command>Delete Twibble</command><twibbleID>"
+							//+ twibbleID + "</twibbleID><alias>"
+							//+ alias + "</alias></ExecuteCommand>";
+					
+					"<ExecuteCommand><command>Delete Twibble</command><alias>"
+					+ alias + "</alias></ExecuteCommand>";
 
+					// Need to change back to just send()
 					Message message = new Message(ServerIP, 6789, JSONCommand);
 					message.send();
+					
+					
+					// Now that we return back from Service, we ask user to select twibble to delete
+					System.out.println("Please enter Twibble ID to delete: ");
+					String twibbleID = input.next();
+					
+					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Confirm Twibble Delete</command><idtwiblr>"
+							+ twibbleID + "</idtwiblr></ExecuteCommand>";
+					Message messageToDelete = new Message(ServerIP, 6789, JSONCommandTwibbleDelete);
+					messageToDelete.send();
+					
+					System.out.println("Twibble Deleted..............");
+					
+					
 				}
 
 				if (deleteTwibbleOption == 2) {
@@ -260,7 +278,7 @@ public class Main {
 					.println("Please enter your new username and press ENTER..");
 
 			
-			String user = userInput.next();
+			String user = userInput.nextLine();
 			
 			System.out.println("You chose your new alias: " + user);
 			
@@ -275,7 +293,7 @@ public class Main {
 			
 			String JSONCommandRegister=
 					"<ExecuteCommand><command>Register</command><alias>"+user+"</alias><email>"+email+"</email></ExecuteCommand>";
-	
+			
 			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
 			messageRegister.send();
 			
