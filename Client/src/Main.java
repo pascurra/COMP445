@@ -277,8 +277,8 @@ public class Main {
 			System.out
 					.println("Please enter your new username and press ENTER..");
 
-			
-			String user = userInput.nextLine();
+			// Needs to be nextLine() but login only accepts one string, no spaces!!!!!
+			String user = userInput.next();
 			
 			System.out.println("You chose your new alias: " + user);
 			
