@@ -527,7 +527,7 @@ public class Service {
 					e.printStackTrace();
 				}
 				
-				String listOfTwibbles = "";
+				//String listOfTwibbles = "";
 				String result="";
 
 				result=result.concat("ExecuteCommand><command>sendTwibbles</command>");
