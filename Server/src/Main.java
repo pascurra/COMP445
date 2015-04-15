@@ -8,7 +8,7 @@ public class Main
 	{
 			
 		Service service= new Service();
-		Thread newThread = new Thread(service);
+		Thread newThread = new Thread(service,"Service Threads");
 		while (service.terminate!=true){
 			newThread.start();
 						
