@@ -543,26 +543,22 @@ public class Service {
 				}
 
 				result=result.concat("</ExecuteCommand>");
-				// Now how do I return that listOfTwibbles to Message.java?????
+				// Now send xml list of twibbles to client
 				out.println(result);
 				
-				
-				
-			
-				// May need to use this to add special command within Delete Twibble
 				/**
-				String xml = "";
+				// We are looking to come back to here from Client main to continue deletion of twibble
+				// May need to use this to add special command within Delete Twibble
+				String xml1 = "";
 
 				while ((line = in.readLine()) != null) {
 
 					System.out.println("Server has received \"" + line
 							+ "\" from the client");
-					// Reverse the message and send it back to the client,
-					
 					
 					if (line.contains("<"))
 					{
-					xml = line;
+					xml1 = line;
 					break;
 					}
 					
@@ -573,26 +569,50 @@ public class Service {
 					
 				}
 
-				Document doc = null;
+				Document docu = null;
 
 				// Demarshall
 
 				try {
-					doc = loadXML(xml);
+					docu = loadXML(xml1);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				String command = doc.getElementsByTagName("command").item(0)
+				String command1 = docu.getElementsByTagName("command").item(0)
 						.getTextContent();
 
-				System.out.println("The command to execute is: " + command);
+				System.out.println("The command to execute is: " + command1);
+				
+				if (command1.equals("Twibble Delete")) {
+					databaseConnection twibbleToDeleteQuery = new databaseConnection("");
+					String iDTwiblr = doc.getElementsByTagName("alias").item(0)
+							.getTextContent();
+					
+					twibbleToDeleteQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
+							+ iDTwiblr + "' ";
+					twibbleToDeleteQuery.ExecuteUpdate();
+					
+				}
 
+				*/
+			}
+			
+			if (command.equals("Twibble Delete")) {
+				databaseConnection twibbleToDeleteQuery = new databaseConnection("");
+				String iDTwiblr = doc.getElementsByTagName("idtwiblr").item(0)
+						.getTextContent();
+				
+				twibbleToDeleteQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
+						+ iDTwiblr + "' ";
+				twibbleToDeleteQuery.ExecuteUpdate();
+				
+				System.out.println("Twibble Deleted..............");
 				
 			}
-			*/	
-		}
+			
+		
 			// Delete Profile: Ryan
 			if (command.equals("Delete Profile")) {
 				

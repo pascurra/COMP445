@@ -98,13 +98,19 @@ public class Main {
 
 					// Need to change back to just send()
 					Message message = new Message(ServerIP, 6789, JSONCommand);
-					message.SendAndReceive();
+					message.send();
 					
 					
-					// Might not use this...
-					message.SendAndReceive();
-
+					// Now that we return back from Service, we ask user to select twibble to delete
+					System.out.println("Please enter Twibble ID to delete: ");
+					String twibbleID = input.next();
 					
+					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Twibble Delete</command><idtwiblr>"
+							+ twibbleID + "</idtwiblr></ExecuteCommand>";
+					Message messageToDelete = new Message(ServerIP, 6789, JSONCommandTwibbleDelete);
+					messageToDelete.send();
+					
+					System.out.println("Twibble Deleted..............");
 					
 					
 				}
