@@ -538,8 +538,6 @@ public class Service {
 					"<CONTENT>"+ twiblrcontent.get(j) +"</CONTENT>"+
 					"<DATE>" + usersIdForeign.get(j) +"</DATE>"+
 					"</twibble>"
-
-
 					);
 
 				}
