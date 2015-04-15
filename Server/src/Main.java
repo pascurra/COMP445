@@ -9,10 +9,10 @@ public class Main
 			
 		Service service= new Service();
 		Thread newThread = new Thread(service);
-		//while (service.terminate!=true){
+		while (service.terminate!=true){
 			newThread.start();
-							
+						
 		}
-		
 	}
 
+}

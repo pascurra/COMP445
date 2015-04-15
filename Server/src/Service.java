@@ -29,7 +29,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 public class Service implements Runnable{
-
+		
 	public Service() {
 		super();
 	}
@@ -45,8 +45,9 @@ public class Service implements Runnable{
 	Scanner input = new Scanner(System.in);
 
 	public void run(){
-		
-		try {
+		synchronized(this){
+				
+		 try {
 			// Create a Socket and bind it to a port
 			server = new ServerSocket(serverPort);
 			System.out.println("Server is up and running...");
@@ -54,8 +55,9 @@ public class Service implements Runnable{
 			// Accept a connection from the client and associate a Socket to
 			// this connection
 			socket = server.accept();
-			Thread t = new Thread();
-			t.start();
+//			Thread t = new Thread();
+//			t.start();
+			Thread.currentThread();
 			// Create the stream of data to be communicated between this server
 			// and the client
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -221,7 +223,7 @@ public class Service implements Runnable{
 
 			}
 
-			// Create Twibble
+			// Create Twibble By Mehdi
 			if (command.equals("Create Twibble")) {
 
 				String twibbleContent = doc
@@ -371,17 +373,11 @@ public class Service implements Runnable{
 
 				}
 				System.out.println("No Subscribers - No notification(s) sent");
-	
-		
-
 				//FIX: Reply to waiting client, by Paolo
 				out.println(new StringBuilder("sucess").toString());
-
-				
-
 			// End of Creating Twibble
 
-			// Updating Profile
+			// Updating Profile By Mehdi
 			if (command.equals("Update Profile")) {
 				databaseConnection updateProfile = new databaseConnection("");
 				String profile_location = doc.getElementsByTagName("profile_location").item(0).getTextContent();
@@ -390,12 +386,8 @@ public class Service implements Runnable{
 				updateProfile.query = "UPDATE profiles SET location='"+profile_location+"',interests='"+profile_interests+"' WHERE alias='"+currentAlias+"'";
 				updateProfile.ExecuteUpdate();
 				System.out.println("Profile Updated :  New Location :"+profile_location+" New Interests : "+profile_interests);
-			
-			
-
 				//FIX: Reply to waiting client, by Paolo
 				out.println(new StringBuilder("sucess").toString());
-			
 			}
 			// End Of Updating Profile
 
@@ -683,6 +675,7 @@ public class Service implements Runnable{
 
     	
 		}
+	}
 	
 	public static Document loadXML(String xml) throws Exception {
 		DocumentBuilderFactory fctr = DocumentBuilderFactory.newInstance();
