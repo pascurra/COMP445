@@ -306,7 +306,8 @@ public class Service {
 						e.printStackTrace();
 					}
 				}
-				;
+				
+				if(subscriberEmails.size()>0){
 
 				InternetAddress[] cc = new InternetAddress[subscriberEmails
 						.size()];
@@ -366,9 +367,8 @@ public class Service {
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
+				}
 				
-				
-
 				//FIX: Reply to waiting client, by Paolo
 				out.println(new StringBuilder("sucess").toString());
 			}
