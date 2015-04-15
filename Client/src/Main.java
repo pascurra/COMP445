@@ -96,8 +96,17 @@ public class Main {
 					"<ExecuteCommand><command>Delete Twibble</command><alias>"
 					+ alias + "</alias></ExecuteCommand>";
 
+					// Need to change back to just send()
 					Message message = new Message(ServerIP, 6789, JSONCommand);
 					message.SendAndReceive();
+					
+					
+					// Might not use this...
+					message.SendAndReceive();
+
+					
+					
+					
 				}
 
 				if (deleteTwibbleOption == 2) {

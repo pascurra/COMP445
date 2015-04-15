@@ -480,6 +480,7 @@ public class Service {
 
 			}
 
+			// Delete Twibble: Ryan
 			if (command.equals("Delete Twibble")) {
 				databaseConnection ListOfTwibbles = new databaseConnection("");
 				String alias = doc.getElementsByTagName("alias").item(0)
@@ -527,46 +528,73 @@ public class Service {
 				}
 				
 				String listOfTwibbles = "";
+				String result="";
 
+				result=result.concat("ExecuteCommand><command>sendTwibbles</command>");
 				for (int j = 0; j < idtwiblr.size(); j++) {
 
-					listOfTwibbles = listOfTwibbles.concat("<div><div>" + "Twibble:"
-							+ "</div>");
+					result=result.concat("<tiwbble>"+
+					"<id>"+ idtwiblr.get(j) +"</id>" +
+					"<CONTENT>"+ twiblrcontent.get(j) +"</CONTENT>"+
+					"<DATE>" + usersIdForeign.get(j) +"</DATE>"+
+					"</twibble>"
 
-					listOfTwibbles = listOfTwibbles.concat("<div><div>Id: "
-							+ idtwiblr.get(j).toString() + "</div>");
-					listOfTwibbles = listOfTwibbles.concat("<div>Content: "
-							+ (String) twiblrcontent.get(j) + "</div>");
-					listOfTwibbles = listOfTwibbles.concat("<div>UserId: "
-							+ usersIdForeign.get(j).toString() + "</div>");
-					listOfTwibbles = listOfTwibbles.concat("<div>Date Of Creation"
-							+ (String) date.get(j) + "</div>");
-					listOfTwibbles = listOfTwibbles.concat("<div><div>"
-							+ "------------------" + "</div>");
+
+					);
 
 				}
-				
-				// Now how do I return that listOfTwibbles to Message.java?????
-				out.println(new StringBuilder(listOfTwibbles).toString());
-				
-			}
 
-			// Confirm twibble delete but not working
-			/**
-			if(command.equals("Twibble Delete")) {
+				result=result.concat("</ExecuteCommand>");
+				// Now how do I return that listOfTwibbles to Message.java?????
+				out.println(result);
 				
-				String twibbleID = doc.getElementsByTagName("twibbleID").item(0).getTextContent();
 				
-				databaseConnection deleteTwibbleQuery = new databaseConnection("");
 				
-				deleteTwibbleQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
-						+ twibbleID + "' ";
-				deleteTwibbleQuery.ExecuteUpdate();
-				
-				System.out.println("Twibble deleted!");
+			
+				// May need to use this to add special command within Delete Twibble
+				/**
+				String xml = "";
+
+				while ((line = in.readLine()) != null) {
+
+					System.out.println("Server has received \"" + line
+							+ "\" from the client");
+					// Reverse the message and send it back to the client,
 					
+					
+					if (line.contains("<"))
+					{
+					xml = line;
+					break;
+					}
+					
+					
+					
+					if (line.equals("exit"))
+						break;
+					
+				}
+
+				Document doc = null;
+
+				// Demarshall
+
+				try {
+					doc = loadXML(xml);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				String command = doc.getElementsByTagName("command").item(0)
+						.getTextContent();
+
+				System.out.println("The command to execute is: " + command);
+
+				
 			}
-			*/
+			*/	
+		}
 			// Delete Profile: Ryan
 			if (command.equals("Delete Profile")) {
 				
@@ -617,7 +645,7 @@ public class Service {
 			out.close();
 			socket.close();
 			server.close();
-
+			
 		} catch (UnknownHostException e) {
 			System.out.println("UnknownHostException:" + e.getMessage());
 		} catch (IOException e) {
