@@ -372,17 +372,15 @@ public class Service implements Runnable{
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
-<<<<<<< HEAD
+
 				}
 				System.out.println("No Subscribers - No notification(s) sent");
-=======
-				
-				
+	
+		
 
 				//FIX: Reply to waiting client, by Paolo
 				out.println(new StringBuilder("sucess").toString());
->>>>>>> 72528ce69b034ab1f9cc76dc09d09cc04e639502
-			}
+
 				
 
 			// End of Creating Twibble
