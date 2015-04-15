@@ -28,12 +28,12 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-public class Service implements Runnable{
+public class Service {
 
 	public Service() {
 		super();
 	}
-	
+
 	Boolean terminate = false;
 
 	ServerSocket server = null;
@@ -44,8 +44,8 @@ public class Service implements Runnable{
 	BufferedReader in;
 	Scanner input = new Scanner(System.in);
 
-	public void run(){
-		
+	public void Execute() throws SQLException {
+
 		try {
 			// Create a Socket and bind it to a port
 			server = new ServerSocket(serverPort);
@@ -54,8 +54,6 @@ public class Service implements Runnable{
 			// Accept a connection from the client and associate a Socket to
 			// this connection
 			socket = server.accept();
-			Thread t = new Thread();
-			t.start();
 			// Create the stream of data to be communicated between this server
 			// and the client
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -312,7 +310,7 @@ public class Service implements Runnable{
 						e.printStackTrace();
 					}
 				}
-				if(subscriberEmails.size() > 0){
+				;
 
 				InternetAddress[] cc = new InternetAddress[subscriberEmails
 						.size()];
@@ -372,18 +370,12 @@ public class Service implements Runnable{
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
-<<<<<<< HEAD
-				}
-				System.out.println("No Subscribers - No notification(s) sent");
-=======
 				
 				
 
 				//FIX: Reply to waiting client, by Paolo
 				out.println(new StringBuilder("sucess").toString());
->>>>>>> 72528ce69b034ab1f9cc76dc09d09cc04e639502
 			}
-				
 
 			// End of Creating Twibble
 
@@ -580,9 +572,8 @@ public class Service implements Runnable{
 
 		System.out.println("Service ended execution.");
 
-    	
-		}
-	
+	}
+
 	public static Document loadXML(String xml) throws Exception {
 		DocumentBuilderFactory fctr = DocumentBuilderFactory.newInstance();
 		DocumentBuilder bldr = fctr.newDocumentBuilder();

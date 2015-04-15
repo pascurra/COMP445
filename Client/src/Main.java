@@ -260,14 +260,14 @@ public class Main {
 					.println("Please enter your new username and press ENTER..");
 
 			
-			String user = userInput.nextLine();
+			String user = userInput.next();
 			
 			System.out.println("You chose your new alias: " + user);
 			
 			System.out
 			.println("Please enter your email address and press ENTER..");
 			
-			String email = userInput.nextLine();
+			String email = userInput.next();
 			
 			
 			System.out.println("Email address associated with your Twiblr account will be: " + email);
@@ -280,7 +280,7 @@ public class Main {
 			messageRegister.send();
 			
 			// Close the scanner object
-			userInput.close();
+			//userInput.close();
 			
 			//show menu for registered users
 			mainMemuOption=1;

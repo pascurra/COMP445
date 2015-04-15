@@ -69,27 +69,13 @@ public class Service implements Runnable{
 			String xml = "";
 
 			while ((line = in.readLine()) != null) {
-
 				System.out.println("Server has received \"" + line
 						+ "\" from the client");
 				// Reverse the message and send it back to the client,
-				
-				
-				if (line.contains("<"))
-				{
+				out.println(new StringBuilder(line).toString());
 				xml = line;
-				break;
-				}
-				
-				
-				
 				if (line.equals("exit"))
 					break;
-				
-
-				
-				
-				
 			}
 
 			Document doc = null;
@@ -148,12 +134,6 @@ public class Service implements Runnable{
 				// databaseConnection registerQuery=new
 				// databaseConnection("INSERT INTO...");
 				// ResultSet result=registerQuery.Query();
-				
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -171,11 +151,6 @@ public class Service implements Runnable{
 				// query db to delete
 				// deregisterQuery.query = "";
 				deregisterQuery.ExecuteUpdate();
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -217,11 +192,6 @@ public class Service implements Runnable{
 				subscribeQuery.query = "INSERT INTO ascurra_445.subscribers(client_alias,following_client_id) VALUES ('"
 						+ alias + "', '" + subscribeToId + "' )";
 				subscribeQuery.ExecuteUpdate();
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -372,16 +342,8 @@ public class Service implements Runnable{
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
-<<<<<<< HEAD
 				}
 				System.out.println("No Subscribers - No notification(s) sent");
-=======
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
->>>>>>> 72528ce69b034ab1f9cc76dc09d09cc04e639502
 			}
 				
 
@@ -396,12 +358,6 @@ public class Service implements Runnable{
 				updateProfile.query = "UPDATE profiles SET location='"+profile_location+"',interests='"+profile_interests+"' WHERE alias='"+currentAlias+"'";
 				updateProfile.ExecuteUpdate();
 				System.out.println("Profile Updated :  New Location :"+profile_location+" New Interests : "+profile_interests);
-			
-			
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
-			
 			}
 			// End Of Updating Profile
 
@@ -483,12 +439,6 @@ public class Service implements Runnable{
 
 				// Ending message
 				System.out.println("New user registered...........");
-				
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 
@@ -511,11 +461,6 @@ public class Service implements Runnable{
 				deleteTwibbleQuery.ExecuteUpdate();
 				
 				System.out.println("Twibble deleted!");
-				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 
 			}
 			
@@ -556,10 +501,6 @@ public class Service implements Runnable{
 				deleteProfileQuery.query = "DELETE FROM ascurra_445.profiles WHERE idForeignKey= '" + fKeyId + "' ";
 				deleteProfileQuery.ExecuteUpdate();
 				
-				
-
-				//FIX: Reply to waiting client, by Paolo
-				out.println(new StringBuilder("sucess").toString());
 				
 			}
 
