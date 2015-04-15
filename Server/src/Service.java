@@ -599,7 +599,7 @@ public class Service {
 				*/
 			}
 			
-			if (command.equals("Twibble Delete")) {
+			if (command.equals("Confirm Twibble Delete")) {
 				databaseConnection twibbleToDeleteQuery = new databaseConnection("");
 				String iDTwiblr = doc.getElementsByTagName("idtwiblr").item(0)
 						.getTextContent();

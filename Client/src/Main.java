@@ -105,7 +105,7 @@ public class Main {
 					System.out.println("Please enter Twibble ID to delete: ");
 					String twibbleID = input.next();
 					
-					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Twibble Delete</command><idtwiblr>"
+					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Confirm Twibble Delete</command><idtwiblr>"
 							+ twibbleID + "</idtwiblr></ExecuteCommand>";
 					Message messageToDelete = new Message(ServerIP, 6789, JSONCommandTwibbleDelete);
 					messageToDelete.send();
