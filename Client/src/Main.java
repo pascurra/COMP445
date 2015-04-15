@@ -278,7 +278,7 @@ public class Main {
 					.println("Please enter your new username and press ENTER..");
 
 			
-			String user = userInput.next();
+			String user = userInput.nextLine();
 			
 			System.out.println("You chose your new alias: " + user);
 			
@@ -293,7 +293,7 @@ public class Main {
 			
 			String JSONCommandRegister=
 					"<ExecuteCommand><command>Register</command><alias>"+user+"</alias><email>"+email+"</email></ExecuteCommand>";
-	
+			
 			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
 			messageRegister.send();
 			
