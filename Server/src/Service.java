@@ -28,12 +28,12 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-public class Service {
+public class Service implements Runnable{
 
 	public Service() {
 		super();
 	}
-
+	
 	Boolean terminate = false;
 
 	ServerSocket server = null;
@@ -44,8 +44,8 @@ public class Service {
 	BufferedReader in;
 	Scanner input = new Scanner(System.in);
 
-	public void Execute() throws SQLException {
-
+	public void run(){
+		
 		try {
 			// Create a Socket and bind it to a port
 			server = new ServerSocket(serverPort);
@@ -54,6 +54,8 @@ public class Service {
 			// Accept a connection from the client and associate a Socket to
 			// this connection
 			socket = server.accept();
+			Thread t = new Thread();
+			t.start();
 			// Create the stream of data to be communicated between this server
 			// and the client
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -280,7 +282,7 @@ public class Service {
 						e.printStackTrace();
 					}
 				}
-				;
+				if(subscriberEmails.size() > 0){
 
 				InternetAddress[] cc = new InternetAddress[subscriberEmails
 						.size()];
@@ -340,7 +342,10 @@ public class Service {
 				} catch (MessagingException mex) {
 					mex.printStackTrace();
 				}
+				}
+				System.out.println("No Subscribers - No notification(s) sent");
 			}
+				
 
 			// End of Creating Twibble
 
@@ -516,8 +521,9 @@ public class Service {
 
 		System.out.println("Service ended execution.");
 
-	}
-
+    	
+		}
+	
 	public static Document loadXML(String xml) throws Exception {
 		DocumentBuilderFactory fctr = DocumentBuilderFactory.newInstance();
 		DocumentBuilder bldr = fctr.newDocumentBuilder();

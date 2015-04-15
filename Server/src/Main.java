@@ -8,12 +8,11 @@ public class Main
 	{
 			
 		Service service= new Service();
-		while (service.terminate!=true){
-				service.Execute();
-				
-				
+		Thread newThread = new Thread(service);
+		//while (service.terminate!=true){
+			newThread.start();
+							
 		}
 		
 	}
 
-}

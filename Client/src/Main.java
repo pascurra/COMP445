@@ -22,7 +22,7 @@ public class Main {
 
 	}
 
-	public static void showMenu() {
+	public static void showMenu(){
 
 		System.out.println("Please choose one option:");
 		System.out.println("1.- Login");
