@@ -26,7 +26,7 @@ Production Mode:
 
 
 
-Development Mode: Needs database setup
+Development Mode: Needs local database setup
 
 Step 1:
 
@@ -42,8 +42,13 @@ Create a database and username with the following information:
 Give permissions to the user create to access and write the database.			
 			
 			
-
 Step 2:
+
+Import the database_content.sql file into the database. This can be don via terminal or using MySQL Workbench.
+			
+			
+			
+Step 3:
 
 Comment the following lines:
 
