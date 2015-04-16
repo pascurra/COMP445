@@ -897,7 +897,7 @@ public class Service {
 						// Set Subject: header field
 						message.setSubject(alias + " deleted twibble !");
 						// Now set the actual message
-						message.setText("Deleted Twibble");
+						message.setText("Deleted Twibble id: "+iDTwiblr);
 						// Send message
 						Transport.send(message);
 						System.out.println("Sent message successfully....");
