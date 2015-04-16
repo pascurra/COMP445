@@ -71,7 +71,7 @@ public class Service {
 		try {
 			// Create a Socket and bind it to a port
 			server = new ServerSocket(serverPort);
-			System.out.println("Server "+this.threadId +"is up and running...");
+			System.out.println("Server is up and running...");
 
 			// Accept a connection from the client and associate a Socket to
 			// this connection
@@ -568,57 +568,7 @@ public class Service {
 				// Now send xml list of twibbles to client
 				out.println(result);
 				
-				/**
-				// We are looking to come back to here from Client main to continue deletion of twibble
-				// May need to use this to add special command within Delete Twibble
-				String xml1 = "";
 
-				while ((line = in.readLine()) != null) {
-
-					System.out.println("Server has received \"" + line
-							+ "\" from the client");
-					
-					if (line.contains("<"))
-					{
-					xml1 = line;
-					break;
-					}
-					
-					
-					
-					if (line.equals("exit"))
-						break;
-					
-				}
-
-				Document docu = null;
-
-				// Demarshall
-
-				try {
-					docu = loadXML(xml1);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				String command1 = docu.getElementsByTagName("command").item(0)
-						.getTextContent();
-
-				System.out.println("The command to execute is: " + command1);
-				
-				if (command1.equals("Twibble Delete")) {
-					databaseConnection twibbleToDeleteQuery = new databaseConnection("");
-					String iDTwiblr = doc.getElementsByTagName("alias").item(0)
-							.getTextContent();
-					
-					twibbleToDeleteQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
-							+ iDTwiblr + "' ";
-					twibbleToDeleteQuery.ExecuteUpdate();
-					
-				}
-
-				*/
 			}
 			
 			if (command.equals("Confirm Twibble Delete")) {
