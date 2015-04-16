@@ -42,7 +42,6 @@ public class Message
 		   // userInput = new BufferedReader(new InputStreamReader(System.in));
 			String line=JSONCommand;
 			
-			System.out.print("> " );
 			int j = 1;
 			
 			//	while(line != null)
@@ -114,7 +113,6 @@ public class Message
 		   // userInput = new BufferedReader(new InputStreamReader(System.in));
 			String line=JSONCommand;
 			
-			System.out.print("> " );
 			
 
 			
@@ -127,7 +125,6 @@ public class Message
 				
 				System.out.println("CLIENT: Received \"" + in.readLine() + "\" from the server");
 				//System.out.println("CLIENT: Received \"" + in.readLine() + "\" from the server");
-				System.out.print("> " );
 				
 				
 

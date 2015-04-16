@@ -15,6 +15,7 @@ public class Main {
 		System.out.println("Please enter the IP of the server X.X.X.X");
 
 		ServerIP = input.next();
+		input.nextLine(); 
 
 		while (keepRunning == true) {
 			showMenu();
@@ -30,6 +31,8 @@ public class Main {
 		System.out.println("3.- Terminate");
 
 		int mainMemuOption = input.nextInt();
+		input.nextLine(); 
+		
 		int subMemuOption;
 		// String s = input.next();
 		String alias;
@@ -40,6 +43,7 @@ public class Main {
 			System.out.println("Please enter your username and press ENTER..");
 
 			alias = input.next();
+			input.nextLine(); 
 
 			System.out.println("You entered your login: " + alias);
 			while (mainMemuOption==1){
@@ -55,7 +59,10 @@ public class Main {
 			System.out.println("7.- Delete Profile");
 			System.out.println("9.- Exit");
 
+
+			
 			subMemuOption = input.nextInt();
+			input.nextLine(); 
 
 			// Create Twibble option Twibble
 			if (subMemuOption == 1) {
@@ -64,7 +71,7 @@ public class Main {
 				System.out.println("Please enter a new Twibble Content: ");
 				
 				//clear input
-				input.nextLine();
+		
 				twibbleContent = input.nextLine();
 				
 				System.out.println("Twibble Posted :" + twibbleContent);
@@ -86,6 +93,8 @@ public class Main {
 				System.out.println("2.- No");
 
 				int deleteTwibbleOption = input.nextInt();
+				input.nextLine(); 
+
 
 				if (deleteTwibbleOption == 1) {
 					//System.out.println("Please enter Twibble ID to delete: ");
@@ -108,6 +117,8 @@ public class Main {
 					// Now that we return back from Service, we ask user to select twibble to delete
 					System.out.println("Please enter Twibble ID to delete: ");
 					String twibbleID = input.next();
+					input.nextLine(); 
+
 					
 					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Confirm Twibble Delete</command><idtwiblr>"
 							+ twibbleID + "</idtwiblr></ExecuteCommand>";
@@ -192,10 +203,16 @@ public class Main {
 				String newAlias="";
 				String newLocation="";
 				String newInterests="";
+				
+				
 				System.out.println("Please enter a new Location :");
-				newLocation = input.next();
+				newLocation = input.nextLine();
+				
+				
 				System.out.println("Please enter a new Interests seperated by a comma :");
-				newInterests= input.next();
+				newInterests= input.nextLine();
+				
+				
 				System.out.println("Profile Updated");
 				String JSONCommand = "<ExecuteCommand><command>Update Profile</command><profile_alias>"
 						+ newAlias + "</profile_alias>"
@@ -210,12 +227,16 @@ public class Main {
 			if (subMemuOption == 6) {
 
 				System.out.println("6.- Post a Profile");
-				System.out.println("Please enter your location: ");
-				String profileLocation = input.next();
+				
+				
+				System.out.println("Please enter your location: ");				
+				String profileLocation = input.nextLine();
 
 				System.out
-						.println("Please enter your interests separated by a comma: ");
-				String interests = input.next();
+						.println("Please enter your interests separated by a comma: ");				
+				String interests = input.nextLine();
+				
+				
 
 				System.out.println("Processing...");
 				String JSONCommand = "<ExecuteCommand><command>PostProfile</command><alias>"
@@ -239,6 +260,7 @@ public class Main {
 				System.out.println("2.- No");
 				
 				int deleteProfileOption = input.nextInt();
+				input.nextLine(); 
 
 				if (deleteProfileOption == 1) {
 					System.out.println("Deleting Profile...........");
@@ -283,13 +305,14 @@ public class Main {
 
 			// Needs to be nextLine() but login only accepts one string, no spaces!!!!!
 			String user = userInput.next();
+			input.nextLine(); 
 			
 			System.out.println("You chose your new alias: " + user);
 			
 			System.out
-			.println("Please enter your email address and press ENTER..");
-			
+			.println("Please enter your email address and press ENTER..");			
 			String email = userInput.next();
+			input.nextLine(); 
 			
 			
 			System.out.println("Email address associated with your Twiblr account will be: " + email);
