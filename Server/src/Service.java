@@ -30,48 +30,26 @@ import org.xml.sax.InputSource;
 
 public class Service {
 
-	public Service(int threadId) {
+	public Service() {
 		super();
-		this.threadId=threadId;
-		
 	}
-	int threadId=0;
+
 	Boolean terminate = false;
 
 	ServerSocket server = null;
 	Socket socket; // Client Socket
-	int serverPort;
+	int serverPort = 6789;
 
 	PrintWriter out;
 	BufferedReader in;
-	Scanner input;
-	
-	
-	
-    public void run() {
-    	
-    	try {
+	Scanner input = new Scanner(System.in);
 
-			this.Execute();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    }
-	
-	
-
-	public synchronized void Execute() throws SQLException {
-		serverPort = 6789;
-		
-		input = new Scanner(System.in);		
+	public void Execute() throws SQLException {
 
 		try {
 			// Create a Socket and bind it to a port
 			server = new ServerSocket(serverPort);
-			System.out.println("Server "+this.threadId +"is up and running...");
+			System.out.println("Server is up and running...");
 
 			// Accept a connection from the client and associate a Socket to
 			// this connection
