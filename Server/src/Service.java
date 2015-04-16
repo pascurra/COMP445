@@ -329,6 +329,22 @@ public class Service {
 					}
 				}
 				
+				
+				
+				
+				//Insert twibble to database
+				
+				
+				databaseConnection createTwibbleQuery = new databaseConnection(
+						"");
+				createTwibbleQuery.query = "INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('"
+						+ twibbleContent + "','" + userId + "')";
+				createTwibbleQuery.ExecuteUpdate();
+				System.out.println("New Twibble Posted: " + twibbleContent);
+				
+				
+				
+				
 				if(subscriberEmails.size()>0){
 
 				InternetAddress[] cc = new InternetAddress[subscriberEmails
@@ -338,12 +354,7 @@ public class Service {
 				}
 				System.out.println(cc);
 					
-				databaseConnection createTwibbleQuery = new databaseConnection(
-						"");
-				createTwibbleQuery.query = "INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('"
-						+ twibbleContent + "','" + userId + "')";
-				createTwibbleQuery.ExecuteUpdate();
-				System.out.println("New Twibble Posted: " + twibbleContent);
+				
 
 				// Send Notification
 				// Recipient's email ID needs to be mentioned.
