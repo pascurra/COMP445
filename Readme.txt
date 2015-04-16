@@ -39,7 +39,6 @@ Install mysql server, preferably with MySQL Workbench.
 
 Create a database and username with the following information:
 
-			//Development Mode	
 			//Databade Name: ascurra_445
 			//User: ascurra_445
 			//Password: comp445
