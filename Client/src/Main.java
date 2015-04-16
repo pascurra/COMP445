@@ -119,7 +119,7 @@ public class Main {
 					input.nextLine(); 
 
 					
-					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Confirm Twibble Delete</command><idtwiblr>"
+					String JSONCommandTwibbleDelete =  "<ExecuteCommand><command>Confirm Twibble Delete</command><alias>"+alias+"</alias><idtwiblr>"
 							+ twibbleID + "</idtwiblr></ExecuteCommand>";
 					Message messageToDelete = new Message(ServerIP, 6789, JSONCommandTwibbleDelete);
 					messageToDelete.send();

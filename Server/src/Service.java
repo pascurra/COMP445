@@ -692,13 +692,15 @@ public class Service {
 				result = result.concat("</ExecuteCommand>");
 				// Now send xml list of twibbles to client
 				out.println(result);
-
+				
 			}
 
 			if (command.equals("Confirm Twibble Delete")) {
 				databaseConnection twibbleToDeleteQuery = new databaseConnection(
 						"");
 				String iDTwiblr = doc.getElementsByTagName("idtwiblr").item(0)
+						.getTextContent();
+				String alias = doc.getElementsByTagName("alias").item(0)
 						.getTextContent();
 
 				twibbleToDeleteQuery.query = "DELETE FROM ascurra_445.twibbles WHERE idtwiblr= '"
@@ -708,6 +710,144 @@ public class Service {
 				System.out.println("SERVER: Twibble Deleted..............");
 				
 				out.println("Server says: Twibble Deleted");
+				
+								
+				// Getting current ID
+				databaseConnection getAliasId = new databaseConnection("");
+				getAliasId.query = "select idusers FROM ascurra_445.clients where alias='"
+						+ alias + "' ";
+				ResultSet id = getAliasId.executeSelectStatement();
+
+				int userId = 0;
+				try {
+					while (id.next()) {
+						userId = id.getInt("idusers");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("The current id is: " + userId);
+
+				// Get Current User Email
+				databaseConnection getUserEmail = new databaseConnection("");
+				getUserEmail.query = "select email FROM ascurra_445.clients where alias='"
+						+ alias + "' ";
+				ResultSet email = getUserEmail.executeSelectStatement();
+
+				String currentEmail = "";
+				try {
+					while (email.next()) {
+						currentEmail = email.getString("email");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("The current email is: " + currentEmail);
+
+				// Get Subscribers List
+				// Get aliases of followers
+				databaseConnection getSubscribers = new databaseConnection("");
+				getSubscribers.query = "select client_alias FROM ascurra_445.subscribers where following_client_id='"
+						+ userId + "' ";
+				ResultSet subscribersSet = getSubscribers
+						.executeSelectStatement();
+
+				ArrayList<String> subscriberAliases = new ArrayList();
+				try {
+
+					while (subscribersSet.next()) {
+						subscriberAliases.add(subscribersSet
+								.getString("client_alias"));
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("The number of followers is: "
+						+ subscriberAliases.size());
+				System.out.println("Array of aliases: " + subscriberAliases);
+
+				// Get Email of Followers
+				ArrayList<String> subscriberEmails = new ArrayList();
+				databaseConnection getSubscriberEmail = new databaseConnection(
+						"");
+				for (String a : subscriberAliases) {
+					getSubscriberEmail.query = "select email FROM ascurra_445.clients where alias='"
+							+ a + "' ";
+					ResultSet emailOfSubscriber = getSubscriberEmail
+							.executeSelectStatement();
+					try {
+						while (emailOfSubscriber.next()) {
+							subscriberEmails.add(emailOfSubscriber
+									.getString("email"));
+
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			
+
+				if (subscriberEmails.size() > 0) {
+
+					InternetAddress[] cc = new InternetAddress[subscriberEmails
+							.size()];
+					for (int b = 0; b < subscriberEmails.size(); b++) {
+						cc[b] = new InternetAddress(subscriberEmails.get(b));
+					}
+					System.out.println(cc);
+
+					// Send Notification
+					// Recipient's email ID needs to be mentioned.
+					// Sender's email ID needs to be mentioned
+					String from = currentEmail;
+					// Auth
+					final String username = "myTwibble@gmail.com";// change
+																	// accordingly
+					final String password = "##twibbleGmail##";// change
+																// accordingly
+					// Assuming you are sending email from localhost
+					String host = "smtp.gmail.com";
+					// Get system properties
+					Properties props = System.getProperties();
+					props.put("mail.smtp.auth", "true");
+					props.put("mail.smtp.starttls.enable", "true");
+					props.put("mail.smtp.host", host);
+					props.put("mail.smtp.port", "587");
+					// Setup mail server
+					props.setProperty("mail.smtp.host", host);
+					//
+					// Get the Session object.
+					Session session = Session.getInstance(props,
+							new javax.mail.Authenticator() {
+								protected PasswordAuthentication getPasswordAuthentication() {
+									return new PasswordAuthentication(username,
+											password);
+								}
+							});
+					try {
+						// Create a default MimeMessage object.
+						MimeMessage message = new MimeMessage(session);
+						// Set From: header field of the header.
+						message.setFrom(new InternetAddress(from));
+						// Set To: header field of the header.
+						message.addRecipients(Message.RecipientType.BCC, cc);
+						// Set Subject: header field
+						message.setSubject(alias + " deleted twibble !");
+						// Now set the actual message
+						message.setText("Deleted Twibble");
+						// Send message
+						Transport.send(message);
+						System.out.println("Sent message successfully....");
+					} catch (MessagingException mex) {
+						mex.printStackTrace();
+					}
+				}
+				//End Notification
 
 			}
 
