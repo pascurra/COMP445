@@ -301,18 +301,18 @@ public class Main {
 		if (mainMemuOption == 2) {
 
 			System.out
-					.println("Please enter your new username and press ENTER..");
+					.println("Please enter your new client alias and press ENTER..");
 
 			// Needs to be nextLine() but login only accepts one string, no spaces!!!!!
-			String user = userInput.next();
-			input.nextLine(); 
+			String user = input.next();
+	
 			
 			System.out.println("You chose your new alias: " + user);
 			
 			System.out
 			.println("Please enter your email address and press ENTER..");			
-			String email = userInput.next();
-			input.nextLine(); 
+			String email = input.next();
+	
 			
 			
 			System.out.println("Email address associated with your Twiblr account will be: " + email);
