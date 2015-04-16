@@ -28,12 +28,26 @@ public class databaseConnection {
 		Connection conn = null;
 
 		try {
+			
+			//Production or development(local) mode can be used.			
+			
+			//Production Mode
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://www.ascurra.com:3306/ascurra_445",
 					"ascurra_445", "comp445");
-
-			System.out.println("Connection ok ");
-
+			
+			
+			//Development Mode	
+			//Databade Name: ascurra_445
+			//User: ascurra_445
+			//Password: comp445
+/*			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/ascurra_445",
+					"ascurra_445", "comp445");			
+*/
+			
+			
+			System.out.println("Connection ok ");			
 			statement = conn.createStatement();
 
 			resultSet = statement
