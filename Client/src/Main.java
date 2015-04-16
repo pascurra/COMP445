@@ -62,7 +62,11 @@ public class Main {
 				System.out.println("1.- Create Twible");
 				// String twibbleContent;
 				System.out.println("Please enter a new Twibble Content: ");
-				twibbleContent = input.next();
+				
+				//clear input
+				input.nextLine();
+				twibbleContent = input.nextLine();
+				
 				System.out.println("Twibble Posted :" + twibbleContent);
 				String JSONCommand = "<ExecuteCommand><command>Create Twibble</command><twibbleContent>"
 						+ twibbleContent
