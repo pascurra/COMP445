@@ -18,15 +18,20 @@ Eclipse Project 3: Web-Server
 To run the web server, execute the Main.java inside the Web-Server project
 
 
-DATABASE SETUP:
+Running the Project:
 
-Production Mode:
-- No need to Setup Database. The database is already up and running in a dedicated server.
+---------------------
+1st Method: Production Mode
+- No need to Setup Database. No need to make changes to the code. The database is already up and running in an public dedicated server.
+Only Step: Run the projects.
+
+---------------------
 
 
 
+---------------------
 
-Development Mode: Needs local database setup
+2nd Method: Development Mode: Needs local database setup
 
 Step 1:
 
@@ -39,16 +44,18 @@ Create a database and username with the following information:
 			//User: ascurra_445
 			//Password: comp445
 			
-Give permissions to the user create to access and write the database.			
+Give all permissions to the user ascurra_445 to access and write the database ascurra_445.			
 			
 			
 Step 2:
 
-Import the database_content.sql file into the database. This can be don via terminal or using MySQL Workbench.
+Import the database_content.sql file into the database. This can be done via terminal or importing data using MySQL Workbench.
 			
 			
 			
 Step 3:
+
+Small Change in  the code:
 
 Comment the following lines:
 
@@ -67,11 +74,12 @@ Uncomment the following code:
 					"ascurra_445", "comp445");			
 */
 
+For both methods: executeSelectStatement() and ExecuteUpdate()     (2 methods)
 
 From the file databaseConnection.java that exists in the Server project and the Web-Server Project (2 files)
 
 
+Step 4: Run the projects.
 
-
-
+---------------------
 
