@@ -320,7 +320,7 @@ public class Main {
 			String JSONCommandRegister=
 					"<ExecuteCommand><command>Register</command><alias>"+user+"</alias><email>"+email+"</email></ExecuteCommand>";
 			
-			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
+			Message messageRegister= new Message( ServerIP , 6789, JSONCommandRegister);
 			messageRegister.send();
 			
 
