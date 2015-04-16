@@ -329,12 +329,21 @@ public class Service {
 					}
 				}
 				
+				
+				
+				
+				//Insert twibble to database
+				
+				
 				databaseConnection createTwibbleQuery = new databaseConnection(
 						"");
 				createTwibbleQuery.query = "INSERT INTO ascurra_445.twibbles(twiblrcontent,usersIdForeign) VALUES ('"
 						+ twibbleContent + "','" + userId + "')";
 				createTwibbleQuery.ExecuteUpdate();
 				System.out.println("New Twibble Posted: " + twibbleContent);
+				
+				
+				
 				
 				if(subscriberEmails.size()>0){
 
