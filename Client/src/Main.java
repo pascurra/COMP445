@@ -112,6 +112,8 @@ public class Main {
 					
 					
 					// Now that we return back from Service, we ask user to select twibble to delete
+					System.out.println(" ");
+
 					System.out.println("Please enter Twibble ID to delete: ");
 					String twibbleID = input.next();
 					input.nextLine(); 
