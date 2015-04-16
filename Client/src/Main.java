@@ -57,6 +57,8 @@ public class Main {
 			System.out.println("5.- Update Profile");
 			System.out.println("6.- Post a Profile");
 			System.out.println("7.- Delete Profile");
+			System.out.println("8.- Un-Subscribe to other poster's Twibbles");
+
 			System.out.println("9.- Exit");
 
 
@@ -195,6 +197,49 @@ public class Main {
 						+ subscribeTo);
 
 			}
+			
+			
+			
+			
+			
+			
+			if (subMemuOption == 8) {
+				System.out.println("8.- UnSubscribe to other poster's Twibbles");
+				System.out
+						.println("Please enter the user you want to un-subscribe to and press ENTER...");
+
+				String subscribeTo = input.next();
+
+				System.out.println("Un-Subscribing you to the user..........");
+
+				// Create code to subscribe account : Paolo
+
+				String JSONCommand =
+
+				"<ExecuteCommand><command>UnSubscribe</command><alias>" + alias
+						+ "</alias><UnSubscribeTo>" + subscribeTo
+						+ "</UnSubscribeTo></ExecuteCommand>";
+
+				Message message = new Message(ServerIP, 6789, JSONCommand);
+				message.send();
+
+				System.out.println("You have been un-subscribed to: "
+						+ subscribeTo);
+
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 			if (subMemuOption == 5) {
 				System.out.println("5.- Update Profile");

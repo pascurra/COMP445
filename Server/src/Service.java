@@ -221,6 +221,64 @@ public class Service {
 				out.println(new StringBuilder("sucess").toString());
 
 			}
+			
+			
+			
+			
+			
+			
+			// Menu 3.4 subscribe by Paolo
+			if (command.equals("UnSubscribe")) {
+
+				String alias = doc.getElementsByTagName("alias").item(0)
+						.getTextContent();
+				String SubscribeTo = doc.getElementsByTagName("UnSubscribeTo")
+						.item(0).getTextContent();
+				// System.out.println("The alias to delete is: " + alias);
+
+
+				databaseConnection subscribeQuery = new databaseConnection(
+						"select idusers FROM ascurra_445.clients where alias='"
+								+ SubscribeTo + "';");
+
+				// registerQuery.query="";
+				ResultSet resultSetSubscribe = subscribeQuery
+						.executeSelectStatement();
+
+				int subscribeToId = 0;
+
+				try {
+					while (resultSetSubscribe.next()) {
+
+						subscribeToId = resultSetSubscribe.getInt("idusers");
+
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+
+				
+				subscribeQuery.query = "DELETE FROM ascurra_445.subscribers WHERE client_alias='"
+						+ alias + "'AND following_client_id='" + subscribeToId + "'";
+				
+				
+				subscribeQuery.ExecuteUpdate();
+
+				// FIX: Reply to waiting client, by Paolo
+				out.println(new StringBuilder("Unsubscribed").toString());
+
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 			// Create Twibble
 			if (command.equals("Create Twibble")) {
