@@ -97,14 +97,11 @@ public class Main {
 
 
 				if (deleteTwibbleOption == 1) {
-					//System.out.println("Please enter Twibble ID to delete: ");
-					//String twibbleID = input.next();
+					
 					
 					String JSONCommand =
 
-					//"<ExecuteCommand><command>Delete Twibble</command><twibbleID>"
-							//+ twibbleID + "</twibbleID><alias>"
-							//+ alias + "</alias></ExecuteCommand>";
+	
 					
 					"<ExecuteCommand><command>Delete Twibble</command><alias>"
 					+ alias + "</alias></ExecuteCommand>";
@@ -324,8 +321,7 @@ public class Main {
 			Message messageRegister= new Message( "localhost" , 6789, JSONCommandRegister);
 			messageRegister.send();
 			
-			// Close the scanner object
-			//userInput.close();
+
 			
 			//show menu for registered users
 			mainMemuOption=1;

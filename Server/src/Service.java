@@ -119,7 +119,6 @@ public class Service {
 
 			// create query object
 
-			// String Command="Deregister";
 
 			// Menu 1.1
 			// Register client: Ryan
@@ -153,10 +152,7 @@ public class Service {
 				// Ending message
 				System.out.println("New user registered...........");
 
-				// Paolo says: Needs to be updated like 3.3
-				// databaseConnection registerQuery=new
-				// databaseConnection("INSERT INTO...");
-				// ResultSet result=registerQuery.Query();
+
 
 				// FIX: Reply to waiting client, by Paolo
 				out.println(new StringBuilder("sucess").toString());
@@ -195,11 +191,7 @@ public class Service {
 						.item(0).getTextContent();
 				// System.out.println("The alias to delete is: " + alias);
 
-				// query db to delete
-				// registerQuery.query =
-				// "DELETE FROM ascurra_445.clients WHERE alias="
-				// + "\"" + alias + "\"" + ";";
-				// registerQuery.ExecuteUpdate();
+
 				databaseConnection subscribeQuery = new databaseConnection(
 						"select idusers FROM ascurra_445.clients where alias='"
 								+ SubscribeTo + "';");

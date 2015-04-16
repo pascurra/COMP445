@@ -72,11 +72,7 @@ public class databaseConnection {
 			int queryresult = statement
 					.executeUpdate(query);
 
-//			while (resultSet.next()) {
-//				String user = resultSet.getString("alias");
-//				System.out.println("User: " + user);
 
-//			}
 
 		} catch (SQLException ex) {
 			// handle any errors
@@ -85,7 +81,6 @@ public class databaseConnection {
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
 		
-		//return resultSet;
 
 	}
 	

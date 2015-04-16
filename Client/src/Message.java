@@ -61,25 +61,7 @@ public class Message
 					System.out.print("> " );
 					}
 					
-					// From earlier attempt
-					/**
-					System.out.println("Please enter Twibble ID to delete: ");
-					int twibbleID = input.nextInt();
-					for (int i: arl) {
-						System.out.println(i); // Just to see output
-						if(twibbleID == i) {
-						String JSONCommand =
-	
-						"<ExecuteCommand><command>Twibble Delete</command><twibbleID>"
-								+ twibbleID + "</twibbleID></ExecuteCommand>";
-						
-						
-						Message message = new Message(hostname, 6789, JSONCommand);
-						message.send();
-						System.out.println("Do we make it here?");
-						}
-					}
-	*/
+
 			// Close all the input and output streams, as well as the socket
 			out.close();
 			in.close();
@@ -104,7 +86,6 @@ public class Message
 		
 		try {
 			// Create a Socket and bind it to a port
-			//serverPort = 6789;  specified in the message
 			InetAddress host = InetAddress.getByName(hostname);
 			socket = new Socket(host, serverPort);
 			// Create the stream of data to be communicated between this client and the server
@@ -116,8 +97,6 @@ public class Message
 			
 
 			
-		//	while(line != null)
-		//	{
 				// Send the line to the server: Put the input line on the output stream
 				out.println(line);
 				System.out.println("CLIENT: Sent \"" + line + "\" to the server");
@@ -128,14 +107,6 @@ public class Message
 				
 				
 
-				
-			//	if(line.equals("exit"))
-		//			break;
-	//		}
-			
-			
-			
-			
 			
 			// Close all the input and output streams, as well as the socket
 			out.close();

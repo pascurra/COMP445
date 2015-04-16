@@ -73,8 +73,7 @@ public class ListOfProfiles {
 
 			listOfclients = listOfclients.concat("<div><div>Client's id: "
 					+ idusers.get(i).toString() + "</div>");
-			// listOfclients=listOfclients.concat("<div>Client's alias: "+
-			// (String) aliasClients.get(i)+"</div>");
+
 
 			listOfclients = listOfclients
 					.concat("<div>Client's alias: <a href=\""
@@ -114,7 +113,6 @@ public class ListOfProfiles {
 						.concat("<div>Date Of Profile Creation: "
 								+ (String) dateOfPostingProfile.get(id)
 								+ "</div></div>");
-				// listOfProfiles=listOfProfiles.concat("<div><div>"+"------------------"+"</div>");
 
 			}
 
