@@ -3,9 +3,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-
-
-
 public class showUserProfile {
 
 	String client;
@@ -16,11 +13,53 @@ public class showUserProfile {
 	}
 
 	
-	public String showProfile(){
+	public String showProfile(){	
 		
 		
-		databaseConnection userProfile=new databaseConnection("");
+		String contentToReturn="";		
 		
+		databaseConnection ListOfClients=new databaseConnection("");		
+		
+		ListOfClients.query="SELECT * FROM ascurra_445.clients where alias='"+client+"'";
+		ResultSet resultSetClients=ListOfClients.executeSelectStatement();
+		
+	      ArrayList idusers = new ArrayList();		
+	      ArrayList aliasClients = new ArrayList();		
+	      ArrayList email = new ArrayList();		
+	      ArrayList registrationDate = new ArrayList();		
+
+	      
+	      
+		try {
+			while (resultSetClients.next()) {
+
+				idusers.add(resultSetClients.getInt("idusers"));
+				aliasClients.add(resultSetClients.getString("alias"));
+				email.add(resultSetClients.getString("email"));
+				registrationDate.add(resultSetClients.getString("registrationDate"));
+
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String listOfclients="";
+		
+		for (int i=0;i< aliasClients.size();i++){
+			listOfclients=listOfclients.concat("<div><div>Client id: "+idusers.get(i).toString()+"</div>");
+			listOfclients=listOfclients.concat("<div>Client alias: "+ (String) aliasClients.get(i)+"</div>");
+			listOfclients=listOfclients.concat("<div>Client email: "+(String) email.get(i)+"</div>");
+			listOfclients=listOfclients.concat("<div>Registration Date: "+(String) registrationDate.get(i)+"</div></div>");
+
+			
+		}
+		
+		contentToReturn=contentToReturn.concat(listOfclients);		
+		
+		databaseConnection userProfile=new databaseConnection("");		
 		
 		userProfile.query="SELECT * FROM ascurra_445.profiles where alias='"+client+"'";
 		ResultSet resultSet=userProfile.executeSelectStatement();
@@ -49,8 +88,7 @@ public class showUserProfile {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 		
 		String listOfProfiles="";
 		
@@ -69,16 +107,20 @@ public class showUserProfile {
 
 			
 		}
-
+		
+		if (alias.size()==0){
+			
+			listOfProfiles="* No Profile for this User.</br>";
+		}
+		
+		
 		
 		ListOfTwibbles ListOfTwibbles=new ListOfTwibbles(client);
 		String listOfTwibbles = ListOfTwibbles.getListOfTwibbles();
-		String contentToReturn=listOfProfiles.concat(listOfTwibbles);
+		contentToReturn=contentToReturn.concat(listOfProfiles);
+		contentToReturn=contentToReturn.concat(listOfTwibbles);
 		
-		return contentToReturn;
-		
-		
-		
+		return contentToReturn;		
 		
 	}
 

@@ -41,7 +41,7 @@ public class Main {
 							+ "Welcome to Twibbler!" + "</div>");
 
 					mainMenu = mainMenu
-							.concat("<div>Go To:  <a href=\"http://localhost:8080/AllProfiles\">All Profiles</a> </div>");
+							.concat("<div>Go To:  <a href=\"AllProfiles\">All Profiles</a> </div>");
 
 					mainMenu = mainMenu.concat("<div><div>"
 							+ "------------------" + "</div>");

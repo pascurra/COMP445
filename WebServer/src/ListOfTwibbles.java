@@ -54,7 +54,7 @@ public class ListOfTwibbles {
 
 		String listOfTwibbles = "";
 
-		for (int i = 0; i < idtwiblr.size(); i++) {
+		for (int i = idtwiblr.size() - 1; i >= 0; i--) {
 
 			listOfTwibbles = listOfTwibbles.concat("<div><div>" + "Twibble:"
 					+ "</div>");
@@ -69,6 +69,12 @@ public class ListOfTwibbles {
 					+ (String) date.get(i) + "</div>");
 			listOfTwibbles = listOfTwibbles.concat("<div><div>"
 					+ "------------------" + "</div>");
+
+		}
+
+		if (idtwiblr.size() == 0) {
+
+			return "* No Twibbles for this user.</br>";
 
 		}
 
